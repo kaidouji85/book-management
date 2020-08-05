@@ -15,7 +15,8 @@ class BooksController {
     lateinit var bookRepository: BookRepository
 
     @Get("/")
-    fun index(): Iterable<Book> {
+    fun index(): List<Book> {
         return bookRepository.findAll()
+                .toList()
     }
 }

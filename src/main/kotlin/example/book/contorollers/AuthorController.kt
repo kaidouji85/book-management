@@ -15,7 +15,8 @@ class AuthorController {
     lateinit var authorRepository: AuthorRepository
 
     @Get("/")
-    fun index(): Iterable<Author> {
+    fun index(): List<Author> {
         return authorRepository.findAll()
+                .toList();
     }
 }
