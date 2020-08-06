@@ -59,7 +59,8 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
   render() {
     return AuthorsPresentation({
       state: this.state,
-      onNewAuthorPush: this.onNewAuthorPush.bind(this)
+      onNewAuthorPush: this.onNewAuthorPush.bind(this),
+      onEditorClosePush: this.onEditorClosePush.bind(this),
     });
   }
 
@@ -73,6 +74,13 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
       isOpen: true
     }
     this.setState({editor: updatedEditor});
-  };
+  }
 
+  private onEditorClosePush(): void {
+    const updatedEditor = {
+      ...this.state.editor,
+      isOpen: false
+    }
+    this.setState({editor: updatedEditor});
+  }
 }

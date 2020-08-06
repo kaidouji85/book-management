@@ -5,7 +5,15 @@ import '../../css/authors/author-editor.css'
  * 著者エディター コンポネント プロパティ
  */
 type Props = {
-  isOpen: boolean
+  /**
+   * 著者エディタ表示フラグ、trueで表示する
+   */
+  isOpen: boolean,
+
+  /**
+   * 閉じるボタンが押された時のコールバック関数
+   */
+  onClosePush: () => void,
 };
 
 /**
@@ -24,7 +32,7 @@ export function AuthorEditor(props: Props) {
           <input></input>
         </div>
         <button className="author-editor__editor__save">登録する</button>
-        <button className="author-editor__editor__close">閉じる</button>
+        <button className="author-editor__editor__close" onClick={props.onClosePush} onTouchStart={props.onClosePush}>閉じる</button>
       </div>
     </div>
   );

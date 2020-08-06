@@ -17,6 +17,11 @@ type Props = {
    * 著者追加ボタンが押された際のコールバック関数
    */
   onNewAuthorPush: () => void,
+
+  /**
+   * 著者エディタ 閉じるボタンが押された際のコールバック関数
+   */
+  onEditorClosePush: () => void,
 };
 
 /**
@@ -33,7 +38,7 @@ export function AuthorsPresentation(props: Props) {
         <NewAuthor onNewAuthorPush={props.onNewAuthorPush}/>
         {props.state.authors.map(v => <Author key={v.id} author={v}/>)}
       </div>
-      <AuthorEditor isOpen={props.state.editor.isOpen}/>
+      <AuthorEditor isOpen={props.state.editor.isOpen} onClosePush={props.onEditorClosePush} />
     </div>
   );
 }
