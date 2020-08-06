@@ -1,18 +1,17 @@
 import React from 'react';
 import {AuthorInfo, fetchAllAuthors} from "../api/authors";
-import {Author} from "./author";
 import '../../css/authors/index.css';
-import {NewAuthor} from "./new-author";
+import {AuthorsPresentation} from "./presentation";
 
 /**
  * 著者管理コンポネント プロパティ
  */
-type AuthorProps = {};
+export type AuthorsProps = {};
 
 /**
  * 著者管理コンポネント ステート
  */
-type AuthorsState = {
+export type AuthorsState = {
   /**
    * 著者情報
    */
@@ -22,7 +21,7 @@ type AuthorsState = {
 /**
  * 著者管理 コンテナ コンポネント
  */
-export class Authors extends React.Component<AuthorProps, AuthorsState> {
+export class Authors extends React.Component<AuthorsProps, AuthorsState> {
   state: AuthorsState;
 
   constructor(props: any) {
@@ -40,27 +39,18 @@ export class Authors extends React.Component<AuthorProps, AuthorsState> {
   }
 
   render() {
-    return AuthorsPresentation(this.state);
+    return AuthorsPresentation({
+      state: this.state,
+      onNewAuthorPush: this.onNewAuthorPush.bind(this)
+    });
+  }
+
+  /**
+   * 著者追加ボタンが押された際の処理
+   * @private
+   */
+  private onNewAuthorPush(): void {
+    console.log('ユーザ追加が呼ばれました');
   }
 }
 
-/**
- * 著者管理 プレゼンテーション コンポネント
- *
- * @param props プロパティ
- * @return 著者管理 プレゼンテーション コンポネント
- */
-export function AuthorsPresentation(props: AuthorsState) {
-  const onNewAuthorPush = () => {
-    console.log('New Author');
-  };
-  return (
-    <div className="authors">
-      <div className="authors__title">著者情報</div>
-      <div className="authors__items">
-        <NewAuthor onNewAuthorPush={onNewAuthorPush} />
-        {props.authors.map(v => <Author key={v.id} author={v} />)}
-      </div>
-    </div>
-  );
-}
