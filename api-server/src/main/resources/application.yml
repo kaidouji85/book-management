@@ -1,6 +1,10 @@
 micronaut:
   application:
     name: management
+  server:
+    cors:
+      # TODO フロントエンドサイトからのみアクセスできるようにCORSを設定する
+      enabled: true
 
 datasources:
   default:
