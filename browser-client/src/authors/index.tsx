@@ -2,19 +2,23 @@ import React from 'react';
 import {AuthorInfo, fetchAllAuthors} from "../api/authors";
 import {Author} from "./author";
 
+/**
+ * 著者管理コンポネント プロパティ
+ */
 type AuthorProps = {};
 
 /**
- * 著者画面 ステート
+ * 著者管理コンポネント ステート
  */
 type AuthorsState = {
+  /**
+   * 著者情報
+   */
   authors: AuthorInfo[]
 };
 
 /**
- * 著者画面
- *
- * @constructor
+ * 著者管理 コンテナ コンポネント
  */
 export class Authors extends React.Component<AuthorProps, AuthorsState> {
   state: AuthorsState;
@@ -38,6 +42,12 @@ export class Authors extends React.Component<AuthorProps, AuthorsState> {
   }
 }
 
+/**
+ * 著者管理 プレゼンテーション コンポネント
+ *
+ * @param props プロパティ
+ * @return 著者管理 プレゼンテーション コンポネント
+ */
 export function AuthorsPresentation(props: AuthorsState) {
   return (
     <div className="authors">
