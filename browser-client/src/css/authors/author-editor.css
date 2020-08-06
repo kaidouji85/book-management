@@ -1,0 +1,29 @@
+.author-editor--closed {
+  display: none;
+}
+
+.author-editor__back-ground {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(30, 30, 30, 0.5);
+}
+
+.author-editor__editor {
+  width: 80vw;
+  height: 80vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: black solid 1px;
+  border-radius: 1em;
+  background-color: white;
+}

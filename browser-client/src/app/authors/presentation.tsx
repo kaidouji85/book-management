@@ -2,6 +2,7 @@ import {NewAuthor} from "./new-author";
 import {Author} from "./author";
 import React from "react";
 import {AuthorsState} from "./index";
+import {AuthorEditor} from "./author-editor";
 
 /**
  * 著者管理 プレゼンテーション コンポネント プロパティ
@@ -32,6 +33,7 @@ export function AuthorsPresentation(props: Props) {
         <NewAuthor onNewAuthorPush={props.onNewAuthorPush}/>
         {props.state.authors.map(v => <Author key={v.id} author={v}/>)}
       </div>
+      <AuthorEditor isOpen={props.state.editor.isOpen}/>
     </div>
   );
 }

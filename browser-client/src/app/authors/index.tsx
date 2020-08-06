@@ -9,13 +9,28 @@ import {AuthorsPresentation} from "./presentation";
 export type AuthorsProps = {};
 
 /**
+ * 著者エディタのステート
+ */
+export type EditorState = {
+  /**
+   * エディタが開かれているかのフラグ、trueで開かれている
+   */
+  isOpen: boolean,
+};
+
+/**
  * 著者管理コンポネント ステート
  */
 export type AuthorsState = {
   /**
    * 著者情報
    */
-  authors: AuthorInfo[]
+  authors: AuthorInfo[],
+
+  /**
+   * 著者エディタ
+   */
+  editor: EditorState,
 };
 
 /**
@@ -27,7 +42,10 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      authors: []
+      authors: [],
+      editor: {
+        isOpen: false
+      }
     };
   }
 
@@ -50,7 +68,11 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
    * @private
    */
   private onNewAuthorPush(): void {
-    console.log('ユーザ追加が呼ばれました');
-  }
-}
+    const updatedEditor = {
+      ...this.state.editor,
+      isOpen: true
+    }
+    this.setState({editor: updatedEditor});
+  };
 
+}
