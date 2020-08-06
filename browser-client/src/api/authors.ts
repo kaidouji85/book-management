@@ -3,7 +3,7 @@ import {getAPIHost} from "./api-host";
 /**
  * APIから返される著者情報
  */
-export type Author = {
+export type AuthorInfo = {
   id: number,
   name: string
 };
@@ -13,7 +13,7 @@ export type Author = {
  *
  * @return 著者情報
  */
-export async function fetchAllAuthors(): Promise<Author[]> {
+export async function fetchAllAuthors(): Promise<AuthorInfo[]> {
   try {
     const resp = await fetch(`http://${getAPIHost()}/authors`);
     const json = resp.json(); //TODO JSONのパース判定を正しく行う
