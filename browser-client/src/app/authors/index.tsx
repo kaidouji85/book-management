@@ -2,6 +2,7 @@ import React from 'react';
 import {AuthorInfo, fetchAllAuthors} from "../api/authors";
 import '../../css/authors/index.css';
 import {AuthorsPresentation} from "./presentation";
+import {AuthorEditorData} from "./author-editor";
 
 /**
  * 著者管理コンポネント プロパティ
@@ -16,6 +17,11 @@ export type EditorState = {
    * エディタが開かれているかのフラグ、trueで開かれている
    */
   isOpen: boolean,
+
+  /**
+   * 著者名
+   */
+  name: string,
 };
 
 /**
@@ -44,7 +50,8 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
     this.state = {
       authors: [],
       editor: {
-        isOpen: false
+        isOpen: false,
+        name: ''
       }
     };
   }
@@ -61,6 +68,7 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
       state: this.state,
       onNewAuthorPush: this.onNewAuthorPush.bind(this),
       onEditorClosePush: this.onEditorClosePush.bind(this),
+      onEditorChange: this.onEditorChange.bind(this),
     });
   }
 
@@ -76,11 +84,29 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
     this.setState({editor: updatedEditor});
   }
 
+  /**
+   * 著者エディタ 閉じるボタンが押された時の処理
+   * @private
+   */
   private onEditorClosePush(): void {
     const updatedEditor = {
       ...this.state.editor,
       isOpen: false
     }
+    this.setState({editor: updatedEditor});
+  }
+
+  /**
+   * 著者エディタ 内容変更時の処理
+   *
+   * @param data 変更後の内容
+   * @private
+   */
+  private onEditorChange(data: AuthorEditorData): void {
+    const updatedEditor = {
+      ...this.state.editor,
+      name: data.name,
+    };
     this.setState({editor: updatedEditor});
   }
 }
