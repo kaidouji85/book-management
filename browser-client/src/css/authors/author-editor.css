@@ -27,3 +27,28 @@
   border-radius: 1em;
   background-color: white;
 }
+
+.author-editor__editor__title {
+  font-size: 1.5em;
+  padding: 0.5em 0;
+}
+
+.author-editor__editor__name {
+  padding: 0.5em 0;
+}
+
+.author-editor__editor__name__label {
+  font-size: 1.5em;
+}
+
+.author-editor__editor__name__input {
+  width: 15em;
+  height: 3em;
+}
+
+.author-editor__editor__save, .author-editor__editor__close {
+  font-size: 1em;
+  width: 5em;
+  height: 3em;
+  margin: 0.5em;
+}
