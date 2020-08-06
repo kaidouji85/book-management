@@ -1,0 +1,17 @@
+.new-author {
+  width: 90vw;
+  display: flex;
+  align-items: baseline;
+  margin: 0.5em;
+}
+
+.new-author__add {
+  font-size: 1em;
+  width: 5em;
+  height: 3em;
+  margin: 0.5em;
+}
+
+.new-author__label {
+  font-size: 1.5em;
+}

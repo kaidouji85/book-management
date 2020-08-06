@@ -2,6 +2,7 @@ import React from 'react';
 import {AuthorInfo, fetchAllAuthors} from "../api/authors";
 import {Author} from "./author";
 import '../../css/authors/index.css';
+import {NewAuthor} from "./new-author";
 
 /**
  * 著者管理コンポネント プロパティ
@@ -50,11 +51,15 @@ export class Authors extends React.Component<AuthorProps, AuthorsState> {
  * @return 著者管理 プレゼンテーション コンポネント
  */
 export function AuthorsPresentation(props: AuthorsState) {
+  const onNewAuthorPush = () => {
+    console.log('New Author');
+  };
   return (
     <div className="authors">
       <div className="authors__title">著者情報</div>
       <div className="authors__items">
-        {props.authors.map(v => Author({author: v}))}
+        <NewAuthor onNewAuthorPush={onNewAuthorPush} />
+        {props.authors.map(v => <Author key={v.id} author={v} />)}
       </div>
     </div>
   );
