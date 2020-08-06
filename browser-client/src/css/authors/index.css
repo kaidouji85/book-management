@@ -1,0 +1,9 @@
+.authors__title {
+  font-size: 2em;
+}
+
+.authors__items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
