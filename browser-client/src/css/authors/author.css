@@ -1,0 +1,22 @@
+.author {
+  --button-width: 5em;
+  --button-height: 3em;
+  --inner-margin: 0.5em;
+  display: flex;
+  width: 90vw;
+  align-items: baseline;
+  border: black solid 1px;
+  margin: 0.5em;
+}
+
+.author__delete, .author__edit {
+  font-size: 1em;
+  width: var(--button-width);
+  height: var(--button-height);
+  margin: var(--inner-margin);
+}
+
+.author__name {
+  font-size: 1.5em;
+  margin: var(--inner-margin);
+}

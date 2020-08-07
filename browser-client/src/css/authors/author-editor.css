@@ -1,0 +1,54 @@
+.author-editor--closed {
+  display: none;
+}
+
+.author-editor__back-ground {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(30, 30, 30, 0.5);
+}
+
+.author-editor__editor {
+  width: 80vw;
+  height: 80vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: black solid 1px;
+  border-radius: 1em;
+  background-color: white;
+}
+
+.author-editor__editor__title {
+  font-size: 1.5em;
+  padding: 0.5em 0;
+}
+
+.author-editor__editor__name {
+  padding: 0.5em 0;
+}
+
+.author-editor__editor__name__label {
+  font-size: 1.5em;
+}
+
+.author-editor__editor__name__input {
+  width: 15em;
+  height: 3em;
+}
+
+.author-editor__editor__save, .author-editor__editor__close {
+  font-size: 1em;
+  width: 5em;
+  height: 3em;
+  margin: 0.5em;
+}

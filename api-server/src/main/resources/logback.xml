@@ -9,7 +9,8 @@
         </encoder>
     </appender>
 
-    <root level="info">
+    <!-- 開発が終了したらinfoに戻す -->
+    <root level="ERROR">
         <appender-ref ref="STDOUT" />
     </root>
 </configuration>
