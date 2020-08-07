@@ -32,6 +32,11 @@ export class Authors extends React.Component<any, AuthorsState> {
     });
   }
 
+  /**
+   * 削除ボタンが押された時の処理
+   * @param id 著者ID
+   * @private
+   */
   private async onDeletePush(id: number): Promise<void> {
     try {
       await this.switchLoading(true);
@@ -46,6 +51,11 @@ export class Authors extends React.Component<any, AuthorsState> {
     }
   }
 
+  /**
+   * ローディング表示を切り替える
+   * @param isLoading ローディングフラグ
+   * @private
+   */
   private async switchLoading(isLoading: boolean): Promise<void> {
     return new Promise(resolve => {
       this.setState({isLoading}, resolve);
