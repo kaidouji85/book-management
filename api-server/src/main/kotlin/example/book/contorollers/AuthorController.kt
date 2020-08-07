@@ -1,17 +1,14 @@
 package example.book.contorollers
 
+import example.book.api.DeleteAuthorResponse
 import example.book.api.GetAllAuthorResponse
 import example.book.api.PostAuthorInput
 import example.book.api.PostAuthorResponse
-import example.book.entity.Author
 import example.book.entity.toAuthor
 import example.book.entity.toAuthorInfo
 import example.book.repository.AuthorRepository
 import io.micronaut.http.HttpResponse
-import io.micronaut.http.annotation.Body
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.Post
+import io.micronaut.http.annotation.*
 import javax.inject.Inject
 
 /**
@@ -38,5 +35,12 @@ class AuthorController {
         val respAuthor = toAuthorInfo(savedAuthor)
         val response = PostAuthorResponse(true, "post author success", respAuthor)
         return HttpResponse.ok(response)
+    }
+
+    @Delete("/{id}")
+    fun delete(@PathVariable id: Long): HttpResponse<DeleteAuthorResponse> {
+        this.authorRepository.deleteById(id);
+        val response = DeleteAuthorResponse(true, "delete author success", id);
+        return HttpResponse.ok(response);
     }
 }
