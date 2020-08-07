@@ -6,7 +6,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import {AuthorRegister} from "./authors/register/author-register";
+import {AuthorRegister} from "./authors/register";
 import {AuthorsLink, AuthorsPath, AuthorRegisterLink, AuthorRegisterPath, RootPath} from "./links/links";
 import {Root} from "./root";
 
