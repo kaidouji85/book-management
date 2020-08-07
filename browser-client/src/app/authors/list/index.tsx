@@ -34,10 +34,21 @@ export class Authors extends React.Component<any, AuthorsState> {
 
   private async onDeletePush(id: number): Promise<void> {
     try {
+      await this.switchLoading(true);
       await deleteAuthor(id);
-
+      const authorsResp = await getAllAuthors();
+      this.setState({
+        isLoading: false,
+        authors: authorsResp.payload
+      });
     } catch(e) {
       throw e;
     }
+  }
+
+  private async switchLoading(isLoading: boolean): Promise<void> {
+    return new Promise(resolve => {
+      this.setState({isLoading}, resolve);
+    });
   }
 }
