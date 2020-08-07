@@ -48,7 +48,10 @@ export function AuthorsPresentation(props: Props) {
       <div className="authors__title">著者情報</div>
       <div className="authors__items">
         <NewAuthor onNewAuthorPush={props.onNewAuthorPush}/>
-        {props.state.authors.map(v => <Author key={v.id} author={v}/>)}
+        {props.state.authors
+          .sort((a, b) => b.id - a.id)
+          .map(v => <Author key={v.id} author={v}/>)
+        }
       </div>
       <AuthorEditor
         isOpen={props.state.editor.isOpen}

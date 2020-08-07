@@ -13,7 +13,7 @@ export type AuthorInfo = {
  *
  * @return 著者情報
  */
-export async function fetchAllAuthors(): Promise<AuthorInfo[]> {
+export async function getAllAuthors(): Promise<AuthorInfo[]> {
   try {
     const resp = await fetch(`http://${getAPIHost()}/authors`);
     const json = resp.json(); //TODO JSONのパース判定を正しく行う
@@ -23,11 +23,19 @@ export async function fetchAllAuthors(): Promise<AuthorInfo[]> {
   }
 }
 
+/**
+ * 追加する著者の内容
+ */
 export type NewAuthorData = {
   name: string
 };
 
-export async function newAuthor(data: NewAuthorData): Promise<void> {
+/**
+ * 著者を追加する
+ *
+ * @param data 追加するデータ
+ */
+export async function postAuthor(data: NewAuthorData): Promise<void> {
   try {
     const method = "POST";
     const body = JSON.stringify(data);

@@ -1,5 +1,5 @@
 import React from 'react';
-import {AuthorInfo, fetchAllAuthors, newAuthor} from "../api/authors";
+import {AuthorInfo, getAllAuthors, postAuthor} from "../api/authors";
 import '../../css/authors/index.css';
 import {AuthorsPresentation} from "./presentation";
 import {AuthorEditorData} from "./author-editor";
@@ -57,7 +57,7 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
   }
 
   async componentDidMount() {
-    const authors = await fetchAllAuthors();
+    const authors = await getAllAuthors();
     this.setState({
       authors: authors
     });
@@ -111,16 +111,22 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
     this.setState({editor: updatedEditor});
   }
 
+  /**
+   * 著者エディタ　保存系ボタンが押された際の処理
+   * @private
+   */
   private async onEditorSave(): Promise<void> {
     try {
       const data = this.state.editor;
-      await newAuthor(data);
+      await postAuthor(data);
+      const updatedAuthors = await getAllAuthors();
       this.setState({
         editor: {
           ...this.state.editor,
-          isOpen: false
-        }
-      })
+          isOpen: false,
+        },
+        authors: updatedAuthors
+      });
     } catch(e) {
       throw e;
     }
