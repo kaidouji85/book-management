@@ -80,7 +80,8 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
   private onNewAuthorPush(): void {
     const updatedEditor = {
       ...this.state.editor,
-      isOpen: true
+      isOpen: true,
+      name: '',
     }
     this.setState({editor: updatedEditor});
   }
@@ -92,7 +93,7 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
   private onEditorClosePush(): void {
     const updatedEditor = {
       ...this.state.editor,
-      isOpen: false
+      isOpen: false,
     }
     this.setState({editor: updatedEditor});
   }
