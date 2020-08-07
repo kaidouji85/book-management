@@ -57,9 +57,9 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
   }
 
   async componentDidMount() {
-    const authors = await getAllAuthors();
+    const resp = await getAllAuthors();
     this.setState({
-      authors: authors
+      authors: resp.payload
     });
   }
 
@@ -120,13 +120,13 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
     try {
       const data = this.state.editor;
       await postAuthor(data);
-      const updatedAuthors = await getAllAuthors();
+      const resp = await getAllAuthors();
       this.setState({
         editor: {
           ...this.state.editor,
           isOpen: false,
         },
-        authors: updatedAuthors
+        authors: resp.payload
       });
     } catch(e) {
       throw e;
