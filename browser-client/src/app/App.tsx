@@ -4,23 +4,19 @@ import {Authors} from "./authors/list";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
-import {RegisterAuthor} from "./authors/register/register-author";
-import {AuthorsLink, RegisterAuthorLink} from "./links/authors";
+import {AuthorRegister} from "./authors/register/author-register";
+import {AuthorsLink, AuthorsPath, RegisterAuthorLink, AuthorRegisterPath, RootPath} from "./links/authors";
+import {Root} from "./root";
 
 function App() {
   return (
     <Router>
-      <div>
-        <AuthorsLink label="著者一覧" />
-        <RegisterAuthorLink label="著者登録" />
-      </div>
       <Switch>
-        <Route path="/authors/register"><RegisterAuthor/></Route>
-        <Route path="/authors"><Authors/></Route>
-        <Route path="/"><Authors/></Route>
+        <Route path={AuthorRegisterPath}><AuthorRegister/></Route>
+        <Route path={AuthorsPath}><Authors/></Route>
+        <Route path={RootPath}><Root/></Route>
       </Switch>
     </Router>
   );
