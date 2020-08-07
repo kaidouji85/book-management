@@ -20,6 +20,7 @@ export class AuthorRegister extends React.Component<any, AuthorRegisterState> {
   constructor(props: Props) {
     super(props);
     this.state = {
+      isLoading: false,
       name: ''
     };
   }
@@ -34,14 +35,28 @@ export class AuthorRegister extends React.Component<any, AuthorRegisterState> {
     );
   }
 
+  /**
+   * 著者名変更時の処理
+   * @param value 変更内容
+   * @private
+   */
   private onNameChange(value: string): void {
     this.setState({
       name: value
     });
   }
 
+  /**
+   * 保存系ボタンが押されて時の処理
+   * @private
+   */
   private async onSavePush(): Promise<void> {
     try {
+      await new Promise(resolve => {
+        this.setState({
+          isLoading: true
+        }, resolve);
+      });
       const data: PostAuthorData = {
         name: this.state.name
       };
@@ -57,4 +72,3 @@ export class AuthorRegister extends React.Component<any, AuthorRegisterState> {
     }
   }
 }
-

@@ -1,7 +1,6 @@
 import {AuthorsLink} from "../../links/links";
 import React from "react";
 import {AuthorRegisterState} from "./state";
-import {useHistory} from 'react-router-dom';
 
 /**
  * プロパティ
@@ -20,7 +19,7 @@ export function AuthorRegisterPresentation(props: Props) {
   const onNameChange = (event: React.FormEvent<HTMLInputElement>) => {
     props.onNameChange(event.currentTarget.value);
   }
-  return (
+  const visible = (
     <div>
       <h1>著者登録</h1>
       <table>
@@ -35,4 +34,8 @@ export function AuthorRegisterPresentation(props: Props) {
       <AuthorsLink label="著書一覧に戻る"/>
     </div>
   );
+  const loading = (
+    <div>通信中</div>
+  );
+  return props.state.isLoading ? loading : visible;
 }
