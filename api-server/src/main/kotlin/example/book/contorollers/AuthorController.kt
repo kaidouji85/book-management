@@ -24,7 +24,7 @@ class AuthorController {
                 .toList();
     }
 
-    @Post("/new")
+    @Post("/")
     fun insert(@Body data: NewAuthorInput): HttpResponse<*> {
         val author = Author(0, data.name)
         authorRepository.save(author)

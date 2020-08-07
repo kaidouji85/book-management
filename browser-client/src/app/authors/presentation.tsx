@@ -29,6 +29,11 @@ type Props = {
    * @param data 変更された内容
    */
   onEditorChange: (data: AuthorEditorData) => void,
+
+  /**
+   * 著者エディタ 保存系ボタンが押された時のコールバック関数
+   */
+  onEditorSave: () => void,
 };
 
 /**
@@ -38,9 +43,6 @@ type Props = {
  * @return 著者管理 プレゼンテーション コンポネント
  */
 export function AuthorsPresentation(props: Props) {
-  const test = (data: AuthorEditorData) => {
-    console.log(data);
-  }
   return (
     <div className="authors">
       <div className="authors__title">著者情報</div>
@@ -53,6 +55,7 @@ export function AuthorsPresentation(props: Props) {
         name={props.state.editor.name}
         onClosePush={props.onEditorClosePush}
         onChange={props.onEditorChange}
+        onSavePush={props.onEditorSave}
       />
     </div>
   );

@@ -31,6 +31,11 @@ type Props = AuthorEditorData & {
    * @param data 変更内容
    */
   onChange: (data: AuthorEditorData) => void,
+
+  /**
+   * 保存系ボタンが押された時のコールバック関数
+   */
+  onSavePush: () => void,
 };
 
 /**
@@ -47,7 +52,6 @@ export function AuthorEditor(props: Props) {
       name: name
     })
   };
-
   return (
     <div className={props.isOpen ? "author-editor" : "author-editor--closed"}>
       <div className="author-editor__back-ground"></div>
@@ -57,7 +61,7 @@ export function AuthorEditor(props: Props) {
           <label className="author-editor__editor__name__label">名前：</label>
           <input className="author-editor__editor__name__input" value={props.name} onChange={onNameChange}></input>
         </div>
-        <button className="author-editor__editor__save">登録する</button>
+        <button className="author-editor__editor__save" onClick={props.onSavePush} onTouchStart={props.onSavePush}>登録する</button>
         <button className="author-editor__editor__close" onClick={props.onClosePush} onTouchStart={props.onClosePush}>閉じる</button>
       </div>
     </div>

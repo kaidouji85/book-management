@@ -23,18 +23,19 @@ export async function fetchAllAuthors(): Promise<AuthorInfo[]> {
   }
 }
 
-export async function newAuthor(): Promise<void> {
+export type NewAuthorData = {
+  name: string
+};
+
+export async function newAuthor(data: NewAuthorData): Promise<void> {
   try {
-    const obj = {
-      name: "world"
-    };
     const method = "POST";
-    const body = JSON.stringify(obj);
+    const body = JSON.stringify(data);
     const headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     };
-    await fetch(`http://localhost:8080/authors`, {method, headers, body});
+    await fetch(`http://${getAPIHost()}/authors`, {method, headers, body});
 
   } catch(e) {
     throw e;

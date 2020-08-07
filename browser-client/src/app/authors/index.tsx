@@ -1,5 +1,5 @@
 import React from 'react';
-import {AuthorInfo, fetchAllAuthors} from "../api/authors";
+import {AuthorInfo, fetchAllAuthors, newAuthor} from "../api/authors";
 import '../../css/authors/index.css';
 import {AuthorsPresentation} from "./presentation";
 import {AuthorEditorData} from "./author-editor";
@@ -69,6 +69,7 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
       onNewAuthorPush: this.onNewAuthorPush.bind(this),
       onEditorClosePush: this.onEditorClosePush.bind(this),
       onEditorChange: this.onEditorChange.bind(this),
+      onEditorSave: this.onEditorSave.bind(this),
     });
   }
 
@@ -108,5 +109,20 @@ export class Authors extends React.Component<AuthorsProps, AuthorsState> {
       name: data.name,
     };
     this.setState({editor: updatedEditor});
+  }
+
+  private async onEditorSave(): Promise<void> {
+    try {
+      const data = this.state.editor;
+      await newAuthor(data);
+      this.setState({
+        editor: {
+          ...this.state.editor,
+          isOpen: false
+        }
+      })
+    } catch(e) {
+      throw e;
+    }
   }
 }
