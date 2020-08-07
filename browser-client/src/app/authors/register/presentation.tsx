@@ -1,6 +1,7 @@
 import {AuthorsLink} from "../../links/links";
 import React from "react";
 import {AuthorRegisterState} from "./state";
+import {useHistory} from 'react-router-dom';
 
 /**
  * プロパティ
