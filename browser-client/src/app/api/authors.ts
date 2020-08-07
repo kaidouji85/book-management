@@ -22,3 +22,21 @@ export async function fetchAllAuthors(): Promise<AuthorInfo[]> {
     throw e;
   }
 }
+
+export async function newAuthor(): Promise<void> {
+  try {
+    const obj = {
+      name: "world"
+    };
+    const method = "POST";
+    const body = JSON.stringify(obj);
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+    await fetch(`http://localhost:8080/authors`, {method, headers, body});
+
+  } catch(e) {
+    throw e;
+  }
+}
