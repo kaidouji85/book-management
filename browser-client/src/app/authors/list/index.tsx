@@ -1,5 +1,5 @@
 import React from 'react';
-import {getAllAuthors} from "../../api/authors";
+import {deleteAuthor, getAllAuthors} from "../../api/authors";
 import {AuthorsPresentation} from "./presentation";
 import {AuthorsState} from "./state";
 
@@ -26,6 +26,18 @@ export class Authors extends React.Component<any, AuthorsState> {
   }
 
   render() {
-    return AuthorsPresentation({state: this.state});
+    return AuthorsPresentation({
+      state: this.state,
+      onDeletePush: this.onDeletePush.bind(this)
+    });
+  }
+
+  private async onDeletePush(id: number): Promise<void> {
+    try {
+      await deleteAuthor(id);
+
+    } catch(e) {
+      throw e;
+    }
   }
 }

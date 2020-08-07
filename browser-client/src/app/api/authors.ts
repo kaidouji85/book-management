@@ -61,3 +61,16 @@ export async function postAuthor(data: PostAuthorData): Promise<PostAuthorRespon
     throw e;
   }
 }
+
+export type DeleteAuthorAPIResponse = APIResponseEnvelope<number>;
+
+export async function deleteAuthor(id: number): Promise<DeleteAuthorAPIResponse> {
+  try {
+    const method = "DELETE";
+    const resp = await fetch(`http://${getAPIHost()}/authors/${id}`, {method});
+    const json = resp.json(); // TODO JSONのパース判定を正しく行う
+    return json;
+  } catch(e) {
+    throw e;
+  }
+}

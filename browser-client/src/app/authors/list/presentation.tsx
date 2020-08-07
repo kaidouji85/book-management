@@ -2,6 +2,7 @@ import {Author} from "./author";
 import React from "react";
 import {AuthorRegisterLink} from "../../links/links";
 import {AuthorsState} from "./state";
+import {AuthorInfo} from "../../api/authors";
 
 /**
  * 著者管理 プレゼンテーション コンポネント プロパティ
@@ -11,6 +12,12 @@ type Props = {
    * 著者管理 ステート
    */
   state: AuthorsState,
+
+  /**
+   * 削除ボタンが押された時のコールバック関数
+   * @param id 著者ID
+   */
+  onDeletePush: (id: number) => void;
 };
 
 /**
@@ -31,7 +38,7 @@ export function AuthorsPresentation(props: Props) {
         </tr>
         {props.state.authors
           .sort((a, b) => b.id - a.id)
-          .map(v => <Author key={v.id} author={v}/>)
+          .map(v => <Author key={v.id} author={v} onDeletePush={props.onDeletePush} />)
         }
         </tbody>
       </table>
