@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../css/authors/author-editor.css'
+import '../../../css/authors/author-editor.css'
 
 /**
  * 著者エディタ 編集可能な内容
