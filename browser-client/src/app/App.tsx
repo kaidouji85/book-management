@@ -7,7 +7,7 @@ import {
   Route
 } from "react-router-dom";
 import {AuthorRegister} from "./authors/register/author-register";
-import {AuthorsLink, AuthorsPath, RegisterAuthorLink, AuthorRegisterPath, RootPath} from "./links/authors";
+import {AuthorsLink, AuthorsPath, AuthorRegisterLink, AuthorRegisterPath, RootPath} from "./links/links";
 import {Root} from "./root";
 
 function App() {

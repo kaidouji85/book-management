@@ -1,8 +1,7 @@
-import {NewAuthor} from "./new-author";
 import {Author} from "./author";
 import React from "react";
-import {AuthorsState} from "./index";
-import {AuthorEditor, AuthorEditorData} from "./author-editor";
+import {AuthorRegisterLink} from "../../links/links";
+import {AuthorsState} from "./state";
 
 /**
  * 著者管理 プレゼンテーション コンポネント プロパティ
@@ -12,28 +11,6 @@ type Props = {
    * 著者管理 ステート
    */
   state: AuthorsState,
-
-  /**
-   * 著者追加ボタンが押された際のコールバック関数
-   */
-  onNewAuthorPush: () => void,
-
-  /**
-   * 著者エディタ 閉じるボタンが押された際のコールバック関数
-   */
-  onEditorClosePush: () => void,
-
-  /**
-   * 著者エディタ 内容変更時のコールバック関数
-   *
-   * @param data 変更された内容
-   */
-  onEditorChange: (data: AuthorEditorData) => void,
-
-  /**
-   * 著者エディタ 保存系ボタンが押された時のコールバック関数
-   */
-  onEditorSave: () => void,
 };
 
 /**
@@ -45,23 +22,19 @@ type Props = {
 export function AuthorsPresentation(props: Props) {
   return (
     <div>
-      <div>著者情報</div>
+      <h1>著者情報</h1>
       <table>
         <tbody>
-          <NewAuthor onNewAuthorPush={props.onNewAuthorPush}/>
+          <tr>
+            <td><AuthorRegisterLink label={"著者追加"}/></td>
+            <td></td>
+          </tr>
           {props.state.authors
             .sort((a, b) => b.id - a.id)
             .map(v => <Author key={v.id} author={v}/>)
           }
         </tbody>
       </table>
-      <AuthorEditor
-        isOpen={props.state.editor.isOpen}
-        name={props.state.editor.name}
-        onClosePush={props.onEditorClosePush}
-        onChange={props.onEditorChange}
-        onSavePush={props.onEditorSave}
-      />
     </div>
   );
 }

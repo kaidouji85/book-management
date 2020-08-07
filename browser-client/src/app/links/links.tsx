@@ -43,7 +43,7 @@ export function AuthorsLink(props: {label: string}) {
  * @param props プロパティ
  * @return 著者登録 リンク
  */
-export function RegisterAuthorLink(props: {label: string}) {
+export function AuthorRegisterLink(props: {label: string}) {
   return (
     <Link to={AuthorRegisterPath}>{props.label}</Link>
   );

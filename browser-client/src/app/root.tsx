@@ -1,5 +1,5 @@
 import React from 'react';
-import {AuthorsLink} from "./links/authors";
+import {AuthorsLink} from "./links/links";
 
 /**
  * ページルート コンポネント
