@@ -11,10 +11,15 @@ import {AuthorsLink, AuthorsPath, AuthorRegisterLink, AuthorRegisterPath, RootPa
 import {Root} from "./root";
 
 function App() {
+  const onAuthorSaveSuccess = () => {
+    console.log('保存成功');
+  };
   return (
     <Router>
       <Switch>
-        <Route path={AuthorRegisterPath}><AuthorRegister/></Route>
+        <Route path={AuthorRegisterPath}>
+          <AuthorRegister onSaveSuccess={onAuthorSaveSuccess} />
+        </Route>
         <Route path={AuthorsPath}><Authors/></Route>
         <Route path={RootPath}><Root/></Route>
       </Switch>

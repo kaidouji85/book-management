@@ -7,7 +7,8 @@ import {AuthorRegisterState} from "./state";
  */
 type Props = {
   state: AuthorRegisterState,
-  onNameChange: (value: string) => void
+  onNameChange: (value: string) => void,
+  onSavePush: () => void,
 }
 
 /**
@@ -29,7 +30,7 @@ export function AuthorRegisterPresentation(props: Props) {
         </tr>
         </tbody>
       </table>
-      <button>著者登録する</button>
+      <button onClick={props.onSavePush} onTouchStart={props.onSavePush}>著者登録する</button>
       <AuthorsLink label="著書一覧に戻る"/>
     </div>
   );
