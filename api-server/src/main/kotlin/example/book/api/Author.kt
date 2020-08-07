@@ -24,3 +24,8 @@ typealias GetAllAuthorResponse = APIResponseEnvelope<List<AuthorInfo>>
  * 著者新規登録 API レスポンス
  */
 typealias PostAuthorResponse = APIResponseEnvelope<AuthorInfo>;
+
+/**
+ * 著者削除 API レスポンス
+ */
+typealias  DeleteAuthorResponse = APIResponseEnvelope<Long>;
