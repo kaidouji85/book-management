@@ -20,21 +20,25 @@ type Props = {
  * @return 著者管理 プレゼンテーション コンポネント
  */
 export function AuthorsPresentation(props: Props) {
-  return (
+  const visible = (
     <div>
       <h1>著者情報</h1>
       <table>
         <tbody>
-          <tr>
-            <td><AuthorRegisterLink label={"著者追加"}/></td>
-            <td></td>
-          </tr>
-          {props.state.authors
-            .sort((a, b) => b.id - a.id)
-            .map(v => <Author key={v.id} author={v}/>)
-          }
+        <tr>
+          <td><AuthorRegisterLink label={"著者追加"}/></td>
+          <td></td>
+        </tr>
+        {props.state.authors
+          .sort((a, b) => b.id - a.id)
+          .map(v => <Author key={v.id} author={v}/>)
+        }
         </tbody>
       </table>
     </div>
   );
+  const loading = (
+    <div>通信中</div>
+  );
+  return props.state.isLoading ? loading : visible;
 }

@@ -12,6 +12,7 @@ export class Authors extends React.Component<any, AuthorsState> {
   constructor(props: any) {
     super(props);
     this.state = {
+      isLoading: true,
       authors: []
     };
   }
@@ -19,6 +20,7 @@ export class Authors extends React.Component<any, AuthorsState> {
   async componentDidMount() {
     const resp = await getAllAuthors();
     this.setState({
+      isLoading: false,
       authors: resp.payload
     });
   }
