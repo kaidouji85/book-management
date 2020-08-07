@@ -20,3 +20,9 @@ jpa:
         hbm2ddl:
           auto: update
         show_sql: true
+
+jackson:
+  # 要素数0のリストでも返すように以下を設定
+  # 参考文献
+  # https://chrisparton.net/rescuing-empty-json-arrays-in-micronaut/
+  serializationInclusion: ALWAYS
