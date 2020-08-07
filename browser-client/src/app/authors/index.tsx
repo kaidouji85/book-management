@@ -1,6 +1,5 @@
 import React from 'react';
 import {AuthorInfo, getAllAuthors, postAuthor} from "../api/authors";
-import '../../css/authors/index.css';
 import {AuthorsPresentation} from "./presentation";
 import {AuthorEditorData} from "./author-editor";
 

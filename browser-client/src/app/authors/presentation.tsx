@@ -44,15 +44,17 @@ type Props = {
  */
 export function AuthorsPresentation(props: Props) {
   return (
-    <div className="authors">
-      <div className="authors__title">著者情報</div>
-      <div className="authors__items">
-        <NewAuthor onNewAuthorPush={props.onNewAuthorPush}/>
-        {props.state.authors
-          .sort((a, b) => b.id - a.id)
-          .map(v => <Author key={v.id} author={v}/>)
-        }
-      </div>
+    <div>
+      <div>著者情報</div>
+      <table>
+        <tbody>
+          <NewAuthor onNewAuthorPush={props.onNewAuthorPush}/>
+          {props.state.authors
+            .sort((a, b) => b.id - a.id)
+            .map(v => <Author key={v.id} author={v}/>)
+          }
+        </tbody>
+      </table>
       <AuthorEditor
         isOpen={props.state.editor.isOpen}
         name={props.state.editor.name}

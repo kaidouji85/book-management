@@ -1,6 +1,5 @@
 import React from 'react';
 import {AuthorInfo} from "../api/authors";
-import '../../css/authors/author.css';
 
 /**
  * 著者情報コンポネント プロパティ
@@ -18,10 +17,13 @@ type Props = {
  */
 export function Author(props: Props) {
   return (
-    <div className="author">
-      <button className="author__delete">削除</button>
-      <button className="author__edit">編集</button>
-      <span className="author__name">{props.author.name}</span>
-    </div>
+    <tr>
+      <td>
+        <button>削除</button>
+        <button>編集</button>
+      </td>
+      <td>{props.author.name}</td>
+
+    </tr>
   );
 }

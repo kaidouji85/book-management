@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../css/authors/new-author.css'
 
 /**
  * 著者 新規作成 コンポネント プロパティ
@@ -19,9 +18,11 @@ export function NewAuthor(props: Props) {
     props.onNewAuthorPush();
   };
   return (
-    <div className="new-author">
-      <button className="new-author__add" onClick={onPush} onTouchStart={onPush}>+</button>
-      <div className="new-author__label">追加</div>
-    </div>
+    <tr>
+      <td>
+        <button onClick={onPush} onTouchStart={onPush}>+追加</button>
+      </td>
+      <td></td>
+    </tr>
   );
 }
