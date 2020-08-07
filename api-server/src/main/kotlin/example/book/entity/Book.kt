@@ -26,5 +26,5 @@ data class Book(
          * 著者
          */
         @ManyToOne
-        var author: Author
+        var author: AuthorEntity
 )

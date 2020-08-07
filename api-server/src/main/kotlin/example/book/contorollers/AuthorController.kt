@@ -4,7 +4,7 @@ import example.book.api.DeleteAuthorResponse
 import example.book.api.GetAllAuthorResponse
 import example.book.api.PostAuthorInput
 import example.book.api.PostAuthorResponse
-import example.book.entity.toAuthor
+import example.book.entity.toAuthorEntity
 import example.book.entity.toAuthorInfo
 import example.book.repository.AuthorRepository
 import io.micronaut.http.HttpResponse
@@ -30,7 +30,7 @@ class AuthorController {
 
     @Post("/")
     fun insert(@Body data: PostAuthorInput): HttpResponse<PostAuthorResponse> {
-        val author = toAuthor(data)
+        val author = toAuthorEntity(data)
         val savedAuthor = authorRepository.save(author)
         val respAuthor = toAuthorInfo(savedAuthor)
         val response = PostAuthorResponse(true, "post author success", respAuthor)

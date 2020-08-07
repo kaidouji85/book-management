@@ -1,29 +1,44 @@
 package example.book.api
 
 /**
- * 著者新規登録API クライアントからの入力
+ * 著者が持っている属性
  */
-data class PostAuthorInput(
-        val name: String
-)
+interface AuthorProps {
+    /**
+     * 著者名
+     */
+    val name: String
+}
 
 /**
- * 著者情報
+ * 著者新規登録 API クライアントからの入力
  */
-data class AuthorInfo(
+data class PostAuthorInput (
+        override val name: String
+): AuthorProps
+
+/**
+ * 著者情報 情報取得、編集などに利用する想定
+ */
+data class Author(
         val id: Long,
-        val name: String
-)
+        override val name: String
+): AuthorProps
 
 /**
  * 著者情報取得 API レスポンス
  */
-typealias GetAllAuthorResponse = APIResponseEnvelope<List<AuthorInfo>>
+typealias GetAllAuthorResponse = APIResponseEnvelope<List<Author>>
 
 /**
  * 著者新規登録 API レスポンス
  */
-typealias PostAuthorResponse = APIResponseEnvelope<AuthorInfo>;
+typealias PostAuthorResponse = APIResponseEnvelope<Author>;
+
+/**
+ * 著者変種 API レスポンス
+ */
+typealias PutAuthorResponse = APIResponseEnvelope<Author>;
 
 /**
  * 著者削除 API レスポンス
