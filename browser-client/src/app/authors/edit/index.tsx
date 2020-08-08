@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 
 type Props = {};
 
-export function AuthorUpdate(props: Props) {
+export function AuthorEdit(props: Props) {
   const {id} = useParams();
   return (
     <div>

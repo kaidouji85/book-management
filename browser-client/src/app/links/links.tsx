@@ -17,11 +17,11 @@ export const AuthorsPath = '/authors';
 export const AuthorRegisterPath = `${AuthorsPath}/register`;
 
 /**
- * 著者変更 パス
+ * 著者編集 パス
  * @param id 著者ID
- * @constructor
+ * @return 著者編集 パス
  */
-export const AuthorUpdatePath = (id: string) => `${AuthorsPath}/update/${id}`;
+export const AuthorEditPath = (id: string) => `${AuthorsPath}/edit/${id}`;
 
 /**
  * ページルート リンク
@@ -57,13 +57,13 @@ export function AuthorRegisterLink(props: {label: string}) {
 }
 
 /**
- * 著者変更 リンク
+ * 著者編集 リンク
  * @param props
  * @constructor
  */
-export function AuthorUpdateLink(props: {label: string, id: number}) {
+export function AuthorEditLink(props: {label: string, id: number}) {
   const id = props.id.toString();
   return (
-    <Link to={AuthorUpdatePath(id)}>{props.label}</Link>
+    <Link to={AuthorEditPath(id)}>{props.label}</Link>
   );
 }

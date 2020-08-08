@@ -7,9 +7,9 @@ import {
   Route
 } from "react-router-dom";
 import {AuthorRegister} from "./authors/register";
-import {AuthorsPath, AuthorRegisterPath, RootPath, AuthorUpdatePath} from "./links/links";
+import {AuthorsPath, AuthorRegisterPath, RootPath, AuthorEditPath} from "./links/links";
 import {Root} from "./root";
-import {AuthorUpdate} from "./authors/update";
+import {AuthorEdit} from "./authors/edit";
 
 function App() {
   // TODO 消す
@@ -22,8 +22,8 @@ function App() {
         <Route path={AuthorRegisterPath}>
           <AuthorRegister onSaveSuccess={onAuthorRegisterSuccess} />
         </Route>
-        <Route path={AuthorUpdatePath(':id')}>
-          <AuthorUpdate/>
+        <Route path={AuthorEditPath(':id')}>
+          <AuthorEdit/>
         </Route>
         <Route path={AuthorsPath}><Authors/></Route>
         <Route path={RootPath}><Root/></Route>

@@ -1,7 +1,7 @@
 import {Author} from "./author";
 import React from "react";
 import {useHistory} from 'react-router-dom';
-import {AuthorRegisterLink, AuthorUpdatePath} from "../../links/links";
+import {AuthorRegisterLink, AuthorEditPath} from "../../links/links";
 import {AuthorsState} from "./state";
 
 /**
@@ -32,13 +32,13 @@ export function AuthorsPresentation(props: Props) {
   }
 
   return (<VisibleAuthors {...props} />)
-  
+
 }
 
 function VisibleAuthors(props: Props) {
   const history = useHistory();
   const onEditPush = (id : number) => {
-    const path = AuthorUpdatePath(id.toString());
+    const path = AuthorEditPath(id.toString());
     history.push(path);
   };
   return (
