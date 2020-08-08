@@ -14,15 +14,25 @@ export class BookInsert extends React.Component<any, BookInsertState> {
     super(props);
     this.state = {
       title: '',
-      authors: []
+      authors: [],
+      selectedAuthorId: null,
     };
   }
 
   async componentDidMount() {
     try {
-      const authors = await getAllAuthors();
+      const resp = await getAllAuthors();
+      if (!resp.isSuccess) {
+        return;
+      }
+
+      const authors = resp.payload;
+      const selectedAuthorId = (0 < authors.length)
+        ? authors[0].id
+        : null;
       this.setState({
-        authors: authors.payload
+        authors: resp.payload,
+        selectedAuthorId
       })
     } catch (e) {
       throw e;
@@ -30,6 +40,20 @@ export class BookInsert extends React.Component<any, BookInsertState> {
   }
 
   render() {
-    return (<BookInsertPresentation state={this.state}/>);
+    return (<BookInsertPresentation
+      state={this.state}
+      onAuthorChange={this.onAuthorChange.bind(this)}
+    />);
+  }
+
+  /**
+   * 著者が変更された時の処理
+   * @param authorId 変更した著者ID
+   * @private
+   */
+  private onAuthorChange(authorId: number): void {
+    this.setState({
+      selectedAuthorId: authorId
+    });
   }
 }

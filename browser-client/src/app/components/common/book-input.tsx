@@ -6,7 +6,9 @@ import {AuthorData} from "../../api/authors";
  */
 type Props = {
   title: string,
-  authors: AuthorData[]
+  authors: AuthorData[],
+  selectedAuthorId: number | null,
+  onAuthorChange: (authorId: number) => void
 }
 
 /**
@@ -15,6 +17,11 @@ type Props = {
  * @constructor
  */
 export function BookInput(props: Props) {
+  const onAuthorChange = (e: React.FormEvent<HTMLSelectElement>) => {
+    const id = Number(e.currentTarget.value);
+    props.onAuthorChange(id);
+  };
+
   return (
     <div>
       <table>
@@ -26,7 +33,7 @@ export function BookInput(props: Props) {
           <tr>
             <td>著者</td>
             <td>
-              <select name="author">
+              <select value={props.selectedAuthorId ?? 0} onChange={onAuthorChange}>
                 {props.authors.map(v => (<option value={v.id}>{v.name}</option>))}
               </select>
             </td>

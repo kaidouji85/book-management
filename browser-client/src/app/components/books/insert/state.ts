@@ -8,8 +8,14 @@ export type BookInsertState = {
    * 書籍名
    */
   title: string,
+
   /**
    * 著者
    */
-  authors: AuthorData[]
+  authors: AuthorData[],
+
+  /**
+   * 選択されている著者ID
+   */
+  selectedAuthorId: number | null,
 }
