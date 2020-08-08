@@ -37,7 +37,7 @@ class AuthorController {
     }
 
     @Post("/")
-    fun insert(@Body data: PostAuthorInput): HttpResponse<PostAuthorResponse> {
+    fun insert(@Body data: PostAuthorData): HttpResponse<PostAuthorResponse> {
         val author = toAuthorEntity(data)
         val savedAuthor = authorRepository.save(author)
         val respAuthor = toAuthor(savedAuthor)
@@ -46,7 +46,7 @@ class AuthorController {
     }
 
     @Put("/")
-    fun update(@Body data: Author): HttpResponse<PostAuthorResponse> {
+    fun update(@Body data: AuthorData): HttpResponse<PostAuthorResponse> {
         val authorEntity = toAuthorEntity(data)
         val savedEntity = this.authorRepository.update(authorEntity)
         val respAuthor = toAuthor(savedEntity)

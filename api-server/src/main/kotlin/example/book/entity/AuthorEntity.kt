@@ -1,7 +1,7 @@
 package example.book.entity
 
-import example.book.api.Author
-import example.book.api.PostAuthorInput
+import example.book.api.AuthorData
+import example.book.api.PostAuthorData
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -30,11 +30,11 @@ data class AuthorEntity(
  * @param origin 変換元
  * @return 変換結果
  */
-fun toAuthorEntity(origin: PostAuthorInput): AuthorEntity {
+fun toAuthorEntity(origin: PostAuthorData): AuthorEntity {
     return AuthorEntity(0, origin.name)
 }
 
-fun toAuthorEntity(origin: Author): AuthorEntity {
+fun toAuthorEntity(origin: AuthorData): AuthorEntity {
     return AuthorEntity(origin.id, origin.name)
 }
 
@@ -44,6 +44,6 @@ fun toAuthorEntity(origin: Author): AuthorEntity {
  * @param origin 変換元
  * @return 変換結果
  */
-fun toAuthor(origin: AuthorEntity): Author {
-    return Author(origin.id, origin.name)
+fun toAuthor(origin: AuthorEntity): AuthorData {
+    return AuthorData(origin.id, origin.name)
 }
