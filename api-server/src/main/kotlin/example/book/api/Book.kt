@@ -33,6 +33,11 @@ typealias GetAllBooksAPIResponse = APIResponseEnvelope<List<BookData>>
 typealias PostBookAPIResponse = APIResponseEnvelope<Optional<BookData>>
 
 /**
+ * 書籍 削除 API レスポンス
+ */
+typealias DeleteBookAPIResponse = APIResponseEnvelope<Long>
+
+/**
  * 書籍エンティティをBookDataに変換する
  * @param origin 変換元
  * @return 変換結果

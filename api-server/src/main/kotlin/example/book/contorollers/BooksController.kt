@@ -4,10 +4,7 @@ import example.book.api.*
 import example.book.repository.AuthorRepository
 import example.book.repository.BookRepository
 import io.micronaut.http.HttpResponse
-import io.micronaut.http.annotation.Body
-import io.micronaut.http.annotation.Controller
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.Post
+import io.micronaut.http.annotation.*
 import java.util.*
 import javax.inject.Inject
 
@@ -32,7 +29,7 @@ class BooksController {
     }
 
     @Post("/")
-    fun post(@Body data: PostBookData): HttpResponse<PostBookAPIResponse> {
+    fun insert(@Body data: PostBookData): HttpResponse<PostBookAPIResponse> {
         val author = this.authorRepository.findById(data.authorId)
         val resp = author.map {
             val book = createNewBookEntity(data, it)
@@ -41,5 +38,12 @@ class BooksController {
             return@map APIResponseEnvelope(true, "book register success", Optional.of(respBook))
         }.orElse(APIResponseEnvelope(false, "author not exist", Optional.empty()))
         return HttpResponse.ok(resp)
+    }
+
+    @Delete("/{id}")
+    fun delete(@PathVariable id: Long): HttpResponse<DeleteBookAPIResponse> {
+        this.bookRepository.deleteById(id)
+        val response = APIResponseEnvelope(true, "book delete success", id)
+        return HttpResponse.ok(response)
     }
 }
