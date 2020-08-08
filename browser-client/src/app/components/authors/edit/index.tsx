@@ -2,7 +2,7 @@ import React from 'react';
 import {AuthorEditState} from "./state";
 import {AuthorEditPresentation} from "./presentation";
 import {useParams} from 'react-router-dom';
-import {AuthorInfo, getAuthorById} from "../../../api/authors";
+import {AuthorInfo, getAuthorById, postAuthor, putAuthor} from "../../../api/authors";
 
 /**
  * 著者編集コンポネント
@@ -58,6 +58,7 @@ export class AuthorEditContainer extends React.Component<ContainerProps, AuthorE
       <AuthorEditPresentation
         state={this.state}
         onNameChange={this.onNameChange.bind(this)}
+        onSavePush={this.onSavePush.bind(this)}
       />);
   }
 
@@ -68,5 +69,25 @@ export class AuthorEditContainer extends React.Component<ContainerProps, AuthorE
    */
   private onNameChange(name: string): void {
     this.setState({name: name});
+  }
+
+  private async onSavePush():Promise<void> {
+    try {
+      const putData = this.createAuthorInfo();
+      const putResp = await putAuthor(putData);
+      if (!putResp.isSuccess) {
+        // TODO エラ〜メッセージを画面に表示する
+        return;
+      }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  private createAuthorInfo(): AuthorInfo {
+    return {
+      id: this.props.id,
+      name: this.state.name
+    };
   }
 }

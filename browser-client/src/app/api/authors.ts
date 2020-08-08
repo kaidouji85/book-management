@@ -81,6 +81,24 @@ export async function postAuthor(data: PostAuthorData): Promise<PostAuthorRespon
   }
 }
 
+export type PutAuthorAPIResponse = APIResponseEnvelope<AuthorInfo>;
+
+export async function putAuthor(data: AuthorInfo): Promise<PutAuthorAPIResponse> {
+  try {
+    const method = "PUT";
+    const body = JSON.stringify(data);
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+    const resp = await fetch(`http://${getAPIHost()}/authors`, {method, headers, body});
+    const json = await resp.json(); // TODO JSONのパース判定を正しく行う
+    return json;
+  } catch (e) {
+    throw e;
+  }
+}
+
 /**
  * 著者削除 API レスポンス
  */
