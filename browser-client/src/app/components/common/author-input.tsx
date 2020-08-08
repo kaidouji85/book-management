@@ -17,7 +17,6 @@ export function AuthorInput(props: Props) {
   const onNameChange = (event: React.FormEvent<HTMLInputElement>) => {
     props.onNameChange(event.currentTarget.value);
   }
-
   return (
     <table>
       <tbody>
