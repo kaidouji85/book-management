@@ -27,6 +27,15 @@ type Props = {
  * @return 著者管理 プレゼンテーション コンポネント
  */
 export function AuthorsPresentation(props: Props) {
+  if (props.state.isLoading) {
+    return (<Loading />);
+  }
+
+  return (<VisibleAuthors {...props} />)
+  
+}
+
+function VisibleAuthors(props: Props) {
   const history = useHistory();
   const onEditPush = (id : number) => {
     const path = AuthorUpdatePath(id.toString());
@@ -48,5 +57,11 @@ export function AuthorsPresentation(props: Props) {
         </tbody>
       </table>
     </div>
+  );
+}
+
+function Loading() {
+  return (
+    <div>通信中</div>
   );
 }
