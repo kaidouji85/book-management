@@ -3,6 +3,7 @@ import {AuthorEditState} from "./state";
 import {AuthorEditPresentation} from "./presentation";
 import {useParams} from 'react-router-dom';
 import {AuthorInfo, getAuthorById, postAuthor, putAuthor} from "../../../api/authors";
+import {AuthorsPath} from "../../links/links";
 
 /**
  * 著者編集コンポネント
@@ -71,23 +72,48 @@ export class AuthorEditContainer extends React.Component<ContainerProps, AuthorE
     this.setState({name: name});
   }
 
-  private async onSavePush():Promise<void> {
+  /**
+   * 保存系ボタンが押された時の処理
+   * @private
+   */
+  private async onSavePush():Promise<string | null> {
     try {
+      await this.isLoadingPromise(true);
+
       const putData = this.createAuthorInfo();
       const putResp = await putAuthor(putData);
       if (!putResp.isSuccess) {
         // TODO エラ〜メッセージを画面に表示する
-        return;
+        await this.isLoadingPromise(false);
+        return null;
       }
+
+      return AuthorsPath;
     } catch (e) {
       throw e;
     }
   }
 
+  /**
+   * 著者更新APIに渡す情報を生成する
+   * @private
+   * @return  著者更新APIに渡す情報
+   */
   private createAuthorInfo(): AuthorInfo {
     return {
       id: this.props.id,
       name: this.state.name
     };
+  }
+
+  /**
+   * 通信中フラグを変更する
+   * @param isLoading 設定値
+   * @private
+   */
+  private isLoadingPromise(isLoading: boolean): Promise<void> {
+    return new Promise(resolve => {
+      this.setState({isLoading: isLoading}, resolve);
+    });
   }
 }

@@ -1,8 +1,9 @@
 import {Author} from "./author";
 import React from "react";
 import {useHistory} from 'react-router-dom';
-import {AuthorRegisterLink, AuthorEditPath} from "../../links/links";
+import {AuthorRegisterLink, AuthorEditPath, RootLink} from "../../links/links";
 import {AuthorsState} from "./state";
+import {Loading} from "../../common/loading";
 
 /**
  * 著者管理 プレゼンテーション コンポネント プロパティ
@@ -28,13 +29,17 @@ type Props = {
  */
 export function AuthorsPresentation(props: Props) {
   if (props.state.isLoading) {
-    return (<Loading />);
+    return (<Loading/>);
   }
 
   return (<VisibleAuthors {...props} />)
-
 }
 
+/**
+ * ローディングでない時の著者管理
+ * @param props プロパティ
+ * @constructor
+ */
 function VisibleAuthors(props: Props) {
   const history = useHistory();
   const onEditPush = (id : number) => {
@@ -56,12 +61,7 @@ function VisibleAuthors(props: Props) {
         }
         </tbody>
       </table>
+      <RootLink label="トップに戻る"/>
     </div>
-  );
-}
-
-function Loading() {
-  return (
-    <div>通信中</div>
   );
 }
