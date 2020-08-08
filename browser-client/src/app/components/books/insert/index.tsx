@@ -3,6 +3,7 @@ import {BookInsertState} from "./state";
 import {BookInsertPresentation} from "./presentation";
 import {getAllAuthors} from "../../../api/authors";
 import {BookInsertData, insertBook} from "../../../api/books";
+import {BooksPath} from "../../links/links";
 
 /**
  * 書籍新規登録 コンポネント
@@ -14,6 +15,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
   constructor(props: any) {
     super(props);
     this.state = {
+      isLoading: false,
       title: '',
       authors: [],
       selectedAuthorId: null,
@@ -71,20 +73,35 @@ export class BookInsert extends React.Component<any, BookInsertState> {
     });
   }
 
-  private async onSavePush(): Promise<void> {
+  /**
+   * 保存系ボタンを押した時の処理
+   * @private
+   */
+  private async onSavePush(): Promise<string | null> {
     try {
-      //console.log('save');
+      await this.isLoadingPromise(true);
+
       const data = this.createBookInsertData();
       if (!data) {
-        return;
+        return null;
+      }
+      const resp = await insertBook(data);
+      if (!resp.isSuccess) {
+        // TODO エラーメッセージを画面に出す
+        return null;
       }
 
-      const resp = await insertBook(data);
+      return BooksPath;
     } catch (e) {
       throw e;
     }
   }
 
+  /**
+   * 書籍登録APIに渡すデータを生成する
+   * @private
+   * @return 生成結果
+   */
   private createBookInsertData(): BookInsertData | null {
     if (this.state.selectedAuthorId === null) {
       return null;
@@ -94,5 +111,11 @@ export class BookInsert extends React.Component<any, BookInsertState> {
       title: this.state.title,
       authorId: this.state.selectedAuthorId
     };
+  }
+
+  private async isLoadingPromise(isLoading: boolean): Promise<void> {
+    return new Promise(resolve => {
+      this.setState({isLoading}, resolve);
+    });
   }
 }
