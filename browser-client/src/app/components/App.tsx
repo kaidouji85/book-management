@@ -22,9 +22,15 @@ function App() {
         <Route path={AuthorUpdatePath(':id')}>
           <AuthorUpdate/>
         </Route>
-        <Route path={AuthorsPath}><Authors/></Route>
-        <Route path={BooksPath}><Books/></Route>
-        <Route path={RootPath}><Root/></Route>
+        <Route path={AuthorsPath}>
+          <Authors/>
+        </Route>
+        <Route path={BooksPath}>
+          <Books/>
+        </Route>
+        <Route path={RootPath}>
+          <Root/>
+        </Route>
       </Switch>
     </Router>
   );

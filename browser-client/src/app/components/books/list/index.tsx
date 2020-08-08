@@ -1,9 +1,26 @@
 import React from 'react';
+import {BooksState} from "./state";
+import {BooksPresentation} from "./presentation";
+import {getAllBooks} from "../../../api/books";
 
-export function Books() {
-  return (
-    <div>
-      <h1>書籍一覧</h1>
-    </div>
-  );
+export class Books extends React.Component<any , BooksState> {
+  state: BooksState;
+
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      books: []
+    };
+  }
+
+  render() {
+    return (<BooksPresentation state={this.state} />);
+  }
+
+  async componentDidMount() {
+    const resp = await getAllBooks();
+    this.setState({
+      books: resp.payload
+    })
+  }
 }
