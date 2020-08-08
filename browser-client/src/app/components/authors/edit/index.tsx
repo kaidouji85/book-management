@@ -2,6 +2,7 @@ import React from 'react';
 import {AuthorEditState} from "./state";
 import {AuthorEditPresentation} from "./presentation";
 import {useParams} from 'react-router-dom';
+import {AuthorInfo, getAuthorById} from "../../../api/authors";
 
 /**
  * 著者編集コンポネント
@@ -29,8 +30,27 @@ export class AuthorEditContainer extends React.Component<ContainerProps, AuthorE
 
     super(props);
     this.state = {
+      isLoading: true,
       name: ''
     };
+  }
+
+  async componentDidMount() {
+    try {
+      const resp = await getAuthorById(this.props.id);
+      if (!resp.isSuccess || !resp.payload) {
+        // TODO エラ〜メッセージを画面に出す
+        return;
+      }
+
+      const author: AuthorInfo = resp.payload;
+      this.setState({
+        isLoading: false,
+        name: author.name
+      })
+    } catch(e) {
+      throw e;
+    }
   }
 
   render() {

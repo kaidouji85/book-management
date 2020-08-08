@@ -1,3 +1,10 @@
+/**
+ * 著者編集 コンポネント ステート
+ */
 export type AuthorEditState = {
-  name: string
+  isLoading: boolean,
+  /**
+   * 著者名
+   */
+  name: string,
 };
