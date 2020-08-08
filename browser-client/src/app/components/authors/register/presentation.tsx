@@ -2,6 +2,7 @@ import {AuthorsLink} from "../../links/links";
 import React from "react";
 import {useHistory} from 'react-router-dom';
 import {AuthorRegisterState} from "./state";
+import {AuthorInput} from "../../common/author-input";
 
 /**
  * プロパティ
@@ -34,9 +35,6 @@ type Props = {
  */
 export function AuthorRegisterPresentation(props: Props) {
   const history = useHistory();
-  const onNameChange = (event: React.FormEvent<HTMLInputElement>) => {
-    props.onNameChange(event.currentTarget.value);
-  }
   const onSavePush = async () => {
     const path = await props.onSavePush();
     if (path !== null) {
@@ -46,14 +44,7 @@ export function AuthorRegisterPresentation(props: Props) {
   const visible = (
     <div>
       <h1>著者登録</h1>
-      <table>
-        <tbody>
-        <tr>
-          <td>著者名</td>
-          <td><input type="text" onChange={onNameChange} value={props.state.name}/></td>
-        </tr>
-        </tbody>
-      </table>
+      <AuthorInput name={props.state.name} onNameChange={props.onNameChange}/>
       <button onClick={onSavePush} onTouchStart={onSavePush}>著者登録する</button>
       <AuthorsLink label="著書一覧に戻る"/>
     </div>

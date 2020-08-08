@@ -1,5 +1,5 @@
 import React from 'react';
-import {AuthorInfo} from "../../api/authors";
+import {AuthorInfo} from "../../../api/authors";
 
 /**
  * 著者情報コンポネント プロパティ

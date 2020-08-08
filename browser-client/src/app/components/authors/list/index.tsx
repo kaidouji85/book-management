@@ -1,5 +1,5 @@
 import React from 'react';
-import {deleteAuthor, getAllAuthors} from "../../api/authors";
+import {deleteAuthor, getAllAuthors} from "../../../api/authors";
 import {AuthorsPresentation} from "./presentation";
 import {AuthorsState} from "./state";
 

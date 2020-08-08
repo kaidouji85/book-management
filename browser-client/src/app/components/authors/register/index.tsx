@@ -1,7 +1,7 @@
 import React from 'react';
 import {AuthorRegisterState} from "./state";
 import {AuthorRegisterPresentation} from "./presentation";
-import {postAuthor, PostAuthorData} from "../../api/authors";
+import {postAuthor, PostAuthorData} from "../../../api/authors";
 import {AuthorsPath} from "../../links/links";
 
 /**
