@@ -1,5 +1,5 @@
 import React from 'react';
-import {deleteAuthor, getAllAuthors} from "../../api/authors";
+import {deleteAuthor, getAllAuthors} from "../../../api/authors";
 import {AuthorsPresentation} from "./presentation";
 import {AuthorsState} from "./state";
 
@@ -26,10 +26,9 @@ export class Authors extends React.Component<any, AuthorsState> {
   }
 
   render() {
-    return AuthorsPresentation({
-      state: this.state,
-      onDeletePush: this.onDeletePush.bind(this)
-    });
+    return (
+      <AuthorsPresentation state={this.state} onDeletePush={this.onDeletePush.bind(this)}/>
+    );
   }
 
   /**

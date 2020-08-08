@@ -1,14 +1,8 @@
 import React from 'react';
 import {AuthorRegisterState} from "./state";
 import {AuthorRegisterPresentation} from "./presentation";
-import {postAuthor, PostAuthorData} from "../../api/authors";
-
-/**
- * 著者登録 コンポネント プロパティ
- */
-type Props = {
-  onSaveSuccess: () => void
-};
+import {postAuthor, PostAuthorData} from "../../../api/authors";
+import {AuthorsPath} from "../../links/links";
 
 /**
  * 著者登録 コンポネント
@@ -17,7 +11,7 @@ type Props = {
 export class AuthorRegister extends React.Component<any, AuthorRegisterState> {
   state: AuthorRegisterState;
 
-  constructor(props: Props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       isLoading: false,
@@ -48,9 +42,10 @@ export class AuthorRegister extends React.Component<any, AuthorRegisterState> {
 
   /**
    * 保存系ボタンが押されて時の処理
+   * @return 遷移先URL
    * @private
    */
-  private async onSavePush(): Promise<void> {
+  private async onSavePush(): Promise<string | null> {
     try {
       await new Promise(resolve => {
         this.setState({
@@ -63,10 +58,10 @@ export class AuthorRegister extends React.Component<any, AuthorRegisterState> {
       const resp = await postAuthor(data);
       if (!resp.isSuccess) {
         // TODO メッセージを画面に表示する
-        return;
+        return null;
       }
 
-      this.props.onSaveSuccess();
+      return AuthorsPath;
     } catch(e) {
       throw e;
     }

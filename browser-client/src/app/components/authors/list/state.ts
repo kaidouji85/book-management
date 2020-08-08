@@ -1,4 +1,4 @@
-import {AuthorInfo} from "../../api/authors";
+import {AuthorInfo} from "../../../api/authors";
 
 /**
  * 著者管理コンポネント ステート
