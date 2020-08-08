@@ -2,25 +2,22 @@ import React from 'react';
 import '../css/App.css';
 import {Authors} from "./authors/list";
 import {
-  //BrowserRouter as Router,
+  BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
-import {Router} from 'react-router';
 import {AuthorRegister} from "./authors/register";
 import {AuthorsPath, AuthorRegisterPath, RootPath, AuthorUpdatePath} from "./links/links";
 import {Root} from "./root";
-import { createBrowserHistory } from "history";
 import {AuthorUpdate} from "./authors/update";
 
-const history = createBrowserHistory();
-
 function App() {
+  // TODO 消す
   const onAuthorRegisterSuccess = () => {
-    history.push(AuthorsPath);
+    //history.push(AuthorsPath);
   };
   return (
-    <Router history={history}>
+    <Router>
       <Switch>
         <Route path={AuthorRegisterPath}>
           <AuthorRegister onSaveSuccess={onAuthorRegisterSuccess} />

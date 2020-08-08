@@ -1,8 +1,8 @@
 import {Author} from "./author";
 import React from "react";
-import {AuthorRegisterLink} from "../../links/links";
+import {useHistory} from 'react-router-dom';
+import {AuthorRegisterLink, AuthorUpdatePath} from "../../links/links";
 import {AuthorsState} from "./state";
-import {AuthorInfo} from "../../api/authors";
 
 /**
  * 著者管理 プレゼンテーション コンポネント プロパティ
@@ -17,7 +17,7 @@ type Props = {
    * 削除ボタンが押された時のコールバック関数
    * @param id 著者ID
    */
-  onDeletePush: (id: number) => void;
+  onDeletePush: (id: number) => void,
 };
 
 /**
@@ -27,7 +27,12 @@ type Props = {
  * @return 著者管理 プレゼンテーション コンポネント
  */
 export function AuthorsPresentation(props: Props) {
-  const visible = (
+  const history = useHistory();
+  const onEditPush = (id : number) => {
+    const path = AuthorUpdatePath(id.toString());
+    history.push(path);
+  };
+  return (
     <div>
       <h1>著者情報</h1>
       <table>
@@ -38,14 +43,10 @@ export function AuthorsPresentation(props: Props) {
         </tr>
         {props.state.authors
           .sort((a, b) => b.id - a.id)
-          .map(v => <Author key={v.id} author={v} onDeletePush={props.onDeletePush} />)
+          .map(v => <Author key={v.id} author={v} onDeletePush={props.onDeletePush}onEditPush={onEditPush} />)
         }
         </tbody>
       </table>
     </div>
   );
-  const loading = (
-    <div>通信中</div>
-  );
-  return props.state.isLoading ? loading : visible;
 }
