@@ -20,12 +20,22 @@ class BooksController {
     lateinit var authorRepository: AuthorRepository
 
     @Get("/")
-    fun index(): HttpResponse<GetAllBooksAPIResponse> {
+    fun getAll(): HttpResponse<GetAllBooksAPIResponse> {
         val books = bookRepository.findAll()
                 .toList()
                 .map { toBookData(it) }
         val response = APIResponseEnvelope(true, "get all books success", books)
         return HttpResponse.ok(response)
+    }
+
+    @Get("/{id}")
+    fun getById(@PathVariable id: Long): HttpResponse<GetBookByIdAPIResponse> {
+        val book = this.bookRepository.findById(id)
+        val resp = book.map {
+            val respBook = toBookData(it)
+            return@map APIResponseEnvelope(true, "get book by id success", Optional.of(respBook))
+        }.orElse(APIResponseEnvelope(true, "get book by id success", Optional.empty()))
+        return HttpResponse.ok(resp)
     }
 
     @Post("/")
@@ -48,7 +58,7 @@ class BooksController {
             val updatedBook = this.bookRepository.update(book)
             val respBook = toBookData(updatedBook)
             return@map APIResponseEnvelope(true, "book update success", Optional.of(respBook))
-        }.orElse(APIResponseEnvelope(false, "author not exist", Optional.empty()))
+        }.orElse(APIResponseEnvelope(false, "no exist book", Optional.empty()))
         return HttpResponse.ok(resp)
     }
 
