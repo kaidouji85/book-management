@@ -2,6 +2,7 @@ import React from 'react';
 import {BookInsertState} from "./state";
 import {BookInsertPresentation} from "./presentation";
 import {getAllAuthors} from "../../../api/authors";
+import {BookInsertData, insertBook} from "../../../api/books";
 
 /**
  * 書籍新規登録 コンポネント
@@ -43,6 +44,8 @@ export class BookInsert extends React.Component<any, BookInsertState> {
     return (<BookInsertPresentation
       state={this.state}
       onAuthorChange={this.onAuthorChange.bind(this)}
+      onTitleChange={this.onTitleChange.bind(this)}
+      onSavePush={this.onSavePush.bind(this)}
     />);
   }
 
@@ -55,5 +58,41 @@ export class BookInsert extends React.Component<any, BookInsertState> {
     this.setState({
       selectedAuthorId: authorId
     });
+  }
+
+  /**
+   * タイトルが変更された時の処理
+   * @param title 変更ない等
+   * @private
+   */
+  private onTitleChange(title: string): void {
+    this.setState({
+      title: title
+    });
+  }
+
+  private async onSavePush(): Promise<void> {
+    try {
+      //console.log('save');
+      const data = this.createBookInsertData();
+      if (!data) {
+        return;
+      }
+
+      const resp = await insertBook(data);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  private createBookInsertData(): BookInsertData | null {
+    if (this.state.selectedAuthorId === null) {
+      return null;
+    }
+
+    return {
+      title: this.state.title,
+      authorId: this.state.selectedAuthorId
+    };
   }
 }

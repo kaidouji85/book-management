@@ -45,7 +45,7 @@ export function AuthorInsertPresentation(props: Props) {
     <div>
       <h1>著者新規登録</h1>
       <AuthorInput name={props.state.name} onNameChange={props.onNameChange}/>
-      <button onClick={onSavePush} onTouchStart={onSavePush}>著者登録する</button>
+      <button onClick={onSavePush} onTouchStart={onSavePush}>著者を登録する</button>
       <AuthorsLink label="著書一覧に戻る"/>
     </div>
   );
