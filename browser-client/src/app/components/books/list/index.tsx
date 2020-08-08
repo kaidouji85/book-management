@@ -14,7 +14,11 @@ export class Books extends React.Component<any , BooksState> {
   }
 
   render() {
-    return (<BooksPresentation state={this.state} />);
+    return (<BooksPresentation
+      state={this.state}
+      onDeletePush={this.onDeletePush.bind(this)}
+      onEditPush={this.onEditPush.bind(this)}
+    />);
   }
 
   async componentDidMount() {
@@ -22,5 +26,21 @@ export class Books extends React.Component<any , BooksState> {
     this.setState({
       books: resp.payload
     })
+  }
+
+  /**
+   * 削除ボタンを押した時の処理
+   * @param id 書籍ID
+   */
+  onDeletePush(id :number): void {
+    console.log(`delete ${id}`);
+  }
+
+  /**
+   * 編集ボタンを押した時の処理
+   * @param id 書籍ID
+   */
+  onEditPush(id :number): void {
+    console.log(`update ${id}`);
   }
 }

@@ -6,7 +6,9 @@ import {Book} from "./book";
  * 書籍情報 コンポネント プロパティ
  */
 type Props = {
-  state: BooksState
+  state: BooksState,
+  onDeletePush: (id: number) => void,
+  onEditPush: (id: number) => void,
 };
 
 /**
@@ -20,7 +22,15 @@ export function BooksPresentation(props: Props) {
       <h1>書籍一覧</h1>
       <table>
         <tbody>
-          {props.state.books.map(v => (<Book key={v.id} {...v} />))}
+        {props.state.books.map(v => {
+          return (
+            <Book
+              {...v}
+              key={v.id}
+              onDeletePush={props.onDeletePush}
+              onEditPush={props.onEditPush}
+            />)
+        })}
         </tbody>
       </table>
     </div>
