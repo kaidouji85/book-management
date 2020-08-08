@@ -1,7 +1,7 @@
 import {Author} from "./author";
 import React from "react";
 import {useHistory} from 'react-router-dom';
-import {AuthorRegisterLink, AuthorEditPath, RootLink} from "../../links/links";
+import {AuthorInsertLink, AuthorUpdatePath, RootLink} from "../../links/links";
 import {AuthorsState} from "./state";
 import {Loading} from "../../common/loading";
 
@@ -43,7 +43,7 @@ export function AuthorsPresentation(props: Props) {
 function VisibleAuthors(props: Props) {
   const history = useHistory();
   const onEditPush = (id : number) => {
-    const path = AuthorEditPath(id.toString());
+    const path = AuthorUpdatePath(id.toString());
     history.push(path);
   };
   return (
@@ -52,7 +52,7 @@ function VisibleAuthors(props: Props) {
       <table>
         <tbody>
         <tr>
-          <td><AuthorRegisterLink label={"著者追加"}/></td>
+          <td><AuthorInsertLink label={"著者追加"}/></td>
           <td></td>
         </tr>
         {props.state.authors

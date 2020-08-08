@@ -1,32 +1,32 @@
 import React from 'react';
-import {AuthorEditState} from "./state";
-import {AuthorEditPresentation} from "./presentation";
+import {AuthorUpdateState} from "./state";
+import {AuthorUpdatePresentation} from "./presentation";
 import {useParams} from 'react-router-dom';
 import {AuthorData, getAuthorById, insertAuthor, updateAuthor} from "../../../api/authors";
 import {AuthorsPath} from "../../links/links";
 
 /**
- * 著者編集コンポネント
+ * 著者更新 コンポネント
  * @constructor
  */
-export function AuthorEdit() {
+export function AuthorUpdate() {
   const {id} = useParams();
   return (
-    <AuthorEditContainer id={id} />
+    <AuthorUpdateContainer id={id} />
   );
 }
 
 /**
- * 著者編集 コンテナ コンポネント プロパティ
+ * 著者更新 コンテナ コンポネント プロパティ
  */
 type ContainerProps = {
   id: number
 };
 
 /**
- * 著者編集 コンテナ コンポネント
+ * 著者更新 コンテナ コンポネント
  */
-export class AuthorEditContainer extends React.Component<ContainerProps, AuthorEditState>{
+export class AuthorUpdateContainer extends React.Component<ContainerProps, AuthorUpdateState>{
   constructor(props: ContainerProps) {
 
     super(props);
@@ -56,7 +56,7 @@ export class AuthorEditContainer extends React.Component<ContainerProps, AuthorE
 
   render() {
     return (
-      <AuthorEditPresentation
+      <AuthorUpdatePresentation
         state={this.state}
         onNameChange={this.onNameChange.bind(this)}
         onSavePush={this.onSavePush.bind(this)}

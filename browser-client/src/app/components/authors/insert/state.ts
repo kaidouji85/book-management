@@ -1,7 +1,7 @@
 /**
  * 著者登録 コンポネント ステート
  */
-export type AuthorRegisterState = {
+export type AuthorInsertState = {
   /**
    * 通信中フラグ、trueで通信中
    */

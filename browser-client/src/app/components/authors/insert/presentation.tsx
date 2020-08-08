@@ -1,7 +1,7 @@
 import {AuthorsLink} from "../../links/links";
 import React from "react";
 import {useHistory} from 'react-router-dom';
-import {AuthorRegisterState} from "./state";
+import {AuthorInsertState} from "./state";
 import {AuthorInput} from "../../common/author-input";
 
 /**
@@ -11,7 +11,7 @@ type Props = {
   /**
    * ステート
    */
-  state: AuthorRegisterState,
+  state: AuthorInsertState,
 
   /**
    * 著者名が変更された時のコールバック関数
@@ -30,10 +30,10 @@ type Props = {
 }
 
 /**
- * 著者登録 プレゼンテーション コンポネント
+ * 著者新規登録 プレゼンテーション コンポネント
  * @return 著者登録 プレゼンテーション コンポネント
  */
-export function AuthorRegisterPresentation(props: Props) {
+export function AuthorInsertPresentation(props: Props) {
   const history = useHistory();
   const onSavePush = async () => {
     const path = await props.onSavePush();

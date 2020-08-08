@@ -1,25 +1,25 @@
 import {AuthorInput} from "../../common/author-input";
 import React from "react";
-import {AuthorEditState} from "./state";
+import {AuthorUpdateState} from "./state";
 import {AuthorsLink} from "../../links/links";
 import {Loading} from "../../common/loading";
 import {useHistory} from "react-router-dom";
 
 /**
- * 著者編集 プレゼンテーション コンポネント プロパティ
+ * 著者更新 プレゼンテーション コンポネント プロパティ
  */
 type Props = {
-  state: AuthorEditState,
+  state: AuthorUpdateState,
   onNameChange: (name: string) => void,
   onSavePush: () => Promise<string | null>,
 };
 
 /**
- * 著者編集 プレゼンテーション コンポネント
+ * 著者更新 プレゼンテーション コンポネント
  * @param props プロパティ
  * @return 著者編集 プレゼンテーション コンポネント
  */
-export function AuthorEditPresentation(props: Props) {
+export function AuthorUpdatePresentation(props: Props) {
   const history = useHistory();
   if (props.state.isLoading) {
     return (<Loading/>);

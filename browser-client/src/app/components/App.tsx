@@ -6,20 +6,20 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import {AuthorRegister} from "./authors/register";
-import {AuthorsPath, AuthorRegisterPath, RootPath, AuthorEditPath} from "./links/links";
+import {AuthorInsert} from "./authors/insert";
+import {AuthorsPath, AuthorInsertPath, RootPath, AuthorUpdatePath} from "./links/links";
 import {Root} from "./root";
-import {AuthorEdit} from "./authors/edit";
+import {AuthorUpdate} from "./authors/update";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path={AuthorRegisterPath}>
-          <AuthorRegister/>
+        <Route path={AuthorInsertPath}>
+          <AuthorInsert/>
         </Route>
-        <Route path={AuthorEditPath(':id')}>
-          <AuthorEdit/>
+        <Route path={AuthorUpdatePath(':id')}>
+          <AuthorUpdate/>
         </Route>
         <Route path={AuthorsPath}><Authors/></Route>
         <Route path={RootPath}><Root/></Route>

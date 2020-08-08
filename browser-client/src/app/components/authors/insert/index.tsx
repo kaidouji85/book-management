@@ -1,15 +1,15 @@
 import React from 'react';
-import {AuthorRegisterState} from "./state";
-import {AuthorRegisterPresentation} from "./presentation";
+import {AuthorInsertState} from "./state";
+import {AuthorInsertPresentation} from "./presentation";
 import {insertAuthor, InsertAuthorData} from "../../../api/authors";
 import {AuthorsPath} from "../../links/links";
 
 /**
- * 著者登録 コンポネント
+ * 著者新規登録 コンポネント
  * @return 著者登録 コンポネント
  */
-export class AuthorRegister extends React.Component<any, AuthorRegisterState> {
-  state: AuthorRegisterState;
+export class AuthorInsert extends React.Component<any, AuthorInsertState> {
+  state: AuthorInsertState;
 
   constructor(props: any) {
     super(props);
@@ -21,7 +21,7 @@ export class AuthorRegister extends React.Component<any, AuthorRegisterState> {
 
   render() {
     return (
-      <AuthorRegisterPresentation
+      <AuthorInsertPresentation
         state={this.state}
         onNameChange={this.onNameChange.bind(this)}
         onSavePush={this.onSavePush.bind(this)}
