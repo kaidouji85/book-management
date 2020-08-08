@@ -16,6 +16,8 @@ export const AuthorsPath = '/authors';
  */
 export const AuthorRegisterPath = `${AuthorsPath}/register`;
 
+export const AuthorUpdatePath = (id: string) => `${AuthorsPath}/update/${id}`;
+
 /**
  * ページルート リンク
  * @param props プロパティ
@@ -46,5 +48,12 @@ export function AuthorsLink(props: {label: string}) {
 export function AuthorRegisterLink(props: {label: string}) {
   return (
     <Link to={AuthorRegisterPath}>{props.label}</Link>
+  );
+}
+
+export function AuthorUpdateLink(props: {label: string, id: number}) {
+  const id = props.id.toString();
+  return (
+    <Link to={AuthorUpdatePath(id)}>{props.label}</Link>
   );
 }

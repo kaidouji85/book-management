@@ -8,9 +8,10 @@ import {
 } from "react-router-dom";
 import {Router} from 'react-router';
 import {AuthorRegister} from "./authors/register";
-import {AuthorsPath, AuthorRegisterPath, RootPath} from "./links/links";
+import {AuthorsPath, AuthorRegisterPath, RootPath, AuthorUpdatePath} from "./links/links";
 import {Root} from "./root";
 import { createBrowserHistory } from "history";
+import {AuthorUpdate} from "./authors/update";
 
 const history = createBrowserHistory();
 
@@ -23,6 +24,9 @@ function App() {
       <Switch>
         <Route path={AuthorRegisterPath}>
           <AuthorRegister onSaveSuccess={onAuthorRegisterSuccess} />
+        </Route>
+        <Route path={AuthorUpdatePath(':id')}>
+          <AuthorUpdate/>
         </Route>
         <Route path={AuthorsPath}><Authors/></Route>
         <Route path={RootPath}><Root/></Route>
