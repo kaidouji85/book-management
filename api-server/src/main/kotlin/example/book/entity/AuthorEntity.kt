@@ -1,7 +1,7 @@
 package example.book.entity
 
 import example.book.api.AuthorData
-import example.book.api.PostAuthorData
+import example.book.api.AuthorPropData
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -30,7 +30,7 @@ data class AuthorEntity(
  * @param origin 変換元
  * @return 変換結果
  */
-fun toAuthorEntity(origin: PostAuthorData): AuthorEntity {
+fun toAuthorEntity(origin: AuthorPropData): AuthorEntity {
     return AuthorEntity(0, origin.name)
 }
 

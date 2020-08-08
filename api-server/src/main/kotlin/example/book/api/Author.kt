@@ -5,9 +5,9 @@ import example.book.domain.AuthorProps
 import java.util.*
 
 /**
- * 著者新規登録 API クライアントからの入力
+ * ユニークID以外の著者情報
  */
-data class PostAuthorData (
+data class AuthorPropData (
         override val name: String
 ): AuthorProps
 

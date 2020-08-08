@@ -1,5 +1,6 @@
 package example.book.entity
 
+import example.book.api.BookData
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -9,7 +10,7 @@ import javax.persistence.ManyToOne
  * 書籍
  */
 @Entity
-data class Book(
+data class BookEntity(
         /**
          * ユニークID
          */
