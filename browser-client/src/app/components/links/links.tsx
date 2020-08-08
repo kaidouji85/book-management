@@ -29,6 +29,9 @@ export const AuthorUpdatePath = (id: string) => `${AuthorsPath}/update/${id}`;
  */
 export const BooksPath = '/books';
 
+/**
+ * 書籍新規登録 パス
+ */
 export const BookInsertPath = `${BooksPath}/insert`;
 
 /**
@@ -87,6 +90,11 @@ export function BooksLink(props: {label: string}) {
   );
 }
 
+/**
+ * 書籍新規登録 リンク
+ * @param props プロパティ
+ * @constructor
+ */
 export function BookInsertLink(props: {label: string}) {
   return (
     <Link to={BookInsertPath}>{props.label}</Link>
