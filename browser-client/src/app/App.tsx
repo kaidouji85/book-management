@@ -12,15 +12,11 @@ import {Root} from "./root";
 import {AuthorEdit} from "./authors/edit";
 
 function App() {
-  // TODO 消す
-  const onAuthorRegisterSuccess = () => {
-    //history.push(AuthorsPath);
-  };
   return (
     <Router>
       <Switch>
         <Route path={AuthorRegisterPath}>
-          <AuthorRegister onSaveSuccess={onAuthorRegisterSuccess} />
+          <AuthorRegister/>
         </Route>
         <Route path={AuthorEditPath(':id')}>
           <AuthorEdit/>
