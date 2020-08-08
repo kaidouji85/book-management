@@ -1,5 +1,5 @@
 import React from 'react';
-import {AuthorsLink} from "./links/links";
+import {AuthorsLink, BooksLink} from "./links/links";
 
 /**
  * ページルート コンポネント
@@ -9,6 +9,7 @@ import {AuthorsLink} from "./links/links";
 export function Root(props: any) {
   return (
     <div>
+      <BooksLink label={"書籍"}/>
       <AuthorsLink label="著者" />
     </div>
   );
