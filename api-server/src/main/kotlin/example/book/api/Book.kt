@@ -27,6 +27,9 @@ data class BookData(
  */
 typealias GetAllBooksAPIResponse = APIResponseEnvelope<List<BookData>>
 
+/**
+ * 書籍 新規登録 API レスポンス
+ */
 typealias PostBookAPIResponse = APIResponseEnvelope<Optional<BookData>>
 
 /**
@@ -39,6 +42,12 @@ fun toBookData(origin: BookEntity): BookData {
     return BookData(origin.id, origin.title, author)
 }
 
+/**
+ * API入力データから新規登録用の書籍エンティティを生成する
+ * @param origin API入力データ
+ * @param authorEntity 著者エンティティ
+ * @return 生成結果
+ */
 fun createNewBookEntity(origin: PostBookData, authorEntity: AuthorEntity): BookEntity {
     return BookEntity(0, origin.title, authorEntity)
 }
