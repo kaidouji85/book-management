@@ -1,6 +1,6 @@
 package example.book.repository
 
-import example.book.entity.Book
+import example.book.entity.BookEntity
 import io.micronaut.data.annotation.*
 import io.micronaut.data.repository.CrudRepository
 
@@ -8,5 +8,5 @@ import io.micronaut.data.repository.CrudRepository
  * 書籍 リポジトリ
  */
 @Repository
-interface BookRepository : CrudRepository<Book, Long> {
+interface BookRepository : CrudRepository<BookEntity, Long> {
 }
