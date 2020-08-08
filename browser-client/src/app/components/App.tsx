@@ -6,21 +6,21 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import {AuthorRegister} from "./authors/register";
-import {AuthorsPath, AuthorRegisterPath, RootPath, AuthorEditPath, BooksPath} from "./links/links";
+import {AuthorInsertPath, AuthorsPath, AuthorUpdatePath, BooksPath, RootPath} from "./links/links";
 import {Root} from "./root";
-import {AuthorEdit} from "./authors/edit";
+import {AuthorInsert} from "./authors/insert";
+import {AuthorUpdate} from "./authors/update";
 import {Books} from "./books/list";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path={AuthorRegisterPath}>
-          <AuthorRegister/>
+        <Route path={AuthorInsertPath}>
+          <AuthorInsert/>
         </Route>
-        <Route path={AuthorEditPath(':id')}>
-          <AuthorEdit/>
+        <Route path={AuthorUpdatePath(':id')}>
+          <AuthorUpdate/>
         </Route>
         <Route path={AuthorsPath}><Authors/></Route>
         <Route path={BooksPath}><Books/></Route>

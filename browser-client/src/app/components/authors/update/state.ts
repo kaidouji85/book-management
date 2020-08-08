@@ -1,7 +1,7 @@
 /**
  * 著者編集 コンポネント ステート
  */
-export type AuthorEditState = {
+export type AuthorUpdateState = {
   isLoading: boolean,
   /**
    * 著者名

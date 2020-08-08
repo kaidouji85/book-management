@@ -12,18 +12,18 @@ export const RootPath= "/";
 export const AuthorsPath = '/authors';
 
 /**
- * 著者登録 パス
+ * 著者新規登録 パス
  */
-export const AuthorRegisterPath = `${AuthorsPath}/register`;
+export const AuthorInsertPath = `${AuthorsPath}/insert`;
 
 export const BooksPath = '/books';
 
 /**
- * 著者編集 パス
+ * 著者更新パス
  * @param id 著者ID
  * @return 著者編集 パス
  */
-export const AuthorEditPath = (id: string) => `${AuthorsPath}/edit/${id}`;
+export const AuthorUpdatePath = (id: string) => `${AuthorsPath}/update/${id}`;
 
 /**
  * ページルート リンク
@@ -48,25 +48,25 @@ export function AuthorsLink(props: {label: string}) {
 }
 
 /**
- * 著者登録 リンク
+ * 著者新規登録 リンク
  * @param props プロパティ
  * @return 著者登録 リンク
  */
-export function AuthorRegisterLink(props: {label: string}) {
+export function AuthorInsertLink(props: {label: string}) {
   return (
-    <Link to={AuthorRegisterPath}>{props.label}</Link>
+    <Link to={AuthorInsertPath}>{props.label}</Link>
   );
 }
 
 /**
- * 著者編集 リンク
+ * 著者更新 リンク
  * @param props
  * @constructor
  */
-export function AuthorEditLink(props: {label: string, id: number}) {
+export function AuthorUpdateLink(props: {label: string, id: number}) {
   const id = props.id.toString();
   return (
-    <Link to={AuthorEditPath(id)}>{props.label}</Link>
+    <Link to={AuthorUpdatePath(id)}>{props.label}</Link>
   );
 }
 
