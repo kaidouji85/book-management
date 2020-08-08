@@ -28,15 +28,17 @@ export function BooksPresentation(props: Props) {
           <td></td>
           <td></td>
         </tr>
-        {props.state.books.map(v => {
-          return (
-            <Book
-              {...v}
-              key={v.id}
-              onDeletePush={props.onDeletePush}
-              onEditPush={props.onEditPush}
-            />)
-        })}
+        {props.state.books
+          .sort((a, b) => b.id - a.id)
+          .map(v => {
+            return (
+              <Book
+                {...v}
+                key={v.id}
+                onDeletePush={props.onDeletePush}
+                onEditPush={props.onEditPush}
+              />)
+          })}
         </tbody>
       </table>
       <RootLink label="トップに戻る"/>
