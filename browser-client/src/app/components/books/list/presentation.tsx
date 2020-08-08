@@ -2,6 +2,7 @@ import React from 'react';
 import {BooksState} from "./state";
 import {Book} from "./book";
 import {BookInsertLink, RootLink} from "../../links/links";
+import {Loading} from "../../common/loading";
 
 /**
  * 書籍情報 コンポネント プロパティ
@@ -18,6 +19,10 @@ type Props = {
  * @constructor
  */
 export function BooksPresentation(props: Props) {
+  if (props.state.isLoading) {
+    return (<Loading/>);
+  }
+
   return (
     <div>
       <h1>書籍一覧</h1>

@@ -9,6 +9,7 @@ export class Books extends React.Component<any , BooksState> {
   constructor(props: any) {
     super(props);
     this.state = {
+      isLoading: true,
       books: []
     };
   }
@@ -24,6 +25,7 @@ export class Books extends React.Component<any , BooksState> {
   async componentDidMount() {
     const resp = await getAllBooks();
     this.setState({
+      isLoading: false,
       books: resp.payload
     })
   }
@@ -32,7 +34,7 @@ export class Books extends React.Component<any , BooksState> {
    * 削除ボタンを押した時の処理
    * @param id 書籍ID
    */
-  onDeletePush(id :number): void {
+  private onDeletePush(id :number): void {
     console.log(`delete ${id}`);
   }
 
@@ -40,7 +42,13 @@ export class Books extends React.Component<any , BooksState> {
    * 編集ボタンを押した時の処理
    * @param id 書籍ID
    */
-  onEditPush(id :number): void {
+  private onEditPush(id :number): void {
     console.log(`update ${id}`);
+  }
+
+  private isLoadingPromise(isLoading: boolean): Promise<void> {
+    return new Promise(resolve => {
+      this.setState({isLoading: isLoading}, resolve);
+    });
   }
 }
