@@ -1,6 +1,7 @@
 import React from 'react';
 import {BooksState} from "./state";
 import {Book} from "./book";
+import {RootLink} from "../../links/links";
 
 /**
  * 書籍情報 コンポネント プロパティ
@@ -33,6 +34,7 @@ export function BooksPresentation(props: Props) {
         })}
         </tbody>
       </table>
+      <RootLink label="トップに戻る"/>
     </div>
   );
 }
