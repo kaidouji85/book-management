@@ -1,12 +1,12 @@
 import React from 'react';
-import {AuthorInfo} from "../../../api/authors";
+import {AuthorData} from "../../../api/authors";
 
 /**
  * 著者情報コンポネント プロパティ
  */
 
 type Props = {
-  author: AuthorInfo,
+  author: AuthorData,
   onDeletePush: (id: number) => void,
   onEditPush: (id: number) => void,
 };

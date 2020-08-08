@@ -4,7 +4,7 @@ import {APIResponseEnvelope} from "./envelope";
 /**
  * APIから返される著者情報
  */
-export type AuthorInfo = {
+export type AuthorData = {
   id: number,
   name: string
 };
@@ -12,7 +12,7 @@ export type AuthorInfo = {
 /**
  * 全著者情報取得API レスポンス
  */
-export type GetAllAuthorsResponse = APIResponseEnvelope<AuthorInfo[]>;
+export type GetAllAuthorsResponse = APIResponseEnvelope<AuthorData[]>;
 
 /**
  * 全著者情報取得API
@@ -31,7 +31,7 @@ export async function getAllAuthors(): Promise<GetAllAuthorsResponse> {
 /**
  * 著者情報ID指定取得API レスポンス
  */
-export type GetAuthorByIdResponse = APIResponseEnvelope<AuthorInfo | null>;
+export type GetAuthorByIdResponse = APIResponseEnvelope<AuthorData | null>;
 
 /**
  * 著者情報ID指定取得API
@@ -49,23 +49,23 @@ export async function getAuthorById(id: number) {
 }
 
 /**
- * 著者追加API 入力
+ * 著者 新規登録 API 入力
  */
-export type PostAuthorData = {
+export type InsertAuthorData = {
   name: string
 };
 
 /**
- * 著者追加API レスポンス
+ * 著者 新規登録 API レスポンス
  */
-export type PostAuthorResponse = APIResponseEnvelope<AuthorInfo>;
+export type InsertAuthorResponse = APIResponseEnvelope<AuthorData>;
 
 /**
- * 著者追加API
- * @param data 追加するデータ
+ * 著者 新規登録 API
+ * @param data 新規登録するデータ
  * @return 実行結果
  */
-export async function postAuthor(data: PostAuthorData): Promise<PostAuthorResponse> {
+export async function insertAuthor(data: InsertAuthorData): Promise<InsertAuthorResponse> {
   try {
     const method = "POST";
     const body = JSON.stringify(data);
@@ -81,9 +81,17 @@ export async function postAuthor(data: PostAuthorData): Promise<PostAuthorRespon
   }
 }
 
-export type PutAuthorAPIResponse = APIResponseEnvelope<AuthorInfo>;
+/**
+ * 著者 更新 API レスポンス
+ */
+export type PutAuthorAPIResponse = APIResponseEnvelope<AuthorData>;
 
-export async function putAuthor(data: AuthorInfo): Promise<PutAuthorAPIResponse> {
+/**
+ * 著者 更新 API
+ * @param data 更新内容
+ * @return 実行結果
+ */
+export async function updateAuthor(data: AuthorData): Promise<PutAuthorAPIResponse> {
   try {
     const method = "PUT";
     const body = JSON.stringify(data);
@@ -105,7 +113,7 @@ export async function putAuthor(data: AuthorInfo): Promise<PutAuthorAPIResponse>
 export type DeleteAuthorAPIResponse = APIResponseEnvelope<number>;
 
 /**
- * 著者削除 API
+ * 著者 削除 API
  * @param id 著者ID
  * @return 実行結果
  */

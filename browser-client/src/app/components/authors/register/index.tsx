@@ -1,7 +1,7 @@
 import React from 'react';
 import {AuthorRegisterState} from "./state";
 import {AuthorRegisterPresentation} from "./presentation";
-import {postAuthor, PostAuthorData} from "../../../api/authors";
+import {insertAuthor, InsertAuthorData} from "../../../api/authors";
 import {AuthorsPath} from "../../links/links";
 
 /**
@@ -52,10 +52,10 @@ export class AuthorRegister extends React.Component<any, AuthorRegisterState> {
           isLoading: true
         }, resolve);
       });
-      const data: PostAuthorData = {
+      const data: InsertAuthorData = {
         name: this.state.name
       };
-      const resp = await postAuthor(data);
+      const resp = await insertAuthor(data);
       if (!resp.isSuccess) {
         // TODO メッセージを画面に表示する
         return null;

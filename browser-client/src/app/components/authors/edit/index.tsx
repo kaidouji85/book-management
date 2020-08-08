@@ -2,7 +2,7 @@ import React from 'react';
 import {AuthorEditState} from "./state";
 import {AuthorEditPresentation} from "./presentation";
 import {useParams} from 'react-router-dom';
-import {AuthorInfo, getAuthorById, postAuthor, putAuthor} from "../../../api/authors";
+import {AuthorData, getAuthorById, insertAuthor, updateAuthor} from "../../../api/authors";
 import {AuthorsPath} from "../../links/links";
 
 /**
@@ -44,7 +44,7 @@ export class AuthorEditContainer extends React.Component<ContainerProps, AuthorE
         return;
       }
 
-      const author: AuthorInfo = resp.payload;
+      const author: AuthorData = resp.payload;
       this.setState({
         isLoading: false,
         name: author.name
@@ -81,7 +81,7 @@ export class AuthorEditContainer extends React.Component<ContainerProps, AuthorE
       await this.isLoadingPromise(true);
 
       const putData = this.createAuthorInfo();
-      const putResp = await putAuthor(putData);
+      const putResp = await updateAuthor(putData);
       if (!putResp.isSuccess) {
         // TODO エラ〜メッセージを画面に表示する
         await this.isLoadingPromise(false);
@@ -99,7 +99,7 @@ export class AuthorEditContainer extends React.Component<ContainerProps, AuthorE
    * @private
    * @return  著者更新APIに渡す情報
    */
-  private createAuthorInfo(): AuthorInfo {
+  private createAuthorInfo(): AuthorData {
     return {
       id: this.props.id,
       name: this.state.name

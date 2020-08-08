@@ -5,14 +5,19 @@ import example.book.domain.Book
 import example.book.domain.BookProps
 import example.book.entity.AuthorEntity
 import example.book.entity.BookEntity
-import example.book.entity.toAuthor
 import java.util.*
 
+/**
+ * 書籍 新規登録 API 入力
+ */
 data class InsertBookData(
         override val title: String,
         val authorId: Long
 ):BookProps
 
+/**
+ * 書籍 更新 API 入力
+ */
 data class UpdateBookData(
         val id: Long,
         override val title: String,
@@ -20,7 +25,7 @@ data class UpdateBookData(
 ):BookProps
 
 /**
- * 書籍 API インタフェース
+ * 書籍 API レスポンス
  */
 data class BookData(
         override val id: Long,
@@ -33,6 +38,9 @@ data class BookData(
  */
 typealias GetAllBooksAPIResponse = APIResponseEnvelope<List<BookData>>
 
+/**
+ * 書籍 ID指定取得 API レスポンス
+ */
 typealias GetBookByIdAPIResponse = APIResponseEnvelope<Optional<BookData>>
 
 /**
@@ -56,7 +64,7 @@ typealias DeleteBookAPIResponse = APIResponseEnvelope<Long>
  * @return 変換結果
  */
 fun toBookData(origin: BookEntity): BookData {
-    val author = toAuthor(origin.author)
+    val author = toAuthorData(origin.author)
     return BookData(origin.id, origin.title, author)
 }
 
