@@ -8,7 +8,13 @@ import example.book.entity.BookEntity
 import example.book.entity.toAuthor
 import java.util.*
 
-data class PostBookData(
+data class InsertBookData(
+        override val title: String,
+        val authorId: Long
+):BookProps
+
+data class UpdateBookData(
+        val id: Long,
         override val title: String,
         val authorId: Long
 ):BookProps
@@ -30,7 +36,9 @@ typealias GetAllBooksAPIResponse = APIResponseEnvelope<List<BookData>>
 /**
  * 書籍 新規登録 API レスポンス
  */
-typealias PostBookAPIResponse = APIResponseEnvelope<Optional<BookData>>
+typealias InsertBookAPIResponse = APIResponseEnvelope<Optional<BookData>>
+
+typealias UpdateBookAPIResponse = APIResponseEnvelope<Optional<BookData>>
 
 /**
  * 書籍 削除 API レスポンス
@@ -53,6 +61,10 @@ fun toBookData(origin: BookEntity): BookData {
  * @param authorEntity 著者エンティティ
  * @return 生成結果
  */
-fun createNewBookEntity(origin: PostBookData, authorEntity: AuthorEntity): BookEntity {
+fun createInsertBookEntity(origin: InsertBookData, authorEntity: AuthorEntity): BookEntity {
     return BookEntity(0, origin.title, authorEntity)
+}
+
+fun createUpdateBookEntity(origin: UpdateBookData, authorEntity: AuthorEntity): BookEntity {
+    return BookEntity(origin.id, origin.title, authorEntity)
 }

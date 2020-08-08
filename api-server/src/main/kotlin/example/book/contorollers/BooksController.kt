@@ -29,13 +29,25 @@ class BooksController {
     }
 
     @Post("/")
-    fun insert(@Body data: PostBookData): HttpResponse<PostBookAPIResponse> {
+    fun insert(@Body data: InsertBookData): HttpResponse<InsertBookAPIResponse> {
         val author = this.authorRepository.findById(data.authorId)
         val resp = author.map {
-            val book = createNewBookEntity(data, it)
+            val book = createInsertBookEntity(data, it)
             val savedBook = this.bookRepository.save(book)
             val respBook = toBookData(savedBook)
-            return@map APIResponseEnvelope(true, "book register success", Optional.of(respBook))
+            return@map APIResponseEnvelope(true, "book insert success", Optional.of(respBook))
+        }.orElse(APIResponseEnvelope(false, "author not exist", Optional.empty()))
+        return HttpResponse.ok(resp)
+    }
+
+    @Put("/")
+    fun update(@Body data: UpdateBookData): HttpResponse<UpdateBookAPIResponse> {
+        val author = this.authorRepository.findById(data.authorId)
+        val resp = author.map {
+            val book = createUpdateBookEntity(data, it)
+            val updatedBook = this.bookRepository.update(book)
+            val respBook = toBookData(updatedBook)
+            return@map APIResponseEnvelope(true, "book update success", Optional.of(respBook))
         }.orElse(APIResponseEnvelope(false, "author not exist", Optional.empty()))
         return HttpResponse.ok(resp)
     }
