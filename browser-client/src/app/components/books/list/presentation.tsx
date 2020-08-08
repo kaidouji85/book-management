@@ -1,7 +1,7 @@
 import React from 'react';
 import {BooksState} from "./state";
 import {Book} from "./book";
-import {RootLink} from "../../links/links";
+import {BookInsertLink, RootLink} from "../../links/links";
 
 /**
  * 書籍情報 コンポネント プロパティ
@@ -23,6 +23,11 @@ export function BooksPresentation(props: Props) {
       <h1>書籍一覧</h1>
       <table>
         <tbody>
+        <tr>
+          <td><BookInsertLink label="+書籍新規登録"/></td>
+          <td></td>
+          <td></td>
+        </tr>
         {props.state.books.map(v => {
           return (
             <Book

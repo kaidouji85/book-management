@@ -52,7 +52,7 @@ function VisibleAuthors(props: Props) {
       <table>
         <tbody>
         <tr>
-          <td><AuthorInsertLink label={"著者追加"}/></td>
+          <td><AuthorInsertLink label={"+著者新規登録"}/></td>
           <td></td>
         </tr>
         {props.state.authors
