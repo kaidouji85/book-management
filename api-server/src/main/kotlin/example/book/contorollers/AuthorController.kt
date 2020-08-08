@@ -6,6 +6,7 @@ import example.book.entity.toAuthor
 import example.book.repository.AuthorRepository
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -22,6 +23,16 @@ class AuthorController {
                 .toList()
                 .map { toAuthor(it) }
         val response = GetAllAuthorResponse(true, "get all authors success", authors)
+        return HttpResponse.ok(response)
+    }
+
+    @Get("/{id}")
+    fun getById(@PathVariable id: Long): HttpResponse<GetAuthorByIdResponse> {
+        val result = this.authorRepository.findById(id)
+        val response = result.map {
+            val author = toAuthor(it)
+            return@map GetAuthorByIdResponse(true, "get author by id success", Optional.of(author))
+        }.orElse(GetAuthorByIdResponse(false, "no exist id", Optional.empty()))
         return HttpResponse.ok(response)
     }
 

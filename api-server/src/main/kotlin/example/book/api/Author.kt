@@ -1,5 +1,7 @@
 package example.book.api
 
+import java.util.*
+
 /**
  * 著者が持っている属性
  */
@@ -29,6 +31,11 @@ data class Author(
  * 著者情報取得 API レスポンス
  */
 typealias GetAllAuthorResponse = APIResponseEnvelope<List<Author>>
+
+/**
+ * 著者情報取得 ID指定 API レスポンス
+ */
+typealias GetAuthorByIdResponse = APIResponseEnvelope<Optional<Author>>
 
 /**
  * 著者新規登録 API レスポンス
