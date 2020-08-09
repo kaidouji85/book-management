@@ -23,7 +23,6 @@ export const AuthorInsertPath = `${AuthorsPath}/insert`;
  */
 export const AuthorUpdatePath = (id: string) => `${AuthorsPath}/update/${id}`;
 
-
 /**
  * 書籍一覧 パス
  */
@@ -33,6 +32,8 @@ export const BooksPath = '/books';
  * 書籍新規登録 パス
  */
 export const BookInsertPath = `${BooksPath}/insert`;
+
+export const BookUpdatePath = (id: string) => `${BooksPath}/update/${id}`;
 
 /**
  * ページルート リンク
@@ -98,5 +99,11 @@ export function BooksLink(props: {label: string}) {
 export function BookInsertLink(props: {label: string}) {
   return (
     <Link to={BookInsertPath}>{props.label}</Link>
+  );
+}
+
+export function BookUpdateLink(props: {label: string, id: string}) {
+  return (
+    <Link to={BookUpdatePath(props.id)}>{props.label}</Link>
   );
 }
