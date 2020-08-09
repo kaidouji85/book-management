@@ -78,13 +78,13 @@ export class AuthorUpdateContainer extends React.Component<ContainerProps, Autho
    */
   private async onSavePush():Promise<string | null> {
     try {
-      await this.isLoadingPromise(true);
+      await this.switchLoading(true);
 
       const putData = this.createAuthorInfo();
       const putResp = await updateAuthor(putData);
       if (!putResp.isSuccess) {
         // TODO エラ〜メッセージを画面に表示する
-        await this.isLoadingPromise(false);
+        await this.switchLoading(false);
         return null;
       }
 
@@ -107,11 +107,11 @@ export class AuthorUpdateContainer extends React.Component<ContainerProps, Autho
   }
 
   /**
-   * 通信中フラグを変更する
+   * 通信中フラグが切り替わるまで待機する
    * @param isLoading 設定値
    * @private
    */
-  private isLoadingPromise(isLoading: boolean): Promise<void> {
+  private switchLoading(isLoading: boolean): Promise<void> {
     return new Promise(resolve => {
       this.setState({isLoading: isLoading}, resolve);
     });

@@ -35,7 +35,7 @@ export class Books extends React.Component<any , BooksState> {
    */
   private async onDeletePush(id :number): Promise<void> {
     try {
-      await this.isLoadingPromise(true);
+      await this.switchLoading(true);
 
       const deleteResp = await deleteBook(id);
       if (!deleteResp.isSuccess) {
@@ -58,7 +58,7 @@ export class Books extends React.Component<any , BooksState> {
    * @param isLoading 変更内容
    * @private
    */
-  private isLoadingPromise(isLoading: boolean): Promise<void> {
+  private switchLoading(isLoading: boolean): Promise<void> {
     return new Promise(resolve => {
       this.setState({isLoading: isLoading}, resolve);
     });

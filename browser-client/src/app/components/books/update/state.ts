@@ -5,6 +5,11 @@ import {AuthorData} from "../../../api/authors";
  */
 export type BookUpdateState = {
   /**
+   * 通信中フラグ、trueで通信中
+   */
+  isLoading: boolean,
+
+  /**
    * 書籍名
    */
   title: string,

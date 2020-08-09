@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import {BookUpdateState} from "./state";
 import {BookInput} from "../../common/book-input";
 import {BooksLink} from "../../links/links";
+import {Loading} from "../../common/loading";
 
 /**
  * 書籍編集 プレゼンテーションコンポネント プロパティ
@@ -27,6 +28,11 @@ export function BookUpdatePresentation(props: Props) {
       history.push(path);
     }
   };
+
+  if (props.state.isLoading) {
+    return (<Loading/>);
+  }
+
   return (
     <div>
       <h1>書籍編集</h1>

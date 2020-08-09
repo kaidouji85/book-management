@@ -33,6 +33,7 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
   constructor(props: ContainerProps) {
     super(props);
     this.state = {
+      isLoading: true,
       title: '',
       authors: [],
       selectedAuthorId: null,
@@ -49,6 +50,7 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
       }
 
       this.setState({
+        isLoading: false,
         title: bookResp.payload.title,
         selectedAuthorId: bookResp.payload.author.id,
         authors: authorsResp.payload,
@@ -89,10 +91,16 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
     })
   }
 
+  /**
+   * 保存系ボタンが押された時の処理
+   * @private
+   */
   private async onSavePush(): Promise<string | null> {
     try {
+      await this.switchLoading(true);
       const data = this.createBookUpdateData();
       if (!data) {
+        // TODO エラ〜メッセージを画面に表示する
         return null;
       }
 
@@ -123,5 +131,16 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
       title: this.state.title,
       authorId: this.state.selectedAuthorId
     };
+  }
+
+  /**
+   * 通信中フラグが切り替わるまで待機する
+   * @param isLoading 変更内容
+   * @private
+   */
+  private switchLoading(isLoading: boolean): Promise<void> {
+    return new Promise(resolve => {
+      this.setState({isLoading}, resolve);
+    })
   }
 }

@@ -79,7 +79,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
    */
   private async onSavePush(): Promise<string | null> {
     try {
-      await this.isLoadingPromise(true);
+      await this.switchLoading(true);
 
       const data = this.createBookInsertData();
       if (!data) {
@@ -118,7 +118,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
    * @param isLoading 設定値
    * @private
    */
-  private async isLoadingPromise(isLoading: boolean): Promise<void> {
+  private async switchLoading(isLoading: boolean): Promise<void> {
     return new Promise(resolve => {
       this.setState({isLoading}, resolve);
     });
