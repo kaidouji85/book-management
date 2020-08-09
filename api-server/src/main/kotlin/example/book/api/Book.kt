@@ -1,10 +1,15 @@
 package example.book.api
 
-import example.book.domain.Book
-import example.book.domain.BookProps
 import example.book.entity.AuthorEntity
 import example.book.entity.BookEntity
 import java.util.*
+
+/**
+ * 書籍 ユニークID以外の固有プロパティ
+ */
+interface BookProps {
+    val title: String
+}
 
 /**
  * 書籍 新規登録 API 入力
@@ -12,7 +17,7 @@ import java.util.*
 data class InsertBookData(
         override val title: String,
         val authorId: Long
-):BookProps
+): BookProps
 
 /**
  * 書籍 更新 API 入力
@@ -21,16 +26,16 @@ data class UpdateBookData(
         val id: Long,
         override val title: String,
         val authorId: Long
-):BookProps
+): BookProps
 
 /**
  * 書籍 API レスポンス
  */
 data class BookData(
-        override val id: Long,
+        val id: Long,
         override val title: String,
-        override val author: AuthorData
-):Book
+        val author: AuthorData
+): BookProps
 
 /**
  * 書籍 全情報取得 API レスポンス
