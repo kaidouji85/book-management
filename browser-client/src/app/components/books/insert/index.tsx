@@ -113,6 +113,11 @@ export class BookInsert extends React.Component<any, BookInsertState> {
     };
   }
 
+  /**
+   * 通信中フラグが切り替わるまで待つ
+   * @param isLoading 設定値
+   * @private
+   */
   private async isLoadingPromise(isLoading: boolean): Promise<void> {
     return new Promise(resolve => {
       this.setState({isLoading}, resolve);

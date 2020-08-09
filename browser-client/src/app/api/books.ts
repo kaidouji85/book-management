@@ -104,3 +104,25 @@ export async function deleteBook(id: number): Promise<DeleteBookAPIResponse> {
     throw e;
   }
 }
+
+export type UpdateBookAPIResponse = APIResponseEnvelope<BookData>;
+
+export type BookUpdateData = BookInsertData & {
+  id: number
+};
+
+export async function updateBook(data: BookUpdateData) {
+  try {
+    const method = "PUT";
+    const body = JSON.stringify(data);
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+    const resp = await fetch(`${getAPIHost()}/books`, {method, headers, body});
+    const json = await resp.json(); // TODO JSONのパース判定を正しく行う
+    return json;
+  } catch(e) {
+    throw e;
+  }
+}

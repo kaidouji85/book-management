@@ -1,6 +1,8 @@
 import React from 'react';
+import {useHistory} from "react-router-dom";
 import {BookUpdateState} from "./state";
 import {BookInput} from "../../common/book-input";
+import {BooksLink} from "../../links/links";
 
 /**
  * 書籍編集 プレゼンテーションコンポネント プロパティ
@@ -8,7 +10,8 @@ import {BookInput} from "../../common/book-input";
 type Props = {
   state: BookUpdateState,
   onTitleChange: (title: string) => void,
-  onAuthorChange: (authorId: number) => void
+  onAuthorChange: (authorId: number) => void,
+  onSavePush: () => Promise<string | null>,
 };
 
 /**
@@ -17,6 +20,13 @@ type Props = {
  * @constructor
  */
 export function BookUpdatePresentation(props: Props) {
+  const history = useHistory();
+  const onSavePush = async () => {
+    const path = await props.onSavePush();
+    if (path) {
+      history.push(path);
+    }
+  };
   return (
     <div>
       <h1>書籍編集</h1>
@@ -27,6 +37,8 @@ export function BookUpdatePresentation(props: Props) {
         onTitleChange={props.onTitleChange}
         onAuthorChange={props.onAuthorChange}
       />
+      <button onClick={onSavePush} onTouchStart={onSavePush} >書籍を更新する</button>
+      <BooksLink label="書籍一覧に戻る"/>
     </div>
   );
 }

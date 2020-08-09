@@ -2,8 +2,9 @@ import React from 'react';
 import {useParams} from 'react-router-dom';
 import {BookUpdateState} from "./state";
 import {BookUpdatePresentation} from "./presentation";
-import {getBookById} from "../../../api/books";
+import {BookInsertData, BookUpdateData, getBookById, updateBook} from "../../../api/books";
 import {getAllAuthors} from "../../../api/authors";
+import {BooksPath} from "../../links/links";
 
 /**
  * 書籍編集 コンポネント
@@ -62,6 +63,7 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
       state={this.state}
       onTitleChange={this.onTitleChange.bind(this)}
       onAuthorChange={this.onAuthorChange.bind(this)}
+      onSavePush={this.onSavePush.bind(this)}
     />);
   }
 
@@ -85,5 +87,41 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
     this.setState({
       selectedAuthorId: authorId
     })
+  }
+
+  private async onSavePush(): Promise<string | null> {
+    try {
+      const data = this.createBookUpdateData();
+      if (!data) {
+        return null;
+      }
+
+      const updateResp = await updateBook(data);
+      if (!updateResp.isSuccess) {
+        // TODO エラ〜メッセージを画面に表示する
+        return null;
+      }
+
+      return BooksPath;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /**
+   * 書籍更新APIに渡すデータを生成する
+   * 生成できない場合はnullを返す
+   * @private
+   */
+  private createBookUpdateData(): BookUpdateData | null {
+    if (this.state.selectedAuthorId === null) {
+      return null;
+    }
+
+    return {
+      id: this.props.id,
+      title: this.state.title,
+      authorId: this.state.selectedAuthorId
+    };
   }
 }
