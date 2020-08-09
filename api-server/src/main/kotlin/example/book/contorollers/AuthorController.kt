@@ -9,20 +9,22 @@ import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
 import java.util.*
 import javax.inject.Inject
+import javax.transaction.Transactional
 
 /**
  * 著者 API コントローラ
  */
 @Controller("/authors")
-class AuthorController {
+open class AuthorController {
     @Inject
     lateinit var authorRepository: AuthorRepository
 
     @Inject
     lateinit var bookRepository: BookRepository
 
+    @Transactional
     @Get("/")
-    fun getAll(): HttpResponse<GetAllAuthorResponse> {
+    open fun getAll(): HttpResponse<GetAllAuthorResponse> {
         val authors = authorRepository.findAll()
                 .toList()
                 .map { toAuthorData(it) }
@@ -30,8 +32,9 @@ class AuthorController {
         return HttpResponse.ok(response)
     }
 
+    @Transactional
     @Get("/{id}")
-    fun getById(@PathVariable id: Long): HttpResponse<GetAuthorByIdResponse> {
+    open fun getById(@PathVariable id: Long): HttpResponse<GetAuthorByIdResponse> {
         val result = this.authorRepository.findById(id)
         val response = result.map {
             val author = toAuthorData(it)
@@ -40,8 +43,9 @@ class AuthorController {
         return HttpResponse.ok(response)
     }
 
+    @Transactional
     @Post("/")
-    fun insert(@Body data: InsertAuthorData): HttpResponse<InsertAuthorResponse> {
+    open fun insert(@Body data: InsertAuthorData): HttpResponse<InsertAuthorResponse> {
         val author = toAuthorEntity(data)
         val savedAuthor = authorRepository.save(author)
         val respAuthor = toAuthorData(savedAuthor)
@@ -49,8 +53,9 @@ class AuthorController {
         return HttpResponse.ok(response)
     }
 
+    @Transactional
     @Put("/")
-    fun update(@Body data: AuthorData): HttpResponse<InsertAuthorResponse> {
+    open fun update(@Body data: AuthorData): HttpResponse<InsertAuthorResponse> {
         val authorEntity = toAuthorEntity(data)
         val savedEntity = this.authorRepository.update(authorEntity)
         val respAuthor = toAuthorData(savedEntity)
@@ -58,8 +63,9 @@ class AuthorController {
         return HttpResponse.ok(response)
     }
 
+    @Transactional
     @Delete("/{id}")
-    fun delete(@PathVariable id: Long): HttpResponse<DeleteAuthorResponse> {
+    open fun delete(@PathVariable id: Long): HttpResponse<DeleteAuthorResponse> {
         val deleteAuthor = this.authorRepository.findById(id)
         val response = deleteAuthor.map {author ->
             val authorsBooks = this.bookRepository.findByAuthor(author)

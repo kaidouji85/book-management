@@ -7,20 +7,22 @@ import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
 import java.util.*
 import javax.inject.Inject
+import javax.transaction.Transactional
 
 /**
  * 書籍 API コントローラ
  */
 @Controller("/books")
-class BooksController {
+open class BooksController {
     @Inject
     lateinit var bookRepository: BookRepository
 
     @Inject
     lateinit var authorRepository: AuthorRepository
 
+    @Transactional
     @Get("/")
-    fun getAll(): HttpResponse<GetAllBooksAPIResponse> {
+    open fun getAll(): HttpResponse<GetAllBooksAPIResponse> {
         val books = bookRepository.findAll()
                 .toList()
                 .map { toBookData(it) }
@@ -28,8 +30,9 @@ class BooksController {
         return HttpResponse.ok(response)
     }
 
+    @Transactional
     @Get("/{id}")
-    fun getById(@PathVariable id: Long): HttpResponse<GetBookByIdAPIResponse> {
+    open fun getById(@PathVariable id: Long): HttpResponse<GetBookByIdAPIResponse> {
         val book = this.bookRepository.findById(id)
         val resp = book.map {
             val respBook = toBookData(it)
@@ -38,8 +41,9 @@ class BooksController {
         return HttpResponse.ok(resp)
     }
 
+    @Transactional
     @Post("/")
-    fun insert(@Body data: InsertBookData): HttpResponse<InsertBookAPIResponse> {
+    open fun insert(@Body data: InsertBookData): HttpResponse<InsertBookAPIResponse> {
         val author = this.authorRepository.findById(data.authorId)
         val resp = author.map {
             val book = createInsertBookEntity(data, it)
@@ -50,8 +54,9 @@ class BooksController {
         return HttpResponse.ok(resp)
     }
 
+    @Transactional
     @Put("/")
-    fun update(@Body data: UpdateBookData): HttpResponse<UpdateBookAPIResponse> {
+    open fun update(@Body data: UpdateBookData): HttpResponse<UpdateBookAPIResponse> {
         val author = this.authorRepository.findById(data.authorId)
         val resp = author.map {
             val book = createUpdateBookEntity(data, it)
@@ -62,8 +67,9 @@ class BooksController {
         return HttpResponse.ok(resp)
     }
 
+    @Transactional
     @Delete("/{id}")
-    fun delete(@PathVariable id: Long): HttpResponse<DeleteBookAPIResponse> {
+    open fun delete(@PathVariable id: Long): HttpResponse<DeleteBookAPIResponse> {
         this.bookRepository.deleteById(id)
         val response = APIResponseEnvelope(true, "book delete success", id)
         return HttpResponse.ok(response)
