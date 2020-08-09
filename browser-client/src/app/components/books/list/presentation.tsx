@@ -1,7 +1,8 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 import {BooksState} from "./state";
 import {Book} from "./book";
-import {BookInsertLink, RootLink} from "../../links/links";
+import {BookInsertLink, BookUpdatePath, RootLink} from "../../links/links";
 import {Loading} from "../../common/loading";
 
 /**
@@ -10,7 +11,6 @@ import {Loading} from "../../common/loading";
 type Props = {
   state: BooksState,
   onDeletePush: (id: number) => void,
-  onEditPush: (id: number) => void,
 };
 
 /**
@@ -19,6 +19,11 @@ type Props = {
  * @constructor
  */
 export function BooksPresentation(props: Props) {
+  const history = useHistory();
+  const onEditPush = (id: number) => {
+    history.push(BookUpdatePath(id.toString()));
+  };
+
   if (props.state.isLoading) {
     return (<Loading/>);
   }
@@ -41,7 +46,7 @@ export function BooksPresentation(props: Props) {
                 {...v}
                 key={v.id}
                 onDeletePush={props.onDeletePush}
-                onEditPush={props.onEditPush}
+                onEditPush={onEditPush}
               />)
           })}
         </tbody>

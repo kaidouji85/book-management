@@ -18,7 +18,6 @@ export class Books extends React.Component<any , BooksState> {
     return (<BooksPresentation
       state={this.state}
       onDeletePush={this.onDeletePush.bind(this)}
-      onEditPush={this.onEditPush.bind(this)}
     />);
   }
 
@@ -52,14 +51,6 @@ export class Books extends React.Component<any , BooksState> {
     } catch (e) {
       throw e;
     }
-  }
-
-  /**
-   * 編集ボタンを押した時の処理
-   * @param id 書籍ID
-   */
-  private onEditPush(id :number): void {
-    console.log(`update ${id}`);
   }
 
   /**
