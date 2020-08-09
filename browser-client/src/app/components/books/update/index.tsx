@@ -58,6 +58,32 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
   }
 
   render() {
-    return (<BookUpdatePresentation state={this.state} />);
+    return (<BookUpdatePresentation
+      state={this.state}
+      onTitleChange={this.onTitleChange.bind(this)}
+      onAuthorChange={this.onAuthorChange.bind(this)}
+    />);
+  }
+
+  /**
+   * タイトルが変更された時の処理
+   * @param title 変更内容
+   * @private
+   */
+  private onTitleChange(title: string) {
+    this.setState({
+      title: title
+    });
+  }
+
+  /**
+   * 著者が変更された時の処理
+   * @param authorId 変更内容
+   * @private
+   */
+  private onAuthorChange(authorId: number) {
+    this.setState({
+      selectedAuthorId: authorId
+    })
   }
 }
