@@ -4,6 +4,7 @@ import example.book.api.*
 import example.book.api.toAuthorEntity
 import example.book.api.toAuthorData
 import example.book.repository.AuthorRepository
+import example.book.repository.BookRepository
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
 import java.util.*
@@ -16,6 +17,9 @@ import javax.inject.Inject
 class AuthorController {
     @Inject
     lateinit var authorRepository: AuthorRepository
+
+    @Inject
+    lateinit var bookRepository: BookRepository
 
     @Get("/")
     fun getAll(): HttpResponse<GetAllAuthorResponse> {
@@ -56,8 +60,15 @@ class AuthorController {
 
     @Delete("/{id}")
     fun delete(@PathVariable id: Long): HttpResponse<DeleteAuthorResponse> {
-        this.authorRepository.deleteById(id);
-        val response = DeleteAuthorResponse(true, "delete author success", id);
+        val deleteAuthor = this.authorRepository.findById(id)
+        val response = deleteAuthor.map {author ->
+            val authorsBooks = this.bookRepository.findByAuthor(author)
+            authorsBooks.forEach { book ->
+                this.bookRepository.deleteById(book.id)
+            }
+            this.authorRepository.deleteById(author.id)
+            return@map DeleteAuthorResponse(true, "delete author success", author.id)
+        }.orElse(DeleteAuthorResponse(false, "author no exist", id))
         return HttpResponse.ok(response);
     }
 }
