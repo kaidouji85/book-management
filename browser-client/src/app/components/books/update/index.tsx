@@ -2,6 +2,8 @@ import React from 'react';
 import {useParams} from 'react-router-dom';
 import {BookUpdateState} from "./state";
 import {BookUpdatePresentation} from "./presentation";
+import {getBookById} from "../../../api/books";
+import {getAllAuthors} from "../../../api/authors";
 
 /**
  * 書籍編集 コンポネント
@@ -29,7 +31,30 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
 
   constructor(props: ContainerProps) {
     super(props);
-    this.state = {};
+    this.state = {
+      title: '',
+      authors: [],
+      selectedAuthorId: null,
+    };
+  }
+
+  async componentDidMount(): Promise<void> {
+    try {
+      const bookResp = await getBookById(this.props.id);
+      const authorsResp = await getAllAuthors();
+      if (!bookResp.isSuccess || !authorsResp.isSuccess) {
+        // TODO エラーメッセージを画面に表示する
+        return;
+      }
+
+      this.setState({
+        title: bookResp.payload.title,
+        selectedAuthorId: bookResp.payload.author.id,
+        authors: authorsResp.payload,
+      })
+    } catch (e) {
+      throw e;
+    }
   }
 
   render() {

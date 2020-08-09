@@ -23,7 +23,27 @@ export type GetAllBooksAPIResponse = APIResponseEnvelope<BookData[]>;
 export async function getAllBooks(): Promise<GetAllBooksAPIResponse> {
   try {
     const resp = await fetch(`${getAPIHost()}/books`);
-    const json = await resp.json();
+    const json = await resp.json(); // TODO JSONのパース判定を正しく行う
+    return json;
+  } catch (e) {
+    throw e;
+  }
+}
+
+/**
+ * 書籍情報取得(ID指定)API レスポンス
+ */
+export type GetBookByIdAPIResponse = APIResponseEnvelope<BookData>;
+
+/**
+ * 書籍情報取得(ID指定)API
+ * @param id 書籍ID
+ * @return 実行結果
+ */
+export async function getBookById(id: number): Promise<GetBookByIdAPIResponse> {
+  try {
+    const resp = await fetch(`${getAPIHost()}/books/${id}`);
+    const json = await resp.json(); // TODO JSONのパース判定を正しく行う
     return json;
   } catch (e) {
     throw e;

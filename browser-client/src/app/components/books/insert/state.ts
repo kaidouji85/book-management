@@ -4,6 +4,9 @@ import {AuthorData} from "../../../api/authors";
  * 書籍新規登録 コンポネント ステート
  */
 export type BookInsertState = {
+  /**
+   * 通信中フラグ、trueで通信中
+   */
   isLoading: boolean,
 
   /**
