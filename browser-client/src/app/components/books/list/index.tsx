@@ -1,7 +1,7 @@
 import React from 'react';
 import {BooksState} from "./state";
 import {BooksPresentation} from "./presentation";
-import {getAllBooks} from "../../../api/books";
+import {deleteBook, getAllBooks} from "../../../api/books";
 
 export class Books extends React.Component<any , BooksState> {
   state: BooksState;
@@ -34,8 +34,24 @@ export class Books extends React.Component<any , BooksState> {
    * 削除ボタンを押した時の処理
    * @param id 書籍ID
    */
-  private onDeletePush(id :number): void {
-    console.log(`delete ${id}`);
+  private async onDeletePush(id :number): Promise<void> {
+    try {
+      await this.isLoadingPromise(true);
+
+      const deleteResp = await deleteBook(id);
+      if (!deleteResp.isSuccess) {
+        // TODO エラーメッセージを画面に表示する
+        return;
+      }
+
+      const getResp = await getAllBooks();
+      this.setState({
+        isLoading: false,
+        books: getResp.payload
+      })
+    } catch (e) {
+      throw e;
+    }
   }
 
   /**
@@ -46,6 +62,11 @@ export class Books extends React.Component<any , BooksState> {
     console.log(`update ${id}`);
   }
 
+  /**
+   * 通信中フラグが切り替わるまで待機する
+   * @param isLoading 変更内容
+   * @private
+   */
   private isLoadingPromise(isLoading: boolean): Promise<void> {
     return new Promise(resolve => {
       this.setState({isLoading: isLoading}, resolve);

@@ -30,13 +30,24 @@ export async function getAllBooks(): Promise<GetAllBooksAPIResponse> {
   }
 }
 
+/**
+ * 書籍新規登録 API 入力データ
+ */
 export type BookInsertData = {
   title: string,
   authorId: number,
 };
 
+/**
+ * 書籍新規登録 API レスポンス
+ */
 export type InsertBookAPIResponse = APIResponseEnvelope<BookData>;
 
+/**
+ * 書籍新規登録 API
+ * @param data 入力データ
+ * @return 実行結果
+ */
 export async function insertBook(data: BookInsertData): Promise<InsertBookAPIResponse> {
   try {
     const method = "POST";
@@ -49,6 +60,27 @@ export async function insertBook(data: BookInsertData): Promise<InsertBookAPIRes
     const json = await resp.json(); // TODO JSONのパース判定を正しく行う
     return json;
   } catch(e) {
+    throw e;
+  }
+}
+
+/**
+ * 書籍削除 API レスポンス
+ */
+export type DeleteBookAPIResponse = APIResponseEnvelope<number>;
+
+/**
+ * 書籍削除 API
+ * @param id 削除する書籍ID
+ * @return 実行結果
+ */
+export async function deleteBook(id: number): Promise<DeleteBookAPIResponse> {
+  try {
+    const method = "DELETE";
+    const resp = await fetch(`${getAPIHost()}/books/${id}`, {method});
+    const json = await resp.json(); // TODO JSONのパース判定を正しく行う
+    return json;
+  } catch (e) {
     throw e;
   }
 }
