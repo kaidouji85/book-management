@@ -35,7 +35,7 @@ export function AuthorUpdatePresentation(props: Props) {
     <div>
       <h1>著者編集</h1>
       <AuthorInput name={props.state.name} onNameChange={props.onNameChange} />
-      <button onClick={onSaveClick} onTouchStart={onSaveClick} >更新する</button>
+      <button onClick={onSaveClick} onTouchStart={onSaveClick} >著者を更新する</button>
       <AuthorsLink label="著者一覧に戻る" />
     </div>
   );

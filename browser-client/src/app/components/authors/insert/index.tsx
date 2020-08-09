@@ -47,11 +47,7 @@ export class AuthorInsert extends React.Component<any, AuthorInsertState> {
    */
   private async onSavePush(): Promise<string | null> {
     try {
-      await new Promise(resolve => {
-        this.setState({
-          isLoading: true
-        }, resolve);
-      });
+      await this.switchLoading(true);
       const data: InsertAuthorData = {
         name: this.state.name
       };
@@ -65,5 +61,16 @@ export class AuthorInsert extends React.Component<any, AuthorInsertState> {
     } catch(e) {
       throw e;
     }
+  }
+
+  /**
+   * 通信中フラグが切り替わるまで待機する
+   * @param isLoading フラグ変更内容
+   * @private
+   */
+  private async switchLoading(isLoading: boolean): Promise<void> {
+    return new Promise(resolve => {
+      this.setState({isLoading}, resolve);
+    })
   }
 }
