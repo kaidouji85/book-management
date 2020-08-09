@@ -1,9 +1,17 @@
 package example.book.api
 
-import example.book.domain.Author
-import example.book.domain.AuthorProps
 import example.book.entity.AuthorEntity
 import java.util.*
+
+/**
+ * 著者 ユニークID以外の属性
+ */
+interface AuthorProps {
+    /**
+     * 著者名
+     */
+    val name: String
+}
 
 /**
  * 著者 新規登録 API 入力
@@ -16,9 +24,9 @@ data class InsertAuthorData (
  * 著者 API レスポンス
  */
 data class AuthorData(
-        override val id: Long,
+        val id: Long,
         override val name: String
-): Author
+): AuthorProps
 
 /**
  * 著者情報取得 API レスポンス

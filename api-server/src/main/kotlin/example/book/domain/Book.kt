@@ -1,5 +1,7 @@
 package example.book.domain
 
+import example.book.api.AuthorData
+
 /**
  * 書籍 ユニークID以外の固有プロパティ
  */
@@ -11,7 +13,7 @@ interface BookProps {
  * 書籍 関連するオブジェクト
  */
 interface BookRelations {
-    val author: Author
+    val author: AuthorData
 }
 
 /**

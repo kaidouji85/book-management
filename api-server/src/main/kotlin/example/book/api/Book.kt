@@ -1,6 +1,5 @@
 package example.book.api
 
-import example.book.domain.Author
 import example.book.domain.Book
 import example.book.domain.BookProps
 import example.book.entity.AuthorEntity
@@ -30,7 +29,7 @@ data class UpdateBookData(
 data class BookData(
         override val id: Long,
         override val title: String,
-        override val author: Author
+        override val author: AuthorData
 ):Book
 
 /**
