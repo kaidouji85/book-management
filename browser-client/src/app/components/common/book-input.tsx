@@ -26,6 +26,10 @@ export function BookInput(props: Props) {
     const id = Number(e.currentTarget.value);
     props.onAuthorChange(id);
   };
+  const onPublicationDateChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const date = e.currentTarget.value;
+    console.log(date);
+  };
 
   return (
     <div>
@@ -42,6 +46,10 @@ export function BookInput(props: Props) {
                 {props.authors.map(v => (<option key={v.id} value={v.id}>{v.name}</option>))}
               </select>
             </td>
+          </tr>
+          <tr>
+            <td>出版日</td>
+            <td><input type="date" onChange={onPublicationDateChange} /></td>
           </tr>
         </tbody>
       </table>
