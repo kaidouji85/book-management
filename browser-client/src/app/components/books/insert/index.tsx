@@ -17,6 +17,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
     super(props);
     this.state = {
       isLoading: false,
+      errorMessage: null,
       title: '',
       authors: [],
       publicationDate: '2020-08-10',
@@ -97,11 +98,19 @@ export class BookInsert extends React.Component<any, BookInsertState> {
 
       const data = this.createBookInsertData();
       if (!data) {
+        this.setState({
+          isLoading: false,
+          errorMessage: '入力に誤りがあります。出版日、著者が正しく入力されているか確認してください'
+        })
         return null;
       }
+
       const resp = await insertBook(data);
       if (!resp.isSuccess) {
-        // TODO エラーメッセージを画面に出す
+        this.setState({
+          isLoading: false,
+          errorMessage: resp.message
+        });
         return null;
       }
 

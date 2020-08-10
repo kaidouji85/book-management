@@ -51,7 +51,10 @@ export function BookInput(props: Props) {
           </tr>
           <tr>
             <td>出版日</td>
-            <td><input type="date" value={props.publicationDate} onChange={onPublicationDateChange} /></td>
+            <td>
+              <input type="date" value={props.publicationDate} onChange={onPublicationDateChange} />
+              <span>入力必須、yyyy-mm-dd形式で入力してください</span>
+            </td>
           </tr>
         </tbody>
       </table>

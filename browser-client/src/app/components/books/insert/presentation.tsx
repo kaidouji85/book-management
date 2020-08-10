@@ -4,6 +4,7 @@ import {BookInput} from "../../common/book-input";
 import {BooksLink} from "../../links/links";
 import {Loading} from "../../common/loading";
 import {useHistory} from 'react-router-dom';
+import {ErrorMessage} from "../../common/error-message";
 
 /**
  * 書籍新規登録 プレゼンテーション コンポネント プロパティ
@@ -37,6 +38,7 @@ export function BookInsertPresentation(props: Props) {
   return (
     <div>
       <h1>書籍新規登録</h1>
+      <ErrorMessage message={props.state.errorMessage}/>
       <BookInput
         title={props.state.title}
         authors={props.state.authors}
