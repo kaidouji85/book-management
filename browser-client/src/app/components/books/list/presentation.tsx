@@ -4,6 +4,7 @@ import {BooksState} from "./state";
 import {Book} from "./book";
 import {BookInsertLink, BookUpdatePath, RootLink} from "../../links/links";
 import {Loading} from "../../common/loading";
+import {AuthorSelector} from "./author-selector";
 
 /**
  * 書籍情報 コンポネント プロパティ
@@ -11,6 +12,7 @@ import {Loading} from "../../common/loading";
 type Props = {
   state: BooksState,
   onDeletePush: (id: number) => void,
+  onAuthorChange: (authorId: number | null) => void
 };
 
 /**
@@ -36,11 +38,15 @@ export function BooksPresentation(props: Props) {
         <tbody>
           <tr>
             <td>著者</td>
-            <td>あとで創る</td>
+            <td><AuthorSelector
+              authors={props.state.authors}
+              authorId={props.state.selectedAuthorId}
+              onAuthorChange={props.onAuthorChange}
+            /></td>
           </tr>
         </tbody>
-        <button>検索</button>
       </table>
+      <button>検索</button>
       <h2>検索結果</h2>
       <BookInsertLink label="+書籍新規登録"/>
       <table>

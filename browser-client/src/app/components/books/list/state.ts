@@ -10,7 +10,12 @@ export type BooksState = {
    */
   isLoading: boolean,
 
+  /**
+   * 著者情報
+   */
   authors: AuthorData[],
+
+  selectedAuthorId: number | null,
 
   /**
    * 書籍情報

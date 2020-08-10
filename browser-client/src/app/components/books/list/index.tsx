@@ -11,6 +11,7 @@ export class Books extends React.Component<any , BooksState> {
     super(props);
     this.state = {
       isLoading: true,
+      selectedAuthorId: null,
       authors: [],
       books: []
     };
@@ -20,6 +21,7 @@ export class Books extends React.Component<any , BooksState> {
     return (<BooksPresentation
       state={this.state}
       onDeletePush={this.onDeletePush.bind(this)}
+      onAuthorChange={this.onAuthorChange.bind(this)}
     />);
   }
 
@@ -56,6 +58,12 @@ export class Books extends React.Component<any , BooksState> {
     } catch (e) {
       throw e;
     }
+  }
+
+  private onAuthorChange(authorId: number | null): void {
+    this.setState({
+      selectedAuthorId: authorId,
+    })
   }
 
   /**
