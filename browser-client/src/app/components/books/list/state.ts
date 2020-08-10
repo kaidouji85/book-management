@@ -1,6 +1,10 @@
 import {BookData} from "../../../api/books";
 import {AuthorData} from "../../../api/authors";
 
+export type BookSearchCondition = {
+  authorId: number | null
+};
+
 /**
  * 書籍一覧 ステート
  */
@@ -15,7 +19,11 @@ export type BooksState = {
    */
   authors: AuthorData[],
 
-  selectedAuthorId: number | null,
+
+  /**
+   * 書籍検索条件
+   */
+  searchCondition: BookSearchCondition,
 
   /**
    * 書籍情報

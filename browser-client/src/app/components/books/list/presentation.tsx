@@ -40,7 +40,7 @@ export function BooksPresentation(props: Props) {
             <td>著者</td>
             <td><AuthorSelector
               authors={props.state.authors}
-              authorId={props.state.selectedAuthorId}
+              authorId={props.state.searchCondition.authorId}
               onAuthorChange={props.onAuthorChange}
             /></td>
           </tr>

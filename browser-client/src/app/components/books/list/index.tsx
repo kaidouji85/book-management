@@ -1,5 +1,5 @@
 import React from 'react';
-import {BooksState} from "./state";
+import {BookSearchCondition, BooksState} from "./state";
 import {BooksPresentation} from "./presentation";
 import {deleteBook, getBooks, GetBooksAPIResponse} from "../../../api/books";
 import {getAllAuthors} from "../../../api/authors";
@@ -11,7 +11,9 @@ export class Books extends React.Component<any , BooksState> {
     super(props);
     this.state = {
       isLoading: true,
-      selectedAuthorId: null,
+      searchCondition: {
+        authorId: null
+      },
       authors: [],
       books: []
     };
@@ -27,7 +29,7 @@ export class Books extends React.Component<any , BooksState> {
 
   async componentDidMount() {
     const [booksResp, authorsResp] = await Promise.all([
-      this.searchBooksByState(),
+      this.searchBooks(this.state.searchCondition),
       getAllAuthors()
     ]);
     this.setState({
@@ -50,7 +52,7 @@ export class Books extends React.Component<any , BooksState> {
         return;
       }
 
-      const getResp = await this.searchBooksByState();
+      const getResp = await this.searchBooks(this.state.searchCondition);
       this.setState({
         isLoading: false,
         books: getResp.payload
@@ -67,9 +69,12 @@ export class Books extends React.Component<any , BooksState> {
    */
   private async onAuthorChange(authorId: number | null): Promise<void> {
     try {
-      console.log(authorId);
       await this.switchLoading(true);
-      const booksResp = await getBooks({authorId: authorId});
+      const updatedSearchCondition: BookSearchCondition = {
+        ...this.state.searchCondition,
+        authorId: authorId
+      };
+      const booksResp = await this.searchBooks(updatedSearchCondition);
       if (!booksResp.isSuccess) {
         // TODO エラーメッセージを画面に表示する
         return;
@@ -78,7 +83,7 @@ export class Books extends React.Component<any , BooksState> {
       this.setState({
         isLoading: false,
         books: booksResp.payload,
-        selectedAuthorId: authorId
+        searchCondition: updatedSearchCondition,
       });
     } catch (e) {
       throw e;
@@ -96,7 +101,13 @@ export class Books extends React.Component<any , BooksState> {
     });
   }
 
-  private searchBooksByState(): Promise<GetBooksAPIResponse> {
-    return getBooks({authorId: this.state.selectedAuthorId});
+  /**
+   * ステートの検索条件から書籍検索を行う
+   * @param condition 検索条件
+   * @return 実行結果
+   * @private
+   */
+  private searchBooks(condition: BookSearchCondition): Promise<GetBooksAPIResponse> {
+    return getBooks({authorId: condition.authorId});
   }
 }
