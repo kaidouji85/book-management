@@ -12,12 +12,13 @@ type Props = {
   state: BookUpdateState,
   onTitleChange: (title: string) => void,
   onAuthorChange: (authorId: number) => void,
+  onPublicationDateChange: (data: string) => void,
   onSavePush: () => Promise<string | null>,
 };
 
 /**
  * 書籍編集 プレゼンテーションコンポネント
- * @param props
+ * @param props プロパティ
  * @constructor
  */
 export function BookUpdatePresentation(props: Props) {
@@ -39,13 +40,11 @@ export function BookUpdatePresentation(props: Props) {
       <BookInput
         title={props.state.title}
         selectedAuthorId={props.state.selectedAuthorId}
-        publicationDate={""}
+        publicationDate={props.state.publicationDate}
         authors={props.state.authors}
         onTitleChange={props.onTitleChange}
         onAuthorChange={props.onAuthorChange}
-        onPublicationDateChange={() => {
-          // NOP
-        }}
+        onPublicationDateChange={props.onPublicationDateChange}
       />
       <button onClick={onSavePush} onTouchStart={onSavePush} >書籍を更新する</button>
       <BooksLink label="書籍一覧に戻る"/>

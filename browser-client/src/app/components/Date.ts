@@ -17,6 +17,12 @@ export function toAPIDate(origin: string): APIDate | null {
   return date;
 }
 
+/**
+ * APIから受け取った日付を入力フォーム用のデータに変換する
+ * 変換できない場合はnullを返す
+ * @param origin 変換元
+ * @return 変換結果
+ */
 export function toInputDate(origin: APIDate): string | null {
   if (origin.length !== 3) {
     return null;

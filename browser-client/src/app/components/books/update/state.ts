@@ -20,6 +20,11 @@ export type BookUpdateState = {
   authors: AuthorData[],
 
   /**
+   * 出版日
+   */
+  publicationDate: string,
+
+  /**
    * 選択されている著者ID
    */
   selectedAuthorId: number | null,
