@@ -1,16 +1,7 @@
 import {AuthorData} from "./authors";
 import {APIResponseEnvelope} from "./envelope";
 import {getAPIHost} from "./api-host";
-
-/**
- *  日付データ
- *  [年, 月, 日]の順番にセットされる
- *
- *  例
- *  [2020, 8, 10]
- *  // 2020年8月10日
- */
-export type APIDate = number[];
+import {APIDate} from "./date";
 
 /**
  * APIのIN/OUTに利用する書籍データ
@@ -67,6 +58,7 @@ export async function getBookById(id: number): Promise<GetBookByIdAPIResponse> {
 export type BookInsertData = {
   title: string,
   authorId: number,
+  publicationDate: APIDate,
 };
 
 /**
@@ -116,12 +108,22 @@ export async function deleteBook(id: number): Promise<DeleteBookAPIResponse> {
   }
 }
 
+/**
+ * 書籍更新API レスポンス
+ */
 export type UpdateBookAPIResponse = APIResponseEnvelope<BookData>;
 
+/**
+ * 書籍更新API 入力データ
+ */
 export type BookUpdateData = BookInsertData & {
   id: number
 };
 
+/**
+ * 書籍更新API
+ * @param data 更新内容
+ */
 export async function updateBook(data: BookUpdateData) {
   try {
     const method = "PUT";

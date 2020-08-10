@@ -4,6 +4,7 @@ import {BookInsertPresentation} from "./presentation";
 import {getAllAuthors} from "../../../api/authors";
 import {BookInsertData, insertBook} from "../../../api/books";
 import {BooksPath} from "../../links/links";
+import {toAPIDate} from "../../Date";
 
 /**
  * 書籍新規登録 コンポネント
@@ -18,7 +19,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
       isLoading: false,
       title: '',
       authors: [],
-      publicationDate: '',
+      publicationDate: '2020-08-10',
       selectedAuthorId: null,
     };
   }
@@ -120,9 +121,15 @@ export class BookInsert extends React.Component<any, BookInsertState> {
       return null;
     }
 
+    const publicationDate = toAPIDate(this.state.publicationDate);
+    if (!publicationDate) {
+      return null;
+    }
+
     return {
       title: this.state.title,
-      authorId: this.state.selectedAuthorId
+      authorId: this.state.selectedAuthorId,
+      publicationDate: publicationDate,
     };
   }
 

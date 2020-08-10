@@ -5,6 +5,7 @@ import {BookUpdatePresentation} from "./presentation";
 import {BookInsertData, BookUpdateData, getBookById, updateBook} from "../../../api/books";
 import {getAllAuthors} from "../../../api/authors";
 import {BooksPath} from "../../links/links";
+import {toAPIDate} from "../../Date";
 
 /**
  * 書籍編集 コンポネント
@@ -129,7 +130,8 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
     return {
       id: this.props.id,
       title: this.state.title,
-      authorId: this.state.selectedAuthorId
+      authorId: this.state.selectedAuthorId,
+      publicationDate: [2020, 8, 10]  // TODO 入力フォームからセットする
     };
   }
 
