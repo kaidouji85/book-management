@@ -18,6 +18,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
       isLoading: false,
       title: '',
       authors: [],
+      publicationDate: '',
       selectedAuthorId: null,
     };
   }
@@ -48,6 +49,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
       onAuthorChange={this.onAuthorChange.bind(this)}
       onTitleChange={this.onTitleChange.bind(this)}
       onSavePush={this.onSavePush.bind(this)}
+      onPublicationDateChange={this.onPublicationDateChange.bind(this)}
     />);
   }
 
@@ -64,12 +66,23 @@ export class BookInsert extends React.Component<any, BookInsertState> {
 
   /**
    * タイトルが変更された時の処理
-   * @param title 変更ない等
+   * @param title 変更内容
    * @private
    */
   private onTitleChange(title: string): void {
     this.setState({
       title: title
+    });
+  }
+
+  /**
+   * 出版日が変更された時の処理
+   * @param date 変更内容
+   * @private
+   */
+  private onPublicationDateChange(date: string): void {
+    this.setState({
+      publicationDate: date
     });
   }
 

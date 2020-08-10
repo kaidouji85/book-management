@@ -39,9 +39,13 @@ export function BookUpdatePresentation(props: Props) {
       <BookInput
         title={props.state.title}
         selectedAuthorId={props.state.selectedAuthorId}
+        publicationDate={""}
         authors={props.state.authors}
         onTitleChange={props.onTitleChange}
         onAuthorChange={props.onAuthorChange}
+        onPublicationDateChange={() => {
+          // NOP
+        }}
       />
       <button onClick={onSavePush} onTouchStart={onSavePush} >書籍を更新する</button>
       <BooksLink label="書籍一覧に戻る"/>

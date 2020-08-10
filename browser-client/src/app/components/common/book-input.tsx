@@ -8,8 +8,10 @@ type Props = {
   title: string,
   authors: AuthorData[],
   selectedAuthorId: number | null,
+  publicationDate: string,
   onTitleChange: (title: string) => void,
-  onAuthorChange: (authorId: number) => void
+  onAuthorChange: (authorId: number) => void,
+  onPublicationDateChange: (data: string) => void,
 }
 
 /**
@@ -28,7 +30,7 @@ export function BookInput(props: Props) {
   };
   const onPublicationDateChange = (e: React.FormEvent<HTMLInputElement>) => {
     const date = e.currentTarget.value;
-    console.log(date);
+    props.onPublicationDateChange(date);
   };
 
   return (
@@ -49,7 +51,7 @@ export function BookInput(props: Props) {
           </tr>
           <tr>
             <td>出版日</td>
-            <td><input type="date" onChange={onPublicationDateChange} /></td>
+            <td><input type="date" value={props.publicationDate} onChange={onPublicationDateChange} /></td>
           </tr>
         </tbody>
       </table>

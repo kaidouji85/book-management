@@ -23,4 +23,10 @@ export type BookInsertState = {
    * 選択されている著者ID
    */
   selectedAuthorId: number | null,
+
+  /**
+   * 出版日
+   * <input type="date">の値をそのままセットする想定
+   */
+  publicationDate: string,
 }
