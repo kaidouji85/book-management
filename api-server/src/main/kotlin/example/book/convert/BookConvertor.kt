@@ -11,10 +11,12 @@ import example.book.entity.BookEntity
  * @param origin 変換元
  * @return 変換結果
  */
-fun toBookData(origin: BookEntity): BookData {
-    val author = toAuthorData(origin.author)
-    return BookData(origin.id, origin.title, author)
-}
+fun toBookData(origin: BookEntity) = BookData(
+        id = origin.id,
+        title = origin.title,
+        publicationDate = origin.publicationDate,
+        author = toAuthorData(origin.author)
+)
 
 /**
  * API入力データから新規登録用の書籍エンティティを生成する
@@ -22,9 +24,12 @@ fun toBookData(origin: BookEntity): BookData {
  * @param authorEntity 著者エンティティ
  * @return 生成結果
  */
-fun createInsertBookEntity(origin: InsertBookData, authorEntity: AuthorEntity): BookEntity {
-    return BookEntity(0, origin.title, authorEntity)
-}
+fun createInsertBookEntity(origin: InsertBookData, authorEntity: AuthorEntity) = BookEntity(
+        id=0,
+        title = origin.title,
+        publicationDate = origin.publicationDate,
+        author = authorEntity
+)
 
 /**
  * API入力データから更新用の書籍エンティティを生成する
@@ -32,6 +37,9 @@ fun createInsertBookEntity(origin: InsertBookData, authorEntity: AuthorEntity): 
  * @param authorEntity 著者エンティティ
  * @return 生成結果
  */
-fun createUpdateBookEntity(origin: UpdateBookData, authorEntity: AuthorEntity): BookEntity {
-    return BookEntity(origin.id, origin.title, authorEntity)
-}
+fun createUpdateBookEntity(origin: UpdateBookData, authorEntity: AuthorEntity) = BookEntity(
+        id = origin.id,
+        title = origin.title,
+        publicationDate = origin.publicationDate,
+        author = authorEntity
+)

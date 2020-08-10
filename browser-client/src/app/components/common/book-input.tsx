@@ -8,8 +8,10 @@ type Props = {
   title: string,
   authors: AuthorData[],
   selectedAuthorId: number | null,
+  publicationDate: string,
   onTitleChange: (title: string) => void,
-  onAuthorChange: (authorId: number) => void
+  onAuthorChange: (authorId: number) => void,
+  onPublicationDateChange: (data: string) => void,
 }
 
 /**
@@ -26,6 +28,10 @@ export function BookInput(props: Props) {
     const id = Number(e.currentTarget.value);
     props.onAuthorChange(id);
   };
+  const onPublicationDateChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const date = e.currentTarget.value;
+    props.onPublicationDateChange(date);
+  };
 
   return (
     <div>
@@ -41,6 +47,13 @@ export function BookInput(props: Props) {
               <select value={props.selectedAuthorId ?? 0} onChange={onAuthorChange}>
                 {props.authors.map(v => (<option key={v.id} value={v.id}>{v.name}</option>))}
               </select>
+            </td>
+          </tr>
+          <tr>
+            <td>出版日</td>
+            <td>
+              <input type="date" value={props.publicationDate} onChange={onPublicationDateChange} />
+              <span>入力必須、yyyy-mm-dd形式で入力してください</span>
             </td>
           </tr>
         </tbody>

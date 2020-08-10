@@ -10,6 +10,11 @@ export type BookInsertState = {
   isLoading: boolean,
 
   /**
+   * 画面に表示するエラーメッセージ
+   */
+  errorMessage: string | null,
+
+  /**
    * 書籍名
    */
   title: string,
@@ -23,4 +28,10 @@ export type BookInsertState = {
    * 選択されている著者ID
    */
   selectedAuthorId: number | null,
+
+  /**
+   * 出版日
+   * <input type="date">の値をそのままセットする想定
+   */
+  publicationDate: string,
 }

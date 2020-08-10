@@ -31,13 +31,9 @@ export function BooksPresentation(props: Props) {
   return (
     <div>
       <h1>書籍一覧</h1>
+      <BookInsertLink label="+書籍新規登録"/>
       <table>
         <tbody>
-        <tr>
-          <td><BookInsertLink label="+書籍新規登録"/></td>
-          <td></td>
-          <td></td>
-        </tr>
         {props.state.books
           .sort((a, b) => b.id - a.id)
           .map(v => {

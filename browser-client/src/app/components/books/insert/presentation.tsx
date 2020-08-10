@@ -4,6 +4,7 @@ import {BookInput} from "../../common/book-input";
 import {BooksLink} from "../../links/links";
 import {Loading} from "../../common/loading";
 import {useHistory} from 'react-router-dom';
+import {ErrorMessage} from "../../common/error-message";
 
 /**
  * 書籍新規登録 プレゼンテーション コンポネント プロパティ
@@ -13,6 +14,7 @@ type Props = {
   onAuthorChange: (authorId: number) => void,
   onTitleChange: (title: string) => void,
   onSavePush: () => Promise<string | null>,
+  onPublicationDateChange: (data: string) => void,
 };
 
 /**
@@ -36,12 +38,15 @@ export function BookInsertPresentation(props: Props) {
   return (
     <div>
       <h1>書籍新規登録</h1>
+      <ErrorMessage message={props.state.errorMessage}/>
       <BookInput
         title={props.state.title}
         authors={props.state.authors}
         selectedAuthorId={props.state.selectedAuthorId}
+        publicationDate={props.state.publicationDate}
         onTitleChange={props.onTitleChange}
         onAuthorChange={props.onAuthorChange}
+        onPublicationDateChange={props.onPublicationDateChange}
       />
       <button onClick={onSavePush} onTouchStart={onSavePush} >書籍を登録する</button>
       <BooksLink label="書籍一覧に戻る" />

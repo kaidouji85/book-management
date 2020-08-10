@@ -1,12 +1,17 @@
 package example.book.api
 
+import io.micronaut.core.convert.format.Format
+import java.time.LocalDate
 import java.util.*
+
+const val DATE_FORMAT = "yyyy-MM-dd";
 
 /**
  * 書籍 ユニークID以外の固有プロパティ
  */
 interface BookProps {
     val title: String
+    val publicationDate: LocalDate
 }
 
 /**
@@ -14,6 +19,10 @@ interface BookProps {
  */
 data class InsertBookData(
         override val title: String,
+
+        @Format(DATE_FORMAT)
+        override val publicationDate: LocalDate,
+
         val authorId: Long
 ): BookProps
 
@@ -23,6 +32,10 @@ data class InsertBookData(
 data class UpdateBookData(
         val id: Long,
         override val title: String,
+
+        @Format(DATE_FORMAT)
+        override val publicationDate: LocalDate,
+
         val authorId: Long
 ): BookProps
 
@@ -31,7 +44,12 @@ data class UpdateBookData(
  */
 data class BookData(
         val id: Long,
+
         override val title: String,
+
+        @Format(DATE_FORMAT)
+        override val publicationDate: LocalDate,
+
         val author: AuthorData
 ): BookProps
 

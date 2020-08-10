@@ -10,6 +10,11 @@ export type BookUpdateState = {
   isLoading: boolean,
 
   /**
+   * エラーメッセージ
+   */
+  errorMessage: string | null,
+
+  /**
    * 書籍名
    */
   title: string,
@@ -18,6 +23,11 @@ export type BookUpdateState = {
    * 著者
    */
   authors: AuthorData[],
+
+  /**
+   * 出版日
+   */
+  publicationDate: string,
 
   /**
    * 選択されている著者ID

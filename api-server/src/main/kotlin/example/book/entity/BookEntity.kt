@@ -1,6 +1,6 @@
 package example.book.entity
 
-import example.book.api.BookData
+import java.time.LocalDate
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -27,5 +27,10 @@ data class BookEntity(
          * 著者
          */
         @ManyToOne
-        var author: AuthorEntity
+        var author: AuthorEntity,
+
+        /**
+         * 出版日
+         */
+        var publicationDate: LocalDate
 )

@@ -2,9 +2,10 @@ import React from 'react';
 import {useParams} from 'react-router-dom';
 import {BookUpdateState} from "./state";
 import {BookUpdatePresentation} from "./presentation";
-import {BookInsertData, BookUpdateData, getBookById, updateBook} from "../../../api/books";
+import {BookUpdateData, getBookById, updateBook} from "../../../api/books";
 import {getAllAuthors} from "../../../api/authors";
 import {BooksPath} from "../../links/links";
+import {toAPIDate, toInputDate} from "../../Date";
 
 /**
  * 書籍編集 コンポネント
@@ -34,8 +35,10 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
     super(props);
     this.state = {
       isLoading: true,
+      errorMessage: null,
       title: '',
       authors: [],
+      publicationDate: '',
       selectedAuthorId: null,
     };
   }
@@ -53,6 +56,7 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
         isLoading: false,
         title: bookResp.payload.title,
         selectedAuthorId: bookResp.payload.author.id,
+        publicationDate: toInputDate(bookResp.payload.publicationDate) ?? '',
         authors: authorsResp.payload,
       })
     } catch (e) {
@@ -65,6 +69,7 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
       state={this.state}
       onTitleChange={this.onTitleChange.bind(this)}
       onAuthorChange={this.onAuthorChange.bind(this)}
+      onPublicationDateChange={this.onPublicationDateChange.bind(this)}
       onSavePush={this.onSavePush.bind(this)}
     />);
   }
@@ -92,6 +97,17 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
   }
 
   /**
+   * 出版日が変更された時の処理
+   * @param date 変更内容
+   * @private
+   */
+  private onPublicationDateChange(date: string) {
+    this.setState({
+      publicationDate: date
+    })
+  }
+
+  /**
    * 保存系ボタンが押された時の処理
    * @private
    */
@@ -100,13 +116,19 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
       await this.switchLoading(true);
       const data = this.createBookUpdateData();
       if (!data) {
-        // TODO エラ〜メッセージを画面に表示する
+        this.setState({
+          isLoading: false,
+          errorMessage: '入力に誤りがあります。出版日、著者が正しく入力されているか確認してください。'
+        })
         return null;
       }
 
       const updateResp = await updateBook(data);
       if (!updateResp.isSuccess) {
-        // TODO エラ〜メッセージを画面に表示する
+        this.setState({
+          isLoading: false,
+          errorMessage: updateResp.message
+        })
         return null;
       }
 
@@ -126,10 +148,16 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
       return null;
     }
 
+    const publicationDate = toAPIDate(this.state.publicationDate);
+    if (!publicationDate) {
+      return null;
+    }
+
     return {
       id: this.props.id,
       title: this.state.title,
-      authorId: this.state.selectedAuthorId
+      authorId: this.state.selectedAuthorId,
+      publicationDate: publicationDate,
     };
   }
 

@@ -4,6 +4,7 @@ import {BookInsertPresentation} from "./presentation";
 import {getAllAuthors} from "../../../api/authors";
 import {BookInsertData, insertBook} from "../../../api/books";
 import {BooksPath} from "../../links/links";
+import {toAPIDate} from "../../Date";
 
 /**
  * 書籍新規登録 コンポネント
@@ -16,8 +17,10 @@ export class BookInsert extends React.Component<any, BookInsertState> {
     super(props);
     this.state = {
       isLoading: false,
+      errorMessage: null,
       title: '',
       authors: [],
+      publicationDate: '2020-08-10',
       selectedAuthorId: null,
     };
   }
@@ -48,6 +51,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
       onAuthorChange={this.onAuthorChange.bind(this)}
       onTitleChange={this.onTitleChange.bind(this)}
       onSavePush={this.onSavePush.bind(this)}
+      onPublicationDateChange={this.onPublicationDateChange.bind(this)}
     />);
   }
 
@@ -64,12 +68,23 @@ export class BookInsert extends React.Component<any, BookInsertState> {
 
   /**
    * タイトルが変更された時の処理
-   * @param title 変更ない等
+   * @param title 変更内容
    * @private
    */
   private onTitleChange(title: string): void {
     this.setState({
       title: title
+    });
+  }
+
+  /**
+   * 出版日が変更された時の処理
+   * @param date 変更内容
+   * @private
+   */
+  private onPublicationDateChange(date: string): void {
+    this.setState({
+      publicationDate: date
     });
   }
 
@@ -83,11 +98,19 @@ export class BookInsert extends React.Component<any, BookInsertState> {
 
       const data = this.createBookInsertData();
       if (!data) {
+        this.setState({
+          isLoading: false,
+          errorMessage: '入力に誤りがあります。出版日、著者が正しく入力されているか確認してください。'
+        })
         return null;
       }
+
       const resp = await insertBook(data);
       if (!resp.isSuccess) {
-        // TODO エラーメッセージを画面に出す
+        this.setState({
+          isLoading: false,
+          errorMessage: resp.message
+        });
         return null;
       }
 
@@ -107,9 +130,15 @@ export class BookInsert extends React.Component<any, BookInsertState> {
       return null;
     }
 
+    const publicationDate = toAPIDate(this.state.publicationDate);
+    if (!publicationDate) {
+      return null;
+    }
+
     return {
       title: this.state.title,
-      authorId: this.state.selectedAuthorId
+      authorId: this.state.selectedAuthorId,
+      publicationDate: publicationDate,
     };
   }
 
