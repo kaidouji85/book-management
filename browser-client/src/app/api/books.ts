@@ -3,11 +3,22 @@ import {APIResponseEnvelope} from "./envelope";
 import {getAPIHost} from "./api-host";
 
 /**
+ *  日付データ
+ *  [年, 月, 日]の順番にセットされる
+ *
+ *  例
+ *  [2020, 8, 10]
+ *  // 2020年8月10日
+ */
+export type APIDate = number[];
+
+/**
  * APIのIN/OUTに利用する書籍データ
  */
 export type BookData = {
   id: number,
   title: string,
+  publicationDate: APIDate,
   author: AuthorData
 };
 

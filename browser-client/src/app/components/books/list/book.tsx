@@ -29,6 +29,7 @@ export function Book(props: Props) {
       </td>
       <td>{props.title}</td>
       <td>{props.author.name}</td>
+      <td>{`${props.publicationDate[0]}年 ${props.publicationDate[1]}月 ${props.publicationDate[2]}日`}</td>
     </tr>
   );
 }
