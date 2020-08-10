@@ -4,6 +4,7 @@ import {BookUpdateState} from "./state";
 import {BookInput} from "../../common/book-input";
 import {BooksLink} from "../../links/links";
 import {Loading} from "../../common/loading";
+import {ErrorMessage} from "../../common/error-message";
 
 /**
  * 書籍編集 プレゼンテーションコンポネント プロパティ
@@ -37,6 +38,7 @@ export function BookUpdatePresentation(props: Props) {
   return (
     <div>
       <h1>書籍編集</h1>
+      <ErrorMessage message={props.state.errorMessage}/>
       <BookInput
         title={props.state.title}
         selectedAuthorId={props.state.selectedAuthorId}

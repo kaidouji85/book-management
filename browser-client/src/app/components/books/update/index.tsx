@@ -35,6 +35,7 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
     super(props);
     this.state = {
       isLoading: true,
+      errorMessage: null,
       title: '',
       authors: [],
       publicationDate: '',
@@ -115,13 +116,19 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
       await this.switchLoading(true);
       const data = this.createBookUpdateData();
       if (!data) {
-        // TODO エラ〜メッセージを画面に表示する
+        this.setState({
+          isLoading: false,
+          errorMessage: '入力に誤りがあります。出版日、著者が正しく入力されているか確認してください。'
+        })
         return null;
       }
 
       const updateResp = await updateBook(data);
       if (!updateResp.isSuccess) {
-        // TODO エラ〜メッセージを画面に表示する
+        this.setState({
+          isLoading: false,
+          errorMessage: updateResp.message
+        })
         return null;
       }
 

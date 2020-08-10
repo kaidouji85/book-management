@@ -10,6 +10,11 @@ export type BookUpdateState = {
   isLoading: boolean,
 
   /**
+   * エラーメッセージ
+   */
+  errorMessage: string | null,
+
+  /**
    * 書籍名
    */
   title: string,

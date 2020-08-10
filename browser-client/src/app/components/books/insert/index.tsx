@@ -100,7 +100,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
       if (!data) {
         this.setState({
           isLoading: false,
-          errorMessage: '入力に誤りがあります。出版日、著者が正しく入力されているか確認してください'
+          errorMessage: '入力に誤りがあります。出版日、著者が正しく入力されているか確認してください。'
         })
         return null;
       }
