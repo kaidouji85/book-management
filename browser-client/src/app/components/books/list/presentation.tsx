@@ -46,7 +46,6 @@ export function BooksPresentation(props: Props) {
           </tr>
         </tbody>
       </table>
-      <button>検索</button>
       <h2>検索結果</h2>
       <BookInsertLink label="+書籍新規登録"/>
       <table>

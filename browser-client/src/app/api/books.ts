@@ -22,7 +22,7 @@ export type GetBooksAPIResponse = APIResponseEnvelope<BookData[]>;
  * 書籍情報取得 API　入力
  */
 export type GetBookAPIInput = {
-  authorId?: number
+  authorId: number | null
 };
 
 /**

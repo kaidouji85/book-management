@@ -37,7 +37,7 @@ export function AuthorSelector(props: Props) {
     ? Number(props.authorId)
     : noSelectItemValue
   return (
-    <select onChange={onAuthorChange}>
+    <select value={value} onChange={onAuthorChange}>
       <option key="no-select-item" value={noSelectItemValue}>指定なし</option>
       {props.authors.map(v => (<option key={v.id} value={v.id}>{v.name}</option>))}
     </select>
