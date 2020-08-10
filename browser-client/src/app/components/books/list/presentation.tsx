@@ -31,6 +31,17 @@ export function BooksPresentation(props: Props) {
   return (
     <div>
       <h1>書籍一覧</h1>
+      <h2>検索条件</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td>著者</td>
+            <td>あとで創る</td>
+          </tr>
+        </tbody>
+        <button>検索</button>
+      </table>
+      <h2>検索結果</h2>
       <BookInsertLink label="+書籍新規登録"/>
       <table>
         <tbody>

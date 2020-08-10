@@ -14,17 +14,26 @@ export type BookData = {
 };
 
 /**
- * 全書籍情報取得 API レスポンス
+ * 書籍情報取得 API レスポンス
  */
-export type GetAllBooksAPIResponse = APIResponseEnvelope<BookData[]>;
+export type GetBooksAPIResponse = APIResponseEnvelope<BookData[]>;
 
 /**
- * 全書籍情報取得 API
+ * 書籍情報取得 API　入力
+ */
+export type GetBookAPIInput = {
+  authorId?: number
+};
+
+/**
+ * 書籍情報取得 API
  * @return 実行結果
  */
-export async function getAllBooks(): Promise<GetAllBooksAPIResponse> {
+export async function getBooks(params: GetBookAPIInput): Promise<GetBooksAPIResponse> {
   try {
-    const resp = await fetch(`${getAPIHost()}/books`);
+    const requestParams = new URLSearchParams();
+    !!params.authorId && requestParams.append('authorId', params.authorId.toString());
+    const resp = await fetch(`${getAPIHost()}/books?${requestParams}`);
     const json = await resp.json(); // TODO JSONのパース判定を正しく行う
     return json;
   } catch (e) {
