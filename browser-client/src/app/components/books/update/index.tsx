@@ -158,6 +158,7 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
       title: this.state.title,
       authorId: this.state.selectedAuthorId,
       publicationDate: publicationDate,
+      isPublished: false, // TODO 画面から入力値を取得する
     };
   }
 

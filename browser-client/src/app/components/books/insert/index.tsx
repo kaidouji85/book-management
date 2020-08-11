@@ -139,6 +139,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
       title: this.state.title,
       authorId: this.state.selectedAuthorId,
       publicationDate: publicationDate,
+      isPublished: false, // TODO 画面から入力値を取得する
     };
   }
 
