@@ -1,11 +1,9 @@
 package example.book.validation
 
-import io.micronaut.test.annotation.MicronautTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
-@MicronautTest
 class PastPublicationDateErrorTest {
 
     /**

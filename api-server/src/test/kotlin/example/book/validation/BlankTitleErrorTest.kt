@@ -1,6 +1,5 @@
 package example.book.validation
 
-import io.micronaut.test.annotation.MicronautTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -14,7 +13,6 @@ const val BLANK_TITLE = "";
  */
 const val NOT_BLANK_TITLE = "空欄でないタイトル";
 
-@MicronautTest
 class BlankTitleErrorTest {
     /**
      * 出版済みの書籍はタイトル空欄だとエラーになる

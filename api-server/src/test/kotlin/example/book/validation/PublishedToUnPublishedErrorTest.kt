@@ -1,10 +1,8 @@
 package example.book.validation
 
-import io.micronaut.test.annotation.MicronautTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-@MicronautTest
 class PublishedToUnPublishedErrorTest {
     /**
      * 出版済 -> 未出版 に変更しようとするとエラーになる
