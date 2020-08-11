@@ -30,6 +30,11 @@ export type BookUpdateState = {
   publicationDate: string,
 
   /**
+   * 出版フラグ、trueで出版したとみなす
+   */
+  isPublished: boolean,
+
+  /**
    * 選択されている著者ID
    */
   selectedAuthorId: number | null,

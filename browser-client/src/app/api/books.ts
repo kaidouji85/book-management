@@ -10,6 +10,7 @@ export type BookData = {
   id: number,
   title: string,
   publicationDate: APIDate,
+  isPublished: boolean,
   author: AuthorData
 };
 
@@ -68,6 +69,7 @@ export type BookInsertData = {
   title: string,
   authorId: number,
   publicationDate: APIDate,
+  isPublished: boolean,
 };
 
 /**

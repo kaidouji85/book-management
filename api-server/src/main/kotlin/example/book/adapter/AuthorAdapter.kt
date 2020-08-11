@@ -1,4 +1,4 @@
-package example.book.convert
+package example.book.adapter
 
 import example.book.api.AuthorData
 import example.book.api.InsertAuthorData

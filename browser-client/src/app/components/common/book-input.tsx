@@ -9,9 +9,11 @@ type Props = {
   authors: AuthorData[],
   selectedAuthorId: number | null,
   publicationDate: string,
+  isPublished: boolean,
   onTitleChange: (title: string) => void,
   onAuthorChange: (authorId: number) => void,
   onPublicationDateChange: (data: string) => void,
+  onIsPublishedChange: (isPublished: boolean) => void,
 }
 
 /**
@@ -32,6 +34,10 @@ export function BookInput(props: Props) {
     const date = e.currentTarget.value;
     props.onPublicationDateChange(date);
   };
+  const onIsPublishedChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const isPublished = e.currentTarget.checked;
+    props.onIsPublishedChange(isPublished);
+  }
 
   return (
     <div>
@@ -54,6 +60,13 @@ export function BookInput(props: Props) {
             <td>
               <input type="date" value={props.publicationDate} onChange={onPublicationDateChange} />
               <span>入力必須、yyyy-mm-dd形式で入力してください</span>
+            </td>
+          </tr>
+          <tr>
+            <td>出版フラグ</td>
+            <td>
+              <input type="checkbox" defaultChecked={props.isPublished} onChange={onIsPublishedChange}/>
+              <label >チェックを入れたら出版したとみなす</label>
             </td>
           </tr>
         </tbody>

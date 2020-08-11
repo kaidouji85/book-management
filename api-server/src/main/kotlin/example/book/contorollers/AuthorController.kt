@@ -1,13 +1,12 @@
 package example.book.contorollers
 
 import example.book.api.*
-import example.book.convert.toAuthorEntity
-import example.book.convert.toAuthorData
+import example.book.adapter.toAuthorEntity
+import example.book.adapter.toAuthorData
 import example.book.repository.AuthorRepository
 import example.book.repository.BookRepository
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
-import java.util.*
 import javax.inject.Inject
 import javax.transaction.Transactional
 

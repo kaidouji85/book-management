@@ -32,5 +32,10 @@ data class BookEntity(
         /**
          * 出版日
          */
-        var publicationDate: LocalDate
+        var publicationDate: LocalDate,
+
+        /**
+         * 出版フラグ、trueで出版された
+         */
+        var isPublished: Boolean
 )

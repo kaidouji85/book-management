@@ -15,6 +15,7 @@ type Props = {
   onTitleChange: (title: string) => void,
   onSavePush: () => Promise<string | null>,
   onPublicationDateChange: (data: string) => void,
+  onIsPublishedChange: (isPublished: boolean) => void,
 };
 
 /**
@@ -44,9 +45,11 @@ export function BookInsertPresentation(props: Props) {
         authors={props.state.authors}
         selectedAuthorId={props.state.selectedAuthorId}
         publicationDate={props.state.publicationDate}
+        isPublished={props.state.isPublished}
         onTitleChange={props.onTitleChange}
         onAuthorChange={props.onAuthorChange}
         onPublicationDateChange={props.onPublicationDateChange}
+        onIsPublishedChange={props.onIsPublishedChange}
       />
       <button onClick={onSavePush} onTouchStart={onSavePush} >書籍を登録する</button>
       <BooksLink label="書籍一覧に戻る" />
