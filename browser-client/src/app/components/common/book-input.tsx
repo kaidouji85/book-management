@@ -9,6 +9,7 @@ type Props = {
   authors: AuthorData[],
   selectedAuthorId: number | null,
   publicationDate: string,
+  isPublished: boolean,
   onTitleChange: (title: string) => void,
   onAuthorChange: (authorId: number) => void,
   onPublicationDateChange: (data: string) => void,
@@ -54,6 +55,13 @@ export function BookInput(props: Props) {
             <td>
               <input type="date" value={props.publicationDate} onChange={onPublicationDateChange} />
               <span>入力必須、yyyy-mm-dd形式で入力してください</span>
+            </td>
+          </tr>
+          <tr>
+            <td>出版フラグ</td>
+            <td>
+              <input checked={props.isPublished} type="checkbox"/>
+              <label >チェックを入れたら出版したとみなす</label>
             </td>
           </tr>
         </tbody>

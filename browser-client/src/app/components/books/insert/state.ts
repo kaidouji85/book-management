@@ -34,4 +34,9 @@ export type BookInsertState = {
    * <input type="date">の値をそのままセットする想定
    */
   publicationDate: string,
+
+  /**
+   * 出版フラグ、trueで出版したとみなす
+   */
+  isPublished: boolean
 }

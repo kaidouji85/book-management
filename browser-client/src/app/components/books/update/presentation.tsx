@@ -44,6 +44,7 @@ export function BookUpdatePresentation(props: Props) {
         selectedAuthorId={props.state.selectedAuthorId}
         publicationDate={props.state.publicationDate}
         authors={props.state.authors}
+        isPublished={false /* TODO 親から渡す  */}
         onTitleChange={props.onTitleChange}
         onAuthorChange={props.onAuthorChange}
         onPublicationDateChange={props.onPublicationDateChange}

@@ -21,6 +21,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
       title: '',
       authors: [],
       publicationDate: '',
+      isPublished: false,
       selectedAuthorId: null,
     };
   }

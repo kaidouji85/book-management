@@ -44,6 +44,7 @@ export function BookInsertPresentation(props: Props) {
         authors={props.state.authors}
         selectedAuthorId={props.state.selectedAuthorId}
         publicationDate={props.state.publicationDate}
+        isPublished={props.state.isPublished}
         onTitleChange={props.onTitleChange}
         onAuthorChange={props.onAuthorChange}
         onPublicationDateChange={props.onPublicationDateChange}
