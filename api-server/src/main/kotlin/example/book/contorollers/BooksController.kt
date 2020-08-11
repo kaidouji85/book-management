@@ -153,6 +153,9 @@ open class BooksController {
         val blankTitle = isBlankTitleError(updateBook)
         if (blankTitle is ValidationError) return blankTitle
 
+        val publishToUnPublish = isPublishedToUnPublishedError(originBook, updateBook)
+        if (publishToUnPublish is ValidationError) return publishToUnPublish
+
         return ValidData
     }
 

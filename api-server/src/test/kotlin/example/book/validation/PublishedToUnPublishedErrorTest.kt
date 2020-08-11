@@ -14,7 +14,7 @@ class PublishedToUnPublishedErrorTest {
         val origin = Book(isPublished = true)
         val update = Book(isPublished = false)
         val actual = isPublishedToUnPublishedError(origin, update)
-        val expected = ValidationError(PUBLISHED_TO_UN_PUBLISHED_ERROR)
+        val expected = ValidationError(PublishedToUnPublishError)
         Assertions.assertEquals(expected, actual)
     }
 
