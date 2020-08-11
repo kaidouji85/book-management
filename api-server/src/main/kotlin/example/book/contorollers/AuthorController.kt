@@ -35,11 +35,10 @@ open class AuthorController {
     @Transactional
     @Get("/{id}")
     open fun getById(@PathVariable id: Long): HttpResponse<GetAuthorByIdResponse> {
-        val result = this.authorRepository.findById(id)
-        val response = result.map {
-            val author = toAuthorData(it)
-            return@map GetAuthorByIdResponse(true, "get author by id success", Optional.of(author))
-        }.orElse(GetAuthorByIdResponse(false, "no exist id", Optional.empty()))
+        val author = this.authorRepository.findById(id)
+        val response = author.map {toAuthorData(it)}
+                .map { GetAuthorByIdResponse(true, "get author by id success", it) }
+                .orElse(GetAuthorByIdResponse(false, "no exist id", null))
         return HttpResponse.ok(response)
     }
 
