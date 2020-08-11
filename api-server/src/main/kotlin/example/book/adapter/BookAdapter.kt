@@ -60,3 +60,9 @@ fun toBook(origin: BookProps) = Book(
         isPublished = origin.isPublished,
         publicationDate = origin.publicationDate
 )
+
+fun toBook(origin: BookEntity) = Book(
+        title = origin.title,
+        isPublished = origin.isPublished,
+        publicationDate = origin.publicationDate
+)

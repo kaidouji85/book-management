@@ -82,7 +82,7 @@ open class BooksController {
     }
 
     /**
-     * 書籍 新規作成データをRDBにインサートする
+     * RDBに書籍データを新規作成する
      * 本メソッドはバリデーション後に呼ばれる想定である
      *
      * @param data API入力データ
@@ -99,14 +99,48 @@ open class BooksController {
     @Transactional
     @Put("/")
     open fun update(@Body data: UpdateBookData): HttpResponse<UpdateBookAPIResponse> {
-        val author = this.authorRepository.findById(data.authorId)
-        val resp = author.map {
-            val book = createUpdateBookEntity(data, it)
-            val updatedBook = this.bookRepository.update(book)
-            val respBook = toBookData(updatedBook)
-            return@map APIResponseEnvelope(true, "book update success", Optional.of(respBook))
-        }.orElse(APIResponseEnvelope(false, "no exist book", Optional.empty()))
-        return HttpResponse.ok(resp)
+        val book: BookEntity?=  this.bookRepository.findById(data.id)
+                .orElse(null)
+        book ?: return HttpResponse.ok(APIResponseEnvelope(false, "no exist book", Optional.empty()))
+
+        val validationResult = this.updateBookValidation(book, data)
+        if (validationResult is ValidationError) return HttpResponse.ok(APIResponseEnvelope(false, validationResult.messages, Optional.empty()))
+
+        val updatedBook = this.updateBookToRDB(data)
+        updatedBook ?: return HttpResponse.ok(APIResponseEnvelope(false, "update book failed", Optional.empty()))
+
+        val respBook = toBookData(updatedBook)
+        return HttpResponse.ok(APIResponseEnvelope(true, "update book failed", Optional.of(respBook)))
+    }
+
+    /**
+     * 書籍 更新 バリデーション
+     * @param origin RDBから取得した既存データ
+     * @param update API入力データ
+     * @return バリデーション結果
+     */
+    private fun updateBookValidation(origin: BookEntity, update: UpdateBookData): ValidationResult {
+        val originBook = toBook(origin)
+        val updateBook = toBook(update)
+
+        val blankTitle = isBlankTitleError(updateBook)
+        if (blankTitle is ValidationError) return blankTitle
+
+        return ValidData
+    }
+
+    /**
+     * RDBの書籍データを更新する
+     * 本メソッドはバリデーション後に呼ばれる想定である
+     * @param data API入力データ
+     */
+    private fun updateBookToRDB(data: UpdateBookData): BookEntity? {
+        val author: AuthorEntity? = this.authorRepository.findById(data.authorId)
+                .orElse(null)
+        author ?: return null
+
+        val book = createUpdateBookEntity(data, author)
+        return this.bookRepository.update(book)
     }
 
     @Transactional
