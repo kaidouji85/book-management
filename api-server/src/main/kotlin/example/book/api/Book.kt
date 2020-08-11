@@ -12,6 +12,7 @@ const val DATE_FORMAT = "yyyy-MM-dd";
 interface BookProps {
     val title: String
     val publicationDate: LocalDate
+    val isPublished: Boolean
 }
 
 /**
@@ -19,10 +20,9 @@ interface BookProps {
  */
 data class InsertBookData(
         override val title: String,
-
         @Format(DATE_FORMAT)
         override val publicationDate: LocalDate,
-
+        override val isPublished: Boolean,
         val authorId: Long
 ): BookProps
 
@@ -32,10 +32,9 @@ data class InsertBookData(
 data class UpdateBookData(
         val id: Long,
         override val title: String,
-
         @Format(DATE_FORMAT)
         override val publicationDate: LocalDate,
-
+        override val isPublished: Boolean,
         val authorId: Long
 ): BookProps
 
@@ -44,12 +43,10 @@ data class UpdateBookData(
  */
 data class BookData(
         val id: Long,
-
         override val title: String,
-
         @Format(DATE_FORMAT)
         override val publicationDate: LocalDate,
-
+        override val isPublished: Boolean,
         val author: AuthorData
 ): BookProps
 

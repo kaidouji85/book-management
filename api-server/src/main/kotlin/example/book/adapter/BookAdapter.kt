@@ -1,4 +1,4 @@
-package example.book.convert
+package example.book.adapter
 
 import example.book.api.BookData
 import example.book.api.InsertBookData
@@ -15,6 +15,7 @@ fun toBookData(origin: BookEntity) = BookData(
         id = origin.id,
         title = origin.title,
         publicationDate = origin.publicationDate,
+        isPublished = origin.isPublished,
         author = toAuthorData(origin.author)
 )
 
@@ -28,6 +29,7 @@ fun createInsertBookEntity(origin: InsertBookData, authorEntity: AuthorEntity) =
         id=0,
         title = origin.title,
         publicationDate = origin.publicationDate,
+        isPublished = origin.isPublished,
         author = authorEntity
 )
 
@@ -41,5 +43,6 @@ fun createUpdateBookEntity(origin: UpdateBookData, authorEntity: AuthorEntity) =
         id = origin.id,
         title = origin.title,
         publicationDate = origin.publicationDate,
+        isPublished = origin.isPublished,
         author = authorEntity
 )

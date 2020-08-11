@@ -1,9 +1,9 @@
 package example.book.contorollers
 
 import example.book.api.*
-import example.book.convert.createInsertBookEntity
-import example.book.convert.createUpdateBookEntity
-import example.book.convert.toBookData
+import example.book.adapter.createInsertBookEntity
+import example.book.adapter.createUpdateBookEntity
+import example.book.adapter.toBookData
 import example.book.repository.AuthorRepository
 import example.book.repository.BookRepository
 import io.micronaut.http.HttpResponse
