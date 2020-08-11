@@ -1,6 +1,6 @@
 package example.book.validation
 
-const val PastPublicationDateError = "現在設定されている出版日よりも、過去日付には更新できません";
+const val PastPublicationDateError = "現在設定されている出版日よりも、過去の日付には変更できません";
 
 /**
  * 出版日を現在値よりも過去に変更したエラーを検知する

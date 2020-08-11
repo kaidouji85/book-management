@@ -156,6 +156,9 @@ open class BooksController {
         val publishToUnPublish = isPublishedToUnPublishedError(originBook, updateBook)
         if (publishToUnPublish is ValidationError) return publishToUnPublish
 
+        val pastPublicationDate = isPastPublicationDate(originBook, updateBook)
+        if (pastPublicationDate is ValidationError) return pastPublicationDate
+
         return ValidData
     }
 
