@@ -35,7 +35,7 @@ typealias GetAllAuthorResponse = APIResponseEnvelope<List<AuthorData>>
 /**
  * 著者情報取得 ID指定 API レスポンス
  */
-typealias GetAuthorByIdResponse = APIResponseEnvelope<Optional<AuthorData>>
+typealias GetAuthorByIdResponse = APIResponseEnvelope<AuthorData?>
 
 /**
  * 著者新規登録 API レスポンス

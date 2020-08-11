@@ -10,5 +10,5 @@ import io.micronaut.data.repository.CrudRepository
  */
 @Repository
 interface BookRepository : CrudRepository<BookEntity, Long> {
-    fun findByAuthor(author: AuthorEntity): List<BookEntity>
+    fun findByAuthorId(authorId: Long): List<BookEntity>
 }

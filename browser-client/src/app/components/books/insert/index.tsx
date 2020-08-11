@@ -20,7 +20,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
       errorMessage: null,
       title: '',
       authors: [],
-      publicationDate: '2020-08-10',
+      publicationDate: '',
       selectedAuthorId: null,
     };
   }

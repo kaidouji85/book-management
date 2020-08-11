@@ -25,11 +25,15 @@ open class BooksController {
 
     @Transactional
     @Get("/")
-    open fun getAll(): HttpResponse<GetAllBooksAPIResponse> {
-        val books = bookRepository.findAll()
-                .toList()
+    open fun get(@QueryValue authorId: Long? ): HttpResponse<GetAllBooksAPIResponse> {
+        println(authorId)
+        val books = when {
+            authorId != null -> bookRepository.findByAuthorId(authorId)
+            else -> bookRepository.findAll()
+        }
+        val respBooks = books.toList()
                 .map { toBookData(it) }
-        val response = APIResponseEnvelope(true, "get all books success", books)
+        val response = APIResponseEnvelope(true, "get all books success", respBooks)
         return HttpResponse.ok(response)
     }
 

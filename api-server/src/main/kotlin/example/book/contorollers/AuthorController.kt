@@ -35,11 +35,10 @@ open class AuthorController {
     @Transactional
     @Get("/{id}")
     open fun getById(@PathVariable id: Long): HttpResponse<GetAuthorByIdResponse> {
-        val result = this.authorRepository.findById(id)
-        val response = result.map {
-            val author = toAuthorData(it)
-            return@map GetAuthorByIdResponse(true, "get author by id success", Optional.of(author))
-        }.orElse(GetAuthorByIdResponse(false, "no exist id", Optional.empty()))
+        val author = this.authorRepository.findById(id)
+        val response = author.map {toAuthorData(it)}
+                .map { GetAuthorByIdResponse(true, "get author by id success", it) }
+                .orElse(GetAuthorByIdResponse(false, "no exist id", null))
         return HttpResponse.ok(response)
     }
 
@@ -66,15 +65,10 @@ open class AuthorController {
     @Transactional
     @Delete("/{id}")
     open fun delete(@PathVariable id: Long): HttpResponse<DeleteAuthorResponse> {
-        val deleteAuthor = this.authorRepository.findById(id)
-        val response = deleteAuthor.map {author ->
-            val authorsBooks = this.bookRepository.findByAuthor(author)
-            authorsBooks.forEach { book ->
-                this.bookRepository.deleteById(book.id)
-            }
-            this.authorRepository.deleteById(author.id)
-            return@map DeleteAuthorResponse(true, "delete author success", author.id)
-        }.orElse(DeleteAuthorResponse(false, "author no exist", id))
-        return HttpResponse.ok(response);
+        val authorsBooks = this.bookRepository.findByAuthorId(id)
+        authorsBooks.forEach { this.bookRepository.deleteById(it.id) }
+        this.authorRepository.deleteById(id)
+        val response = DeleteAuthorResponse(true, "delete author success", id)
+        return HttpResponse.ok(response)
     }
 }
