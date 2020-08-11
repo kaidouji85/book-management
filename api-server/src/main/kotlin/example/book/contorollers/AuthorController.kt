@@ -66,15 +66,10 @@ open class AuthorController {
     @Transactional
     @Delete("/{id}")
     open fun delete(@PathVariable id: Long): HttpResponse<DeleteAuthorResponse> {
-        val deleteAuthor = this.authorRepository.findById(id)
-        val response = deleteAuthor.map {author ->
-            val authorsBooks = this.bookRepository.findByAuthor(author)
-            authorsBooks.forEach { book ->
-                this.bookRepository.deleteById(book.id)
-            }
-            this.authorRepository.deleteById(author.id)
-            return@map DeleteAuthorResponse(true, "delete author success", author.id)
-        }.orElse(DeleteAuthorResponse(false, "author no exist", id))
-        return HttpResponse.ok(response);
+        val authorsBooks = this.bookRepository.findByAuthorId(id)
+        authorsBooks.forEach { this.bookRepository.deleteById(it.id) }
+        this.authorRepository.deleteById(id)
+        val response = DeleteAuthorResponse(true, "delete author success", id)
+        return HttpResponse.ok(response)
     }
 }

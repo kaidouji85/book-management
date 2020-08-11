@@ -10,7 +10,5 @@ import io.micronaut.data.repository.CrudRepository
  */
 @Repository
 interface BookRepository : CrudRepository<BookEntity, Long> {
-    // TODO 削除する、代わりにfindByAuthorIdを利用する
-    fun findByAuthor(author: AuthorEntity): List<BookEntity>
     fun findByAuthorId(authorId: Long): List<BookEntity>
 }
