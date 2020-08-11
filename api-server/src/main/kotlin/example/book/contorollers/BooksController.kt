@@ -3,9 +3,13 @@ package example.book.contorollers
 import example.book.api.*
 import example.book.adapter.createInsertBookEntity
 import example.book.adapter.createUpdateBookEntity
+import example.book.adapter.toBook
 import example.book.adapter.toBookData
+import example.book.entity.AuthorEntity
+import example.book.entity.BookEntity
 import example.book.repository.AuthorRepository
 import example.book.repository.BookRepository
+import example.book.validation.*
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
 import java.util.*
@@ -51,14 +55,45 @@ open class BooksController {
     @Transactional
     @Post("/")
     open fun insert(@Body data: InsertBookData): HttpResponse<InsertBookAPIResponse> {
-        val author = this.authorRepository.findById(data.authorId)
-        val resp = author.map {
-            val book = createInsertBookEntity(data, it)
-            val savedBook = this.bookRepository.save(book)
-            val respBook = toBookData(savedBook)
-            return@map APIResponseEnvelope(true, "book insert success", Optional.of(respBook))
-        }.orElse(APIResponseEnvelope(false, "author not exist", Optional.empty()))
-        return HttpResponse.ok(resp)
+        val validationResult = this.insertBookValidation(data)
+        if (validationResult is ValidationError) {
+            return HttpResponse.ok(APIResponseEnvelope(false, validationResult.messages, Optional.empty()))
+        }
+
+        val savedBook = this.insertBookToRDB(data)
+        savedBook ?: return HttpResponse.ok(APIResponseEnvelope(false, "author not exist", Optional.empty()))
+
+        val respBook = toBookData(savedBook)
+        return  HttpResponse.ok(APIResponseEnvelope(true, "book insert success", Optional.of(respBook)))
+    }
+
+    /**
+     * 書籍 新規作成 のバリデーションを行う
+     * @param data API入力データ
+     * @return バリデーション結果
+     */
+    private fun insertBookValidation(data: InsertBookData): ValidationResult {
+        val target = toBook(data)
+
+        val blankTitleError = isBlankTitleError(target)
+        if (blankTitleError is ValidationError) return blankTitleError
+
+        return ValidData
+    }
+
+    /**
+     * 書籍 新規作成データをRDBにインサートする
+     * 本メソッドはバリデーション後に呼ばれる想定である
+     *
+     * @param data API入力データ
+     * @return 登録した書籍エンティティを返す、登録失敗した場合はnullを返す
+     */
+    private fun insertBookToRDB(data: InsertBookData): BookEntity? {
+        val authorEntity: AuthorEntity? = this.authorRepository.findById(data.authorId)
+                .orElse(null)
+        authorEntity ?: return null
+        val bookEntity = createInsertBookEntity(data, authorEntity)
+        return this.bookRepository.save(bookEntity)
     }
 
     @Transactional
