@@ -23,34 +23,40 @@ class BlankTitleErrorTest {
     fun testPublishedBookNoBlankTitle() {
         val data = Book(title = BLANK_TITLE, isPublished = true)
         val actual = isBlankTitleError(data)
-        val expected = ValidationError(true, BlankTitleErrorMessage)
-        Assertions.assertEquals(expected, actual)
-    }
-
-    @Test
-    fun testPublishedBookNoBlankTitleOk() {
-        val data = Book(title = NOT_BLANK_TITLE, isPublished = true)
-        val actual = isBlankTitleError(data)
-        val expected = ValidationError(false, "")
+        val expected = ValidationError(BlankTitleErrorMessage)
         Assertions.assertEquals(expected, actual)
     }
 
     /**
-     * 未出版の書籍ならタイトルが空欄でも問題ない
+     * 出版済み書籍でタイトルが空欄でないなら正常
+     */
+    @Test
+    fun testPublishedBookNoBlankTitleOk() {
+        val data = Book(title = NOT_BLANK_TITLE, isPublished = true)
+        val actual = isBlankTitleError(data)
+        val expected = ValidData
+        Assertions.assertEquals(expected, actual)
+    }
+
+    /**
+     * 未出版の書籍ならタイトルが空欄でも正常
      */
     @Test
     fun testNoPublishedBookBlankTitleOk() {
         val data = Book(title = BLANK_TITLE, isPublished = false)
         val actual = isBlankTitleError(data)
-        val expected = ValidationError(false, "")
+        val expected = ValidData
         Assertions.assertEquals(expected, actual)
     }
 
+    /**
+     * 未出版の書籍でタイトルが空欄でないのであれば成功
+     */
     @Test
     fun testNoPublishedBookNotBlankTitleOk () {
         val data = Book(title = NOT_BLANK_TITLE, isPublished = false)
         val actual = isBlankTitleError(data)
-        val expected = ValidationError(false, "")
+        val expected = ValidData
         Assertions.assertEquals(expected, actual)
     }
 }

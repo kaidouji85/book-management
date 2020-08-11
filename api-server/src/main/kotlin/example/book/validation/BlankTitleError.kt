@@ -1,5 +1,8 @@
 package example.book.validation
 
+/**
+ * エラーメッセージ
+ */
 const val BlankTitleErrorMessage = "書籍が空欄だと出版できません";
 
 /**
@@ -7,11 +10,10 @@ const val BlankTitleErrorMessage = "書籍が空欄だと出版できません";
  * @param book チェック対象
  * @return チェック結果
  */
-fun isBlankTitleError(book: Book): ValidationError {
+fun isBlankTitleError(book: Book): ValidationResult {
     val isError = book.isPublished && book.title.isEmpty()
-    val message = when {
-        isError -> BlankTitleErrorMessage
-        else -> ""
+    return when {
+        isError -> ValidationError(BlankTitleErrorMessage)
+        else -> ValidData
     }
-    return ValidationError(isError, message)
 }
