@@ -30,15 +30,16 @@ open class BooksController {
     @Transactional
     @Get("/")
     open fun get(@QueryValue authorId: Long? ): HttpResponse<GetAllBooksAPIResponse> {
-        println(authorId)
         val books = when {
             authorId != null -> bookRepository.findByAuthorId(authorId)
             else -> bookRepository.findAll()
         }
         val respBooks = books.toList()
                 .map { toBookData(it) }
-        val response = APIResponseEnvelope(true, "get all books success", respBooks)
-        return HttpResponse.ok(response)
+        return HttpResponse.ok(APIResponseEnvelope(
+                isSuccess = true,
+                message = "get all books success", payload = respBooks
+        ))
     }
 
     @Transactional
@@ -56,15 +57,25 @@ open class BooksController {
     @Post("/")
     open fun insert(@Body data: InsertBookData): HttpResponse<InsertBookAPIResponse> {
         val validationResult = this.insertBookValidation(data)
-        if (validationResult is ValidationError) {
-            return HttpResponse.ok(APIResponseEnvelope(false, validationResult.messages, Optional.empty()))
-        }
+        if (validationResult is ValidationError) return HttpResponse.ok(APIResponseEnvelope(
+                isSuccess = false,
+                message = validationResult.messages,
+                payload = Optional.empty()
+        ))
 
         val savedBook = this.insertBookToRDB(data)
-        savedBook ?: return HttpResponse.ok(APIResponseEnvelope(false, "author not exist", Optional.empty()))
+        savedBook ?: return HttpResponse.ok(APIResponseEnvelope(
+                isSuccess = false,
+                message = "author not exist",
+                payload = Optional.empty()
+        ))
 
         val respBook = toBookData(savedBook)
-        return  HttpResponse.ok(APIResponseEnvelope(true, "book insert success", Optional.of(respBook)))
+        return  HttpResponse.ok(APIResponseEnvelope(
+                isSuccess = true,
+                message = "book insert success",
+                payload = Optional.of(respBook)
+        ))
     }
 
     /**
@@ -101,16 +112,32 @@ open class BooksController {
     open fun update(@Body data: UpdateBookData): HttpResponse<UpdateBookAPIResponse> {
         val book: BookEntity?=  this.bookRepository.findById(data.id)
                 .orElse(null)
-        book ?: return HttpResponse.ok(APIResponseEnvelope(false, "no exist book", Optional.empty()))
+        book ?: return HttpResponse.ok(APIResponseEnvelope(
+                isSuccess = false,
+                message = "no exist book",
+                payload = Optional.empty()
+        ))
 
         val validationResult = this.updateBookValidation(book, data)
-        if (validationResult is ValidationError) return HttpResponse.ok(APIResponseEnvelope(false, validationResult.messages, Optional.empty()))
+        if (validationResult is ValidationError) return HttpResponse.ok(APIResponseEnvelope(
+                isSuccess = false,
+                message = validationResult.messages,
+                payload = Optional.empty()
+        ))
 
         val updatedBook = this.updateBookToRDB(data)
-        updatedBook ?: return HttpResponse.ok(APIResponseEnvelope(false, "update book failed", Optional.empty()))
+        updatedBook ?: return HttpResponse.ok(APIResponseEnvelope(
+                isSuccess = false,
+                message = "update book failed",
+                payload = Optional.empty()
+        ))
 
         val respBook = toBookData(updatedBook)
-        return HttpResponse.ok(APIResponseEnvelope(true, "update book failed", Optional.of(respBook)))
+        return HttpResponse.ok(APIResponseEnvelope(
+                isSuccess = true,
+                message = "update book failed",
+                payload = Optional.of(respBook)
+        ))
     }
 
     /**
