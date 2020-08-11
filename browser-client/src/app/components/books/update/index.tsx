@@ -39,17 +39,30 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
       title: '',
       authors: [],
       publicationDate: '',
+      isPublished: false,
       selectedAuthorId: null,
     };
   }
 
   async componentDidMount(): Promise<void> {
     try {
-      const bookResp = await getBookById(this.props.id);
-      const authorsResp = await getAllAuthors();
-      if (!bookResp.isSuccess || !authorsResp.isSuccess) {
-        // TODO エラーメッセージを画面に表示する
-        return;
+      const [bookResp, authorsResp] = await Promise.all([
+        getBookById(this.props.id),
+        getAllAuthors()
+      ]);
+
+      if (!bookResp.isSuccess) {
+        this.setState({
+          errorMessage: bookResp.message,
+          isLoading: false,
+        });
+      }
+
+      if (!authorsResp.isSuccess) {
+        this.setState({
+          errorMessage: authorsResp.message,
+          isLoading: false,
+        });
       }
 
       this.setState({
@@ -57,6 +70,7 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
         title: bookResp.payload.title,
         selectedAuthorId: bookResp.payload.author.id,
         publicationDate: toInputDate(bookResp.payload.publicationDate) ?? '',
+        isPublished: bookResp.payload.isPublished,
         authors: authorsResp.payload,
       })
     } catch (e) {
@@ -70,6 +84,7 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
       onTitleChange={this.onTitleChange.bind(this)}
       onAuthorChange={this.onAuthorChange.bind(this)}
       onPublicationDateChange={this.onPublicationDateChange.bind(this)}
+      onIsPublishedChange={this.onIsPublishedChange.bind(this)}
       onSavePush={this.onSavePush.bind(this)}
     />);
   }
@@ -104,6 +119,17 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
   private onPublicationDateChange(date: string) {
     this.setState({
       publicationDate: date
+    })
+  }
+
+  /**
+   * 出版フラグが変更された時の処理
+   * @param isPublished 変更内容
+   * @private
+   */
+  private onIsPublishedChange(isPublished: boolean): void {
+    this.setState({
+      isPublished: isPublished
     })
   }
 
@@ -158,7 +184,7 @@ class BookUpdateContainer extends React.Component<ContainerProps, BookUpdateStat
       title: this.state.title,
       authorId: this.state.selectedAuthorId,
       publicationDate: publicationDate,
-      isPublished: false, // TODO 画面から入力値を取得する
+      isPublished: this.state.isPublished,
     };
   }
 

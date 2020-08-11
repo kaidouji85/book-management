@@ -90,6 +90,11 @@ export class BookInsert extends React.Component<any, BookInsertState> {
     });
   }
 
+  /**
+   * 出版フラグが変更された時の処理
+   * @param isPublished 変更内容
+   * @private
+   */
   private onIsPublishedChange(isPublished: boolean): void {
     this.setState({
       isPublished: isPublished
@@ -147,7 +152,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
       title: this.state.title,
       authorId: this.state.selectedAuthorId,
       publicationDate: publicationDate,
-      isPublished: false, // TODO 画面から入力値を取得する
+      isPublished: this.state.isPublished,
     };
   }
 

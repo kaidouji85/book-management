@@ -14,6 +14,7 @@ type Props = {
   onTitleChange: (title: string) => void,
   onAuthorChange: (authorId: number) => void,
   onPublicationDateChange: (data: string) => void,
+  onIsPublishedChange: (isPublished: boolean) => void,
   onSavePush: () => Promise<string | null>,
 };
 
@@ -44,14 +45,11 @@ export function BookUpdatePresentation(props: Props) {
         selectedAuthorId={props.state.selectedAuthorId}
         publicationDate={props.state.publicationDate}
         authors={props.state.authors}
-        isPublished={false /* TODO 親から渡す  */}
+        isPublished={props.state.isPublished}
         onTitleChange={props.onTitleChange}
         onAuthorChange={props.onAuthorChange}
         onPublicationDateChange={props.onPublicationDateChange}
-        onIsPublishedChange={ () => {
-          // TODO 親から渡す
-          // NOP
-        }}
+        onIsPublishedChange={props.onIsPublishedChange}
       />
       <button onClick={onSavePush} onTouchStart={onSavePush} >書籍を更新する</button>
       <BooksLink label="書籍一覧に戻る"/>
