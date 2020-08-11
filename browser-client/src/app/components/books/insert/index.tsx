@@ -53,6 +53,7 @@ export class BookInsert extends React.Component<any, BookInsertState> {
       onTitleChange={this.onTitleChange.bind(this)}
       onSavePush={this.onSavePush.bind(this)}
       onPublicationDateChange={this.onPublicationDateChange.bind(this)}
+      onIsPublishedChange={this.onIsPublishedChange.bind(this)}
     />);
   }
 
@@ -86,6 +87,12 @@ export class BookInsert extends React.Component<any, BookInsertState> {
   private onPublicationDateChange(date: string): void {
     this.setState({
       publicationDate: date
+    });
+  }
+
+  private onIsPublishedChange(isPublished: boolean): void {
+    this.setState({
+      isPublished: isPublished
     });
   }
 
