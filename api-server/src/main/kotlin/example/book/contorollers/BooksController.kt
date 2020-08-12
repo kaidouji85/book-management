@@ -205,7 +205,7 @@ open class BooksController {
      * RDBの書籍を更新する
      * 本メソッドはバリデーション後に呼ばれる想定である
      * @param data API入力データ
-     * @return APIのレスポンス
+     * @return RDBに更新したデータ、失敗した場合はnullを返す
      */
     private fun updateBookToRDB(data: UpdateBookData): BookEntity? {
         val author: AuthorEntity? = this.authorRepository.findById(data.authorId)
@@ -216,6 +216,11 @@ open class BooksController {
         return this.bookRepository.update(book)
     }
 
+    /**
+     * 書籍削除API
+     * @param id 削除する書籍ID
+     * @return APIのレスポンス
+     */
     @Transactional
     @Delete("/{id}")
     open fun delete(@PathVariable id: Long): DeleteBookAPIResponse {

@@ -3,7 +3,7 @@ package example.book.validation
 import java.time.LocalDate
 
 /**
- * バリデーション用の書籍データ
+ * 書籍(バリデーション用)
  * API、RDBでデータを統一する目的で利用する
  */
 data class Book (

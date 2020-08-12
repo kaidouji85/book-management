@@ -7,7 +7,7 @@ import javax.persistence.Id
 import javax.persistence.ManyToOne
 
 /**
- * 書籍
+ * 書籍エンティティ
  */
 @Entity
 data class BookEntity(

@@ -3,50 +3,79 @@ package example.book.api
 import io.micronaut.core.convert.format.Format
 import java.time.LocalDate
 
-const val DATE_FORMAT = "yyyy-MM-dd";
-
 /**
- * 書籍 ユニークID以外の固有プロパティ
+ * 書籍ユニークID以外の固有プロパティ
  */
 interface BookProps {
+    /**
+     * タイトル
+     */
     val title: String
+
+    /**
+     * 出版日
+     */
     val publicationDate: LocalDate
+
+    /**
+     * 出版フラグ、trueで出版されたとみなす
+     */
     val isPublished: Boolean
 }
 
 /**
- * 書籍 新規登録 API 入力
+ * 書籍新規登録API入力
  */
 data class InsertBookData(
+        /**
+         * 著者ID
+         */
+        val authorId: Long,
+
         override val title: String,
         @Format(DATE_FORMAT)
         override val publicationDate: LocalDate,
-        override val isPublished: Boolean,
-        val authorId: Long
+        override val isPublished: Boolean
 ): BookProps
 
 /**
- * 書籍 更新 API 入力
+ * 書籍更新API入力
  */
 data class UpdateBookData(
+        /**
+         * 書籍ID
+         */
         val id: Long,
+
+        /**
+         * 著者ID
+         */
+        val authorId: Long,
+
         override val title: String,
         @Format(DATE_FORMAT)
         override val publicationDate: LocalDate,
-        override val isPublished: Boolean,
-        val authorId: Long
+        override val isPublished: Boolean
 ): BookProps
 
 /**
  * 書籍APIレスポンス
  */
 data class BookData(
+        /**
+         * 書籍ID
+         */
         val id: Long,
+
+        /**
+         * 著者ID
+         */
+        val author: AuthorData,
+
         override val title: String,
         @Format(DATE_FORMAT)
         override val publicationDate: LocalDate,
-        override val isPublished: Boolean,
-        val author: AuthorData
+        override val isPublished: Boolean
 ): BookProps
 
 /**
