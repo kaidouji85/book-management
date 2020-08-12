@@ -5,7 +5,7 @@ import io.micronaut.data.annotation.Repository
 import io.micronaut.data.repository.CrudRepository
 
 /**
- * 書籍 リポジトリ
+ * 書籍リポジトリ
  */
 @Repository
 interface BookRepository : CrudRepository<BookEntity, Long> {
