@@ -1,9 +1,7 @@
 package example.book.api
 
-import java.util.*
-
 /**
- * 著者 ユニークID以外の属性
+ * 著者が持つユニークID以外の属性
  */
 interface AuthorProps {
     /**
@@ -13,42 +11,45 @@ interface AuthorProps {
 }
 
 /**
- * 著者 新規登録 API 入力
+ * 著者新規登録API入力データ
  */
 data class InsertAuthorData (
         override val name: String
 ): AuthorProps
 
 /**
- * 著者 API レスポンス
+ * 著者APIレスポンス
  */
 data class AuthorData(
+        /**
+         * 著者ID
+         */
         val id: Long,
+
         override val name: String
 ): AuthorProps
 
 /**
- * 著者情報取得 API レスポンス
+ * 全著者情報取得API レスポンス
  */
 typealias GetAllAuthorResponse = APIResponseEnvelope<List<AuthorData>>
 
 /**
- * 著者情報取得 ID指定 API レスポンス
+ * 著者情報取得(ID指定)API レスポンス
  */
 typealias GetAuthorByIdResponse = APIResponseEnvelope<AuthorData?>
 
 /**
- * 著者新規登録 API レスポンス
+ * 著者新規登録API レスポンス
  */
 typealias InsertAuthorResponse = APIResponseEnvelope<AuthorData>
 
 /**
- * 著者変種 API レスポンス
+ * 著者更新API レスポンス
  */
 typealias UpdateAuthorResponse = APIResponseEnvelope<AuthorData>
 
 /**
- * 著者削除 API レスポンス
+ * 著者削除API レスポンス
  */
 typealias  DeleteAuthorResponse = APIResponseEnvelope<Long>
-

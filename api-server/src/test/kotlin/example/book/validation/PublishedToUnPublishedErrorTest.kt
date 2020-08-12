@@ -11,8 +11,8 @@ class PublishedToUnPublishedErrorTest {
     fun publishedToUnPublishedError() {
         val origin = Book(isPublished = true)
         val update = Book(isPublished = false)
-        val actual = isPublishedToUnPublishedError(origin, update)
-        val expected = ValidationError(PublishedToUnPublishError)
+        val actual = isPublishedToUnPublishError(origin, update)
+        val expected = ValidationError(PUBLISHED_TO_UN_PUBLISH_ERROR)
         Assertions.assertEquals(expected, actual)
     }
 
@@ -23,7 +23,7 @@ class PublishedToUnPublishedErrorTest {
     fun unPublishedToPublishedOK() {
         val origin = Book(isPublished = false)
         val update = Book(isPublished = true)
-        val actual = isPublishedToUnPublishedError(origin, update)
+        val actual = isPublishedToUnPublishError(origin, update)
         val expected = ValidData
         Assertions.assertEquals(expected, actual)
     }
@@ -35,7 +35,7 @@ class PublishedToUnPublishedErrorTest {
     fun publishedToPublishedOk() {
         val origin = Book(isPublished = true)
         val update = Book(isPublished = true)
-        val actual = isPublishedToUnPublishedError(origin, update)
+        val actual = isPublishedToUnPublishError(origin, update)
         val expected = ValidData
         Assertions.assertEquals(expected, actual)
     }
@@ -47,7 +47,7 @@ class PublishedToUnPublishedErrorTest {
     fun unPublishedToUnPublishedOK() {
         val origin = Book(isPublished = false)
         val update = Book(isPublished = false)
-        val actual = isPublishedToUnPublishedError(origin, update)
+        val actual = isPublishedToUnPublishError(origin, update)
         val expected = ValidData
         Assertions.assertEquals(expected, actual)
     }

@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 /**
- * 著者 エンティティ
+ * 著者エンティティ
  */
 @Entity
 data class AuthorEntity(

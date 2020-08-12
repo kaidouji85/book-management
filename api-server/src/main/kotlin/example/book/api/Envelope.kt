@@ -1,7 +1,7 @@
 package example.book.api
 
 /**
- * API レスポンス エンベロープ
+ * APIレスポンス エンベロープ
  */
 data class APIResponseEnvelope<P>(
         val isSuccess: Boolean,

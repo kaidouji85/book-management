@@ -1,17 +1,17 @@
 package example.book.validation
 
 /**
- * バリデーション結果をまとめるインタフェース
+ * バリデーション結果
  */
 interface ValidationResult
 
 /**
- * バリデーションエラーなし
+ * 正常データ
  */
 object ValidData: ValidationResult
 
 /**
- * バリデーションエラー判定結果
+ * バリデーションエラー
  */
 data class ValidationError(
         /**

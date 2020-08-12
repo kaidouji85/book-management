@@ -9,7 +9,7 @@ import example.book.entity.BookEntity
 import example.book.validation.Book
 
 /**
- * 書籍エンティティをBookDataに変換する
+ * 書籍エンティティを書籍APIレスポンスに変換する
  * @param origin 変換元
  * @return 変換結果
  */
@@ -22,8 +22,8 @@ fun toBookData(origin: BookEntity) = BookData(
 )
 
 /**
- * API入力データから新規登録用の書籍エンティティを生成する
- * @param origin API入力データ
+ * 書籍新規登録API入力から新規登録用の書籍エンティティを生成する
+ * @param origin 書籍新規登録API入力
  * @param authorEntity 著者エンティティ
  * @return 生成結果
  */
@@ -36,8 +36,8 @@ fun createInsertBookEntity(origin: InsertBookData, authorEntity: AuthorEntity) =
 )
 
 /**
- * API入力データから更新用の書籍エンティティを生成する
- * @param origin API入力データ
+ * 書籍更新API入力から更新用の書籍エンティティを生成する
+ * @param origin 書籍更新API入力
  * @param authorEntity 著者エンティティ
  * @return 生成結果
  */
@@ -50,8 +50,7 @@ fun createUpdateBookEntity(origin: UpdateBookData, authorEntity: AuthorEntity) =
 )
 
 /**
- * API入力データをバリデーション様データに変換する
- *
+ * API入力データを書籍(バリデーション用)に変換する
  * @param origin 変換元
  * @return 変換結果
  */
@@ -61,6 +60,11 @@ fun toBook(origin: BookProps) = Book(
         publicationDate = origin.publicationDate
 )
 
+/**
+ * 書籍エンティティを書籍(バリデーション用)に変換する
+ * @param origin 変換元
+ * @return 変換結果
+ */
 fun toBook(origin: BookEntity) = Book(
         title = origin.title,
         isPublished = origin.isPublished,
