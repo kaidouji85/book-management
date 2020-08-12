@@ -21,7 +21,7 @@ class BlankTitleErrorTest {
     fun testPublishedBookNoBlankTitle() {
         val data = Book(title = BLANK_TITLE, isPublished = true)
         val actual = isBlankTitleError(data)
-        val expected = ValidationError(BlankTitleErrorMessage)
+        val expected = ValidationError(BLANK_TITLE_ERROR)
         Assertions.assertEquals(expected, actual)
     }
 

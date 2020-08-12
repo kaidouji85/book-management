@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
 class PastPublicationDateErrorTest {
-
     /**
      * 過去の出版日に更新するとエラーになる
      */
@@ -14,7 +13,7 @@ class PastPublicationDateErrorTest {
         val origin = Book(publicationDate = LocalDate.of(2020, 10, 11))
         val update = Book(publicationDate = LocalDate.of(2020, 10, 9))
         val actual = isPastPublicationDate(origin, update)
-        val expected = ValidationError(PastPublicationDateError)
+        val expected = ValidationError(PAST_PUBLICATION_DATE_ERROR)
         Assertions.assertEquals(expected, actual)
     }
 

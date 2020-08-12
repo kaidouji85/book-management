@@ -3,7 +3,7 @@ package example.book.validation
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class ChangeTitleAfterPublishedTest {
+class TitleChangeErrorTest {
     /**
      * 出版後 タイトル変更をするとエラー
      */
@@ -11,8 +11,8 @@ class ChangeTitleAfterPublishedTest {
     fun changeTitleAfterPublishedError() {
         val origin = Book(isPublished = true, title="吾輩は猫である")
         val update = Book(title="こころ")
-        val actual = isChangeTitleAfterPublishedError(origin, update)
-        val expected = ValidationError(ChangeTitleAfterPublishedError)
+        val actual = isTitleChangeError(origin, update)
+        val expected = ValidationError(TITLE_CHANGE_ERROR)
         Assertions.assertEquals(expected, actual)
     }
 
@@ -23,7 +23,7 @@ class ChangeTitleAfterPublishedTest {
     fun changeTitlePrePublishOk() {
         val origin = Book(isPublished = false, title="吾輩は猫である")
         val update = Book(title="こころ")
-        val actual = isChangeTitleAfterPublishedError(origin, update)
+        val actual = isTitleChangeError(origin, update)
         val expected = ValidData
         Assertions.assertEquals(expected, actual)
     }
@@ -35,7 +35,7 @@ class ChangeTitleAfterPublishedTest {
     fun noChangeTitleAfterPublishedError() {
         val origin = Book(isPublished = true, title="吾輩は猫である")
         val update = Book(title="吾輩は猫である")
-        val actual = isChangeTitleAfterPublishedError(origin, update)
+        val actual = isTitleChangeError(origin, update)
         val expected = ValidData
         Assertions.assertEquals(expected, actual)
     }
@@ -47,7 +47,7 @@ class ChangeTitleAfterPublishedTest {
     fun noChangeTitlePrePublishedError() {
         val origin = Book(isPublished = false, title="吾輩は猫である")
         val update = Book(title="吾輩は猫である")
-        val actual = isChangeTitleAfterPublishedError(origin, update)
+        val actual = isTitleChangeError(origin, update)
         val expected = ValidData
         Assertions.assertEquals(expected, actual)
     }

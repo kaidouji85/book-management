@@ -150,10 +150,10 @@ open class BooksController {
         val originBook = toBook(origin)
         val updateBook = toBook(update)
 
-        val publishToUnPublish = isPublishedToUnPublishedError(originBook, updateBook)
+        val publishToUnPublish = isPublishedToUnPublishError(originBook, updateBook)
         if (publishToUnPublish is ValidationError) return publishToUnPublish
 
-        val changeTitleAfterPublished = isChangeTitleAfterPublishedError(originBook, updateBook)
+        val changeTitleAfterPublished = isTitleChangeError(originBook, updateBook)
         if (changeTitleAfterPublished is ValidationError) return changeTitleAfterPublished
 
         val  publicationDateChange = isPublicationDateChangeError(originBook, updateBook)

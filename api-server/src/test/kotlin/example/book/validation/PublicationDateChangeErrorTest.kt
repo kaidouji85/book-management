@@ -13,7 +13,7 @@ class PublicationDateChangeErrorTest {
         val origin = Book(isPublished = true, publicationDate = LocalDate.of(2020, 8, 10))
         val update = Book(publicationDate = LocalDate.of(2020, 8, 30))
         val actual = isPublicationDateChangeError(origin, update)
-        val expected = ValidationError(PublicationDateChangeError)
+        val expected = ValidationError(PUBLICATION_DATE_CHANGE_ERROR)
         Assertions.assertEquals(expected, actual)
     }
 

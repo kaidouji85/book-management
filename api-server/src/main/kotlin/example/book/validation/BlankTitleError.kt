@@ -3,7 +3,7 @@ package example.book.validation
 /**
  * エラーメッセージ
  */
-const val BlankTitleErrorMessage = "書籍が空欄だと出版できません";
+const val BLANK_TITLE_ERROR = "書籍が空欄だと出版できません";
 
 /**
  * 書籍タイトル空欄エラーチェックを行う
@@ -13,7 +13,7 @@ const val BlankTitleErrorMessage = "書籍が空欄だと出版できません";
 fun isBlankTitleError(book: Book): ValidationResult {
     val isError = book.isPublished && book.title.isEmpty()
     return when {
-        isError -> ValidationError(BlankTitleErrorMessage)
+        isError -> ValidationError(BLANK_TITLE_ERROR)
         else -> ValidData
     }
 }
