@@ -2,7 +2,6 @@ package example.book.api
 
 import io.micronaut.core.convert.format.Format
 import java.time.LocalDate
-import java.util.*
 
 const val DATE_FORMAT = "yyyy-MM-dd";
 
@@ -58,17 +57,17 @@ typealias GetAllBooksAPIResponse = APIResponseEnvelope<List<BookData>>
 /**
  * 書籍 ID指定取得 API レスポンス
  */
-typealias GetBookByIdAPIResponse = APIResponseEnvelope<Optional<BookData>>
+typealias GetBookByIdAPIResponse = APIResponseEnvelope<BookData?>
 
 /**
  * 書籍 新規登録 API レスポンス
  */
-typealias InsertBookAPIResponse = APIResponseEnvelope<Optional<BookData>>
+typealias InsertBookAPIResponse = APIResponseEnvelope<BookData?>
 
 /**
  * 書籍 更新 API レスポンス
  */
-typealias UpdateBookAPIResponse = APIResponseEnvelope<Optional<BookData>>
+typealias UpdateBookAPIResponse = APIResponseEnvelope<BookData?>
 
 /**
  * 書籍 削除 API レスポンス
