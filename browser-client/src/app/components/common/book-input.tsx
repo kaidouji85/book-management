@@ -58,15 +58,15 @@ export function BookInput(props: Props) {
           <tr>
             <td>出版日</td>
             <td>
-              <input type="date" value={props.publicationDate} onChange={onPublicationDateChange} />
-              <span>入力必須、yyyy-mm-dd形式で入力してください</span>
+              <input type="date" pattern="\d{4}-\d{2}-\d{2}" value={props.publicationDate} onChange={onPublicationDateChange} />
+              <span>入力必須、カレンダーが表示されない場合はyyyy-mm-dd形式で入力すること</span>
             </td>
           </tr>
           <tr>
             <td>出版フラグ</td>
             <td>
               <input type="checkbox" defaultChecked={props.isPublished} onChange={onIsPublishedChange}/>
-              <label >チェックを入れたら出版したとみなす</label>
+              <label >チェックを入れたら出版済</label>
             </td>
           </tr>
         </tbody>
