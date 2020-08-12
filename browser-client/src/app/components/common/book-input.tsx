@@ -44,7 +44,7 @@ export function BookInput(props: Props) {
       <table>
         <tbody>
           <tr>
-            <td>書籍名</td>
+            <td>タイトル</td>
             <td><input value={props.title} onChange={onTitleChange} /></td>
           </tr>
           <tr>
