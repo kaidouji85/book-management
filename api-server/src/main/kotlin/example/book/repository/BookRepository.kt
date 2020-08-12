@@ -9,5 +9,10 @@ import io.micronaut.data.repository.CrudRepository
  */
 @Repository
 interface BookRepository : CrudRepository<BookEntity, Long> {
+    /**
+     * 著者ID指定で書籍を検索する
+     * @param authorId 著者ID
+     * @return 検索結果
+     */
     fun findByAuthorId(authorId: Long): List<BookEntity>
 }

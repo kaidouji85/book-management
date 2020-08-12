@@ -8,5 +8,4 @@ import io.micronaut.data.repository.CrudRepository
  * 著者 リポジトリ
  */
 @Repository
-interface AuthorRepository : CrudRepository<AuthorEntity, Long> {
-}
+interface AuthorRepository : CrudRepository<AuthorEntity, Long>
