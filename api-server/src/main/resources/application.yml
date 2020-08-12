@@ -1,0 +1,28 @@
+micronaut:
+  application:
+    name: management
+  server:
+    cors:
+      # TODO フロントエンドサイトからのみアクセスできるようにCORSを設定する
+      enabled: true
+
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/predator?ssl=false
+    driverClassName: org.postgresql.Driver
+    username: predator
+    password: predator123
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
+
+jackson:
+  # 要素数0のリストでも返すように以下を設定
+  # 参考文献
+  # https://chrisparton.net/rescuing-empty-json-arrays-in-micronaut/
+  serializationInclusion: ALWAYS
