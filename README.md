@@ -84,5 +84,8 @@ cd <本リポジトリをcloneした場所>/api-server
 
 | パス             | 概要                                       |
 |-----------------|--------------------------------------------|
-| api-server      | APIサーバ(Kotlin)                           |
-| browser-client  | ブラウザクライアント(TypeScript + React.js)    |
+| api-server          | APIサーバ プロジェクト                     |
+| api-server/src/main | APIサーバ ソースコード                     |
+| api-server/src/test | APIサーバ ユニットテスト                   |
+| browser-client  | ブラウザクライアント プロジェクト                 |
+| browser-client/src/  | ブラウザクライアント ソースコード            |
