@@ -71,3 +71,18 @@ docker stop postgres
 ```
 
 ```./gradlew clean run```、```npm start```を実行したターミナルで```Control + C```を入力してプログラムを終了させる
+
+## ユニットテスト実行方法
+### APIサーバ
+
+```shell script
+cd <本リポジトリをcloneした場所>/api-server
+./gradlew clean test
+```
+
+## プロジェクト構成
+
+| パス             | 概要                                       |
+|-----------------|--------------------------------------------|
+| api-server      | APIサーバ(Kotlin)                           |
+| browser-client  | ブラウザクライアント(TypeScript + React.js)    |
