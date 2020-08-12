@@ -1,6 +1,6 @@
 import {AuthorData} from "./authors";
 import {APIResponseEnvelope} from "./envelope";
-import {getAPIHost} from "./api-host";
+import {getAPIURL} from "./api-url";
 import {APIDate} from "./date";
 
 /**
@@ -34,7 +34,7 @@ export async function getBooks(params: GetBookAPIInput): Promise<GetBooksAPIResp
   try {
     const requestParams = new URLSearchParams();
     !!params.authorId && requestParams.append('authorId', params.authorId.toString());
-    const resp = await fetch(`${getAPIHost()}/books?${requestParams}`);
+    const resp = await fetch(`${getAPIURL()}/books?${requestParams}`);
     const json = await resp.json(); // TODO JSONのパース判定を正しく行う
     return json;
   } catch (e) {
@@ -54,7 +54,7 @@ export type GetBookByIdAPIResponse = APIResponseEnvelope<BookData>;
  */
 export async function getBookById(id: number): Promise<GetBookByIdAPIResponse> {
   try {
-    const resp = await fetch(`${getAPIHost()}/books/${id}`);
+    const resp = await fetch(`${getAPIURL()}/books/${id}`);
     const json = await resp.json(); // TODO JSONのパース判定を正しく行う
     return json;
   } catch (e) {
@@ -90,7 +90,7 @@ export async function insertBook(data: BookInsertData): Promise<InsertBookAPIRes
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     };
-    const resp = await fetch(`${getAPIHost()}/books`, {method, headers, body});
+    const resp = await fetch(`${getAPIURL()}/books`, {method, headers, body});
     const json = await resp.json(); // TODO JSONのパース判定を正しく行う
     return json;
   } catch(e) {
@@ -111,7 +111,7 @@ export type DeleteBookAPIResponse = APIResponseEnvelope<number>;
 export async function deleteBook(id: number): Promise<DeleteBookAPIResponse> {
   try {
     const method = "DELETE";
-    const resp = await fetch(`${getAPIHost()}/books/${id}`, {method});
+    const resp = await fetch(`${getAPIURL()}/books/${id}`, {method});
     const json = await resp.json(); // TODO JSONのパース判定を正しく行う
     return json;
   } catch (e) {
@@ -143,7 +143,7 @@ export async function updateBook(data: BookUpdateData) {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     };
-    const resp = await fetch(`${getAPIHost()}/books`, {method, headers, body});
+    const resp = await fetch(`${getAPIURL()}/books`, {method, headers, body});
     const json = await resp.json(); // TODO JSONのパース判定を正しく行う
     return json;
   } catch(e) {
