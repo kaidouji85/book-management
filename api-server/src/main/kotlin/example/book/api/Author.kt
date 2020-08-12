@@ -1,7 +1,5 @@
 package example.book.api
 
-import java.util.*
-
 /**
  * 著者 ユニークID以外の属性
  */

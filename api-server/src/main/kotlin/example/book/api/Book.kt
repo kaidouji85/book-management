@@ -50,22 +50,22 @@ data class BookData(
 ): BookProps
 
 /**
- * 書籍 全情報取得 API レスポンス
+ * 書籍検索API レスポンス
  */
 typealias GetAllBooksAPIResponse = APIResponseEnvelope<List<BookData>>
 
 /**
- * 書籍 ID指定取得 API レスポンス
+ * 書籍取得(ID指定)API レスポンス
  */
 typealias GetBookByIdAPIResponse = APIResponseEnvelope<BookData?>
 
 /**
- * 書籍 新規登録 API レスポンス
+ * 書籍新規登録API レスポンス
  */
 typealias InsertBookAPIResponse = APIResponseEnvelope<BookData?>
 
 /**
- * 書籍 更新 API レスポンス
+ * 書籍更新API レスポンス
  */
 typealias UpdateBookAPIResponse = APIResponseEnvelope<BookData?>
 

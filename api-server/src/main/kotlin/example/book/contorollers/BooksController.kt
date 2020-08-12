@@ -1,10 +1,10 @@
 package example.book.contorollers
 
-import example.book.api.*
 import example.book.adapter.createInsertBookEntity
 import example.book.adapter.createUpdateBookEntity
 import example.book.adapter.toBook
 import example.book.adapter.toBookData
+import example.book.api.*
 import example.book.entity.AuthorEntity
 import example.book.entity.BookEntity
 import example.book.repository.AuthorRepository
@@ -19,12 +19,24 @@ import javax.transaction.Transactional
  */
 @Controller("/books")
 open class BooksController {
+    /**
+     * 書籍リポジトリ
+     */
     @Inject
     lateinit var bookRepository: BookRepository
 
+    /**
+     * 著者リポジトリ
+     */
     @Inject
     lateinit var authorRepository: AuthorRepository
 
+    /**
+     * 書籍検索API
+     * 本メソッドのパラメータが著者検索条件である
+     * @param authorId 著者ID
+     * @return APIのレスポンス
+     */
     @Transactional
     @Get("/")
     open fun get(@QueryValue authorId: Long? ): GetAllBooksAPIResponse {
@@ -41,6 +53,11 @@ open class BooksController {
         )
     }
 
+    /**
+     * 書籍取得(ID指定)API
+     * @param id 書籍ID
+     * @return APIのレスポンス
+     */
     @Transactional
     @Get("/{id}")
     open fun getById(@PathVariable id: Long): GetBookByIdAPIResponse {
@@ -60,6 +77,11 @@ open class BooksController {
         )
     }
 
+    /**
+     * 書籍新規登録API
+     * @param data 新規登録する内容
+     * @return APIのレスポンス
+     */
     @Transactional
     @Post("/")
     open fun insert(@Body data: InsertBookData): InsertBookAPIResponse {
@@ -86,8 +108,8 @@ open class BooksController {
     }
 
     /**
-     * 書籍 新規作成 のバリデーションを行う
-     * @param data API入力データ
+     * 書籍新規登録のバリデーションを行う
+     * @param data 新規登録する内容
      * @return バリデーション結果
      */
     private fun insertBookValidation(data: InsertBookData): ValidationResult {
@@ -100,9 +122,9 @@ open class BooksController {
     }
 
     /**
-     * RDBに書籍データを新規作成する
+     * RDBに書籍を新規作成する
      * 本メソッドはバリデーション後に呼ばれる想定である
-     * @param data API入力データ
+     * @param data 新規登録する内容
      * @return 登録した書籍エンティティを返す、登録失敗した場合はnullを返す
      */
     private fun insertBookToRDB(data: InsertBookData): BookEntity? {
@@ -113,6 +135,11 @@ open class BooksController {
         return this.bookRepository.save(bookEntity)
     }
 
+    /**
+     * 書籍更新API
+     * @param data 更新する内容
+     * @return APIのレスポンス
+     */
     @Transactional
     @Put("/")
     open fun update(@Body data: UpdateBookData): UpdateBookAPIResponse {
@@ -147,9 +174,9 @@ open class BooksController {
     }
 
     /**
-     * 書籍 更新 バリデーション
+     * 書籍更新のバリデーション
      * @param origin RDBから取得した既存データ
-     * @param update API入力データ
+     * @param update 更新する内容
      * @return バリデーション結果
      */
     private fun updateBookValidation(origin: BookEntity, update: UpdateBookData): ValidationResult {
@@ -175,9 +202,10 @@ open class BooksController {
     }
 
     /**
-     * RDBの書籍データを更新する
+     * RDBの書籍を更新する
      * 本メソッドはバリデーション後に呼ばれる想定である
      * @param data API入力データ
+     * @return APIのレスポンス
      */
     private fun updateBookToRDB(data: UpdateBookData): BookEntity? {
         val author: AuthorEntity? = this.authorRepository.findById(data.authorId)
