@@ -1,7 +1,7 @@
 package example.book.api
 
 /**
- * 著者 ユニークID以外の属性
+ * 著者が持つユニークID以外の属性
  */
 interface AuthorProps {
     /**
@@ -11,17 +11,21 @@ interface AuthorProps {
 }
 
 /**
- * 著者 新規登録 API 入力
+ * 著者新規登録API入力データ
  */
 data class InsertAuthorData (
         override val name: String
 ): AuthorProps
 
 /**
- * 著者API レスポンス
+ * 著者APIレスポンス
  */
 data class AuthorData(
+        /**
+         * 著者ID
+         */
         val id: Long,
+
         override val name: String
 ): AuthorProps
 
@@ -49,4 +53,3 @@ typealias UpdateAuthorResponse = APIResponseEnvelope<AuthorData>
  * 著者削除API レスポンス
  */
 typealias  DeleteAuthorResponse = APIResponseEnvelope<Long>
-

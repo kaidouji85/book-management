@@ -5,28 +5,31 @@ import example.book.api.InsertAuthorData
 import example.book.entity.AuthorEntity
 
 /**
- * 著者エンティティに変換するヘルパー関数
+ * 著者新規登録API入力データを著者エンティティに変換するヘルパー関数
  * @param origin 変換元
  * @return 変換結果
  */
-fun toAuthorEntity(origin: InsertAuthorData): AuthorEntity {
-    return AuthorEntity(0, origin.name)
-}
+fun toAuthorEntity(origin: InsertAuthorData) = AuthorEntity(
+        id = 0,
+        name = origin.name
+)
 
 /**
- * APIインタフェースを著者エンティティに変換する
+ * 著者APIレスポンスを著者エンティティに変換する
  * @param origin 変換元
  * @return 変換結果
  */
-fun toAuthorEntity(origin: AuthorData): AuthorEntity {
-    return AuthorEntity(origin.id, origin.name)
-}
+fun toAuthorEntity(origin: AuthorData) = AuthorEntity(
+        id = origin.id,
+        name = origin.name
+)
 
 /**
- * 著者情報に変換するヘルパー関数
+ * 著者エンティティを著者APIレスポンスに変換するヘルパー関数
  * @param origin 変換元
  * @return 変換結果
  */
-fun toAuthorData(origin: AuthorEntity): AuthorData {
-    return AuthorData(origin.id, origin.name)
-}
+fun toAuthorData(origin: AuthorEntity) = AuthorData(
+        id = origin.id,
+        name = origin.name
+)

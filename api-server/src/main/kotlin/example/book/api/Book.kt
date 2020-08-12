@@ -38,7 +38,7 @@ data class UpdateBookData(
 ): BookProps
 
 /**
- * 書籍 API レスポンス
+ * 書籍APIレスポンス
  */
 data class BookData(
         val id: Long,
