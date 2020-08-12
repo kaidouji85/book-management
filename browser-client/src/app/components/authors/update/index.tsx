@@ -2,7 +2,7 @@ import React from 'react';
 import {AuthorUpdateState} from "./state";
 import {AuthorUpdatePresentation} from "./presentation";
 import {useParams} from 'react-router-dom';
-import {AuthorData, getAuthorById, insertAuthor, updateAuthor} from "../../../api/authors";
+import {AuthorData, getAuthorById, updateAuthor} from "../../../api/authors";
 import {AuthorsPath} from "../../links/links";
 
 /**

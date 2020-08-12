@@ -1,4 +1,4 @@
-import {getAPIHost} from "./api-host";
+import {getAPIURL} from "./api-url";
 import {APIResponseEnvelope} from "./envelope";
 
 /**
@@ -20,7 +20,7 @@ export type GetAllAuthorsResponse = APIResponseEnvelope<AuthorData[]>;
  */
 export async function getAllAuthors(): Promise<GetAllAuthorsResponse> {
   try {
-    const resp = await fetch(`${getAPIHost()}/authors`);
+    const resp = await fetch(`${getAPIURL()}/authors`);
     const json = resp.json(); //TODO JSONのパース判定を正しく行う
     return json;
   } catch(e) {
@@ -40,7 +40,7 @@ export type GetAuthorByIdResponse = APIResponseEnvelope<AuthorData | null>;
  */
 export async function getAuthorById(id: number) {
   try {
-    const resp = await fetch(`${getAPIHost()}/authors/${id}`);
+    const resp = await fetch(`${getAPIURL()}/authors/${id}`);
     const json = resp.json(); //TODO JSONのパース判定を正しく行う
     return json;
   } catch(e) {
@@ -73,7 +73,7 @@ export async function insertAuthor(data: InsertAuthorData): Promise<InsertAuthor
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     };
-    const resp = await fetch(`${getAPIHost()}/authors`, {method, headers, body});
+    const resp = await fetch(`${getAPIURL()}/authors`, {method, headers, body});
     const json = await resp.json(); // TODO JSONのパース判定を正しく行う
     return json;
   } catch(e) {
@@ -99,7 +99,7 @@ export async function updateAuthor(data: AuthorData): Promise<PutAuthorAPIRespon
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     };
-    const resp = await fetch(`${getAPIHost()}/authors`, {method, headers, body});
+    const resp = await fetch(`${getAPIURL()}/authors`, {method, headers, body});
     const json = await resp.json(); // TODO JSONのパース判定を正しく行う
     return json;
   } catch (e) {
@@ -120,7 +120,7 @@ export type DeleteAuthorAPIResponse = APIResponseEnvelope<number>;
 export async function deleteAuthor(id: number): Promise<DeleteAuthorAPIResponse> {
   try {
     const method = "DELETE";
-    const resp = await fetch(`${getAPIHost()}/authors/${id}`, {method});
+    const resp = await fetch(`${getAPIURL()}/authors/${id}`, {method});
     const json = resp.json(); // TODO JSONのパース判定を正しく行う
     return json;
   } catch(e) {
